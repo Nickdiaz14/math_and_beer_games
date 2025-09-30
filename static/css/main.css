@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+:root {
+  --background-color: linear-gradient(135deg, #1a1a2e 0%, #15003e 50%, #0f0f23 100%);
+  --background-instagram-color: linear-gradient(135deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
+  --primary-gradient-text: linear-gradient(135deg, #b6bde7 0%, #c5a3e7 100%);
+}
+
+body {
+  display: flex;
+  background: var(--background-color);
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-attachment: fixed;
+}
+
+/* Estilos del header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+  background: rgba(50, 14, 67, 0.445);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9.5px);
+  -webkit-backdrop-filter: blur(9.5px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);}
+
+main {
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1vh;
+}
+
+main div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-right: 45px;
+}
+
+.menu {
+  display: flex;
+  gap: 50px; /* espacio entre los enlaces del menú */
+}
+
+.menu a {
+  background: var(--primary-gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 100%;
+  transition: all 0.3s ease;
+}
+
+.menu a:hover {
+  color: #ffc800;
+  font-size: 18px;
+  transition: all 0.3s ease;
+
+}
+
+.title {
+  background: var(--primary-gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 300%;
+  text-align: center;
+  margin: 10vh 0px 0px 0px;
+}
+
+hr {
+  background: var(--primary-gradient-text);
+  width: 90%;
+  height: 2px;
+  border: none;
+  margin: 40px 0 0 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0.2;
+}
+
+.contact {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--background-instagram-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.contact img {
+  height: 40px;
+}  
