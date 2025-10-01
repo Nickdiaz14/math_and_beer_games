@@ -38,7 +38,24 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);}
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.logo {
+  width: 10vw;
+  height: 10vh;
+  float: left;
+  margin-right: 2vw;
+  background: var(--primary-gradient-text);
+  -webkit-mask-image:url('/static/images/logo_M&B_b.png');
+  mask-image: url('/static/images/logo_M&B_b.png');
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
 
 main {
   height: 100%;
@@ -59,30 +76,22 @@ main div {
   justify-content: center;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  margin-right: 45px;
-}
-
 .menu {
   display: flex;
-  gap: 50px; /* espacio entre los enlaces del menú */
+  gap: 5vw; /* espacio entre los enlaces del menú */
 }
 
-.menu a {
-  background: var(--primary-gradient-text);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-decoration: none;
+.menu button {
+  color: #b6bde7;
+  background: none;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  font-size: 100%;
+  font-size: min(2.6vw, 15px);
   transition: all 0.3s ease;
+  border: none;
 }
 
-.menu a:hover {
+.menu button:hover {
   color: #ffc800;
   font-size: 18px;
   transition: all 0.3s ease;
