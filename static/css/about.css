@@ -1,0 +1,84 @@
+.about_text p {
+    text-align: justify;
+    line-height: 1.6;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: min(4vw, 18px);
+    max-width: 87%;
+    text-justify: inter-word;
+    hyphens: auto;
+}
+
+.myBg {
+    background: rgb(31, 0, 54) !important;
+}
+
+.yearBox {
+    background: rgba(255, 255, 255, 0.1) !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(230px, auto)) !important;
+    gap: 4vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.myCard {
+    width: 13rem;
+    height: 25rem !important;
+}
+
+.myCardBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    padding: 3vh 1vw 0px 1vw !important;
+}
+
+.modalContent {
+    font-size: 15px !important;
+}
+
+.liveButton {
+    background: var(--background-mail-color);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: min(4vw, 18px);
+    border: none !important;
+    border-radius: 8px;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.closeButton {
+    background: var(--background-color);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: min(4vw, 18px);
+    border: none !important;
+    border-radius: 8px;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.liveButton:hover,
+.closeButton:hover {
+    background: #ffc800;
+    color: black;
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+.myButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}

@@ -5,75 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.6">
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/menu.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Menu</title>
 </head> 
 <body>
     <header>
-        <div class="logo"></div>
-        <nav class="menu">
-            <button onclick="window.location.href='/'">Juegos</button>
-            <button onclick="window.location.href='/leaderboards'">Rankings</button>
-            <button onclick="window.location.href='/leaderboards'">Nosotros</button>
-            <button onclick="window.location.href='/leaderboards'">Contáctanos</button>
+        <nav class="navbar navbar-expand-lg menu">
+        <div class="container-fluid">
+            <button onclick="window.location.href='/'" class="navbar-brand"><div class="logo"></div></button>
+            <button class="navbar-toggler menuHamb" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars fa-2xl" style="color: #b6bde7;"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <button onclick="window.location.href='/'" class="nav-link active" aria-current="page"><i class="fa-solid fa-gamepad"></i> Juegos</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='/leaderboards'" class="nav-link active" aria-current="page"><i class="fa-solid fa-ranking-star"></i> Rankings</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='/about'" class="nav-link active" aria-current="page"><i class="fa-solid fa-people-group"></i> Sobre Nosotros</button>
+                </li>
+            </ul>
+            </div>
+        </div>
         </nav>
     </header>
     <main>
         <h1 class="title">¡Hola, {{ nickname }}! <br> Elige un juego</h1>
         <hr>
-        <div class="grid_container">
-            <button class="game" onclick="location.href='0h_h1.html'">
-                <img class="game_img" src="../static/images/games/0h-h1.png" alt="Math Game Icon">
-                <span class="game_text">0h-h1</span>
-            </button>
-
-            <button class="game" onclick="location.href='time_trial_0h_h1.html'">
-                <img class="game_img" src="../static/images/games/0h-h1.png" alt="Math Game Icon">
-                <span class="game_text">Contrareloj</span>
-            </button>
-
-            <button class="game" onclick="location.href='knight.html'">
-                <img class="game_img" src="../static/images/games/knight.png" alt="Math Game Icon">
-                <span class="game_text">Knight</span>
-            </button>
-
-            <button class="game" onclick="location.href='secuenzo.html'">
-                <img class="game_img" src="../static/images/games/0h-h1.png" alt="Math Game Icon">
-                <span class="game_text">Secuenzo</span>
-            </button>
-
-            <button class="game" onclick="location.href='cuentamania.html'">
-                <img class="game_img" src="../static/images/games/0h-h1.png" alt="Math Game Icon">
-                <span class="game_text">CuentaManía</span>
-            </button>
-
-            <button class="game" onclick="location.href='0h_h1.html'">
-                <img class="game_img" src="../static/images/games/0h-h1.png" alt="Math Game Icon">
-                <span class="game_text">Patrón<br>Perfecto</span>
-            </button>
-
-            <button class="game" onclick="location.href='0h_h1.html'">
-                <img class="game_img" src="../static/images/games/0h-h1.png" alt="Math Game Icon">
-                <span class="game_text">Colores<br>Cruzados</span>
-            </button>
-
-            <button class="game" onclick="location.href='0h_h1.html'">
-                <img class="game_img" src="../static/images/games/0h-h1.png" alt="Math Game Icon">
-                <span class="game_text">0h-n0</span>
-            </button>
-
-            <button class="game" onclick="location.href='0h_h1.html'">
-                <img class="game_img" src="../static/images/games/0h-h1.png" alt="Math Game Icon">
-                <span class="game_text">Nerdle</span>
-            </button>
-
-            <button class="game" onclick="location.href='0h_h1.html'">
-                <img class="game_img" src="../static/images/games/0h-h1.png" alt="Math Game Icon">
-                <span class="game_text">Agalludo</span>
-            </button>
+        <div class="container text-center w-75">
+            <div class="row">
+                <div class="col myCol">
+                    <button class="game" onclick="location.href='0h_h1.html'">
+                        <span class="game_text">0h-h1</span>
+                    </button>
+                </div>
+                <div class="col myCol">
+                    <button class="game" onclick="location.href='time_trial_0h_h1.html'">
+                        <span class="game_text">Contrareloj</span>
+                    </button>
+                </div>
+                <div class="col myCol">
+                    <button class="game" onclick="location.href='knight.html'">
+                        <span class="game_text">Knight</span>
+                    </button>
+                </div>
+                <div class="col myCol">
+                    <button class="game" onclick="location.href='secuenzo.html'">
+                        <span class="game_text">Secuenzo</span>
+                    </button>
+                </div>
+                <div class="col myCol">
+                    <button class="game" onclick="location.href='cuentamania.html'">
+                        <span class="game_text">Cuenta<br>Manía</span>
+                    </button>
+                </div>
+                <div class="col myCol">
+                    <button class="game" onclick="location.href='patron_perfecto.html'">
+                        <span class="game_text">Patrón<br>Perfecto</span>
+                    </button>
+                </div>
+                <div class="col myCol">
+                    <button class="game" onclick="location.href='colores_cruzados.html'">
+                        <span class="game_text">Colores<br>Cruzados</span>
+                    </button>
+                </div>
+                <div class="col myCol">
+                    <button class="game" onclick="location.href='0h_n0.html'">
+                        <span class="game_text">0h-n0</span>
+                    </button>
+                </div>
+                <div class="col myCol">
+                    <button class="game" onclick="location.href='nerdle.html'">
+                        <span class="game_text">Nerdle</span>
+                    </button>
+                </div>
+                <div class="col myCol">
+                    <button class="game" onclick="location.href='agalludo.html'">
+                        <span class="game_text">Agalludo</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </main>
-    <button class="contact" onclick="location.href='https://www.instagram.com/math_and_beer/#'">
-        <img src="../static/images/instagram.png" alt="">
+    <div class="menu-toggle">
+        <a class="mail" href="https://mail.google.com/mail/?view=cm&fs=1&to=mate.et.cerv@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        <a class="instagram" href="https://www.instagram.com/math_and_beer/#"><i class="fa-brands fa-instagram"></i></a>
+        <a class="whatsapp" href="https://wa.me/+573227217274"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <button class="contact">
+        <i class="fa-solid fa-chevron-up"></i>
     </button>
+    <script src="../static/scripts/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

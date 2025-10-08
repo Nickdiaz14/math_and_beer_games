@@ -1,23 +1,19 @@
-.grid_container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 2vh;
-  width: 90%;
-  justify-content: center;
-  align-items: center;
-  max-width: 1200px;
-  margin-top: 4vh;
+.myCol {
+  display: flex;
+  justify-content: space-around;
 }
 
 .game {
   background: rgba(255, 255, 255, 0.1);
-  padding: 25px;
+  padding: 15px;
   border-radius: 40px;
   align-items: center;
   transition: all 0.3s ease;
   display: flex;
   justify-content: space-around;
-  min-width: 230px;
+  min-width: 210px;
+  min-height: 16vh;
+  margin-bottom: 2rem;
 }
 
 .game:hover {
@@ -38,7 +34,6 @@
   color: white;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  font-size: 150%;
-  margin-left: 10px;
+  font-size: min(8vw, 30px);
   position: relative;
-} 
+}

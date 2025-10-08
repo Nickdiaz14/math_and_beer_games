@@ -7,12 +7,12 @@
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    width: 15vw;
-    padding: 2px;
+    width: 45%;
+    padding: 3px;
+    margin: 4vw 0 0 0;
 }
 
 .game_select:hover {
-    background: var(--secondary-gradient-text);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transform: translateY(-3px);
 }
