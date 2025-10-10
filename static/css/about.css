@@ -16,7 +16,7 @@
 .yearBox {
     background: rgba(255, 255, 255, 0.1) !important;
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(230px, auto)) !important;
+    grid-template-columns: repeat(auto-fit, minmax(400px, auto)) !important;
     gap: 4vh;
     width: 100%;
     justify-content: center;
@@ -25,8 +25,8 @@
 }
 
 .myCard {
-    width: 13rem;
-    height: 25rem !important;
+    max-width: 540px;
+    max-height: 300px;
 }
 
 .myCardBody {
@@ -34,7 +34,6 @@
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
-    padding: 3vh 1vw 0px 1vw !important;
 }
 
 .modalContent {
@@ -81,4 +80,8 @@
     justify-content: center;
     gap: 15px;
     margin-top: 20px;
+}
+
+.leftImg {
+    width: 30%;
 }
