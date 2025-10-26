@@ -85,3 +85,13 @@
 .leftImg {
     width: 30%;
 }
+
+.accordion {
+    width: 85%;
+    margin: 0 auto 5vh auto;
+}
+
+.accordion-item {
+    border: 1px solid rgba(232, 201, 254, 0.53) !important;
+    box-sizing: border-box;
+}
