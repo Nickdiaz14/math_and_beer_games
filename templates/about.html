@@ -36,6 +36,11 @@
                                 <i class="fa-solid fa-people-group"></i> ¿Quién está detrás de esto?
                             </button>
                         </li>
+                        <li class="nav-item">
+                            <button onclick="location.href='#Ciudad'" class="nav-link active" aria-current="page">
+                                <i class="fa-solid fa-map-location-dot"></i> Lleva Math & Beer a tu ciudad
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -64,7 +69,7 @@
         <!-- Acordeón -->
         <div class="accordion displayColumn" id="accordionExample">
             <!-- 2023 -->
-            <div class="accordion-item myBg displayColumn">
+            <div class="accordion-item myBorder myBg displayColumn">
                 <h2 class="accordion-header myBg w-100">
                     <button class="accordion-button collapsed myBg text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">2023</button>
                 </h2>
@@ -378,7 +383,7 @@
             </div>
 
             <!-- 2024 -->
-            <div class="accordion-item myBg displayColumn">
+            <div class="accordion-item myBorder myBg displayColumn">
                 <h2 class="accordion-header myBg w-100">
                     <button class="accordion-button collapsed myBg text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">2024</button>
                 </h2>
@@ -640,7 +645,7 @@
             </div>
 
             <!-- 2025 -->
-            <div class="accordion-item myBg displayColumn">
+            <div class="accordion-item myBorder myBg displayColumn">
                 <h2 class="accordion-header myBg w-100">
                     <button class="accordion-button collapsed myBg text-light w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">2025</button>
                 </h2>
@@ -1081,11 +1086,73 @@
         <div class="about_text displayColumn">
             <p>Detrás de Math & Beer hay un grupo de estudiantes y egresados del programa de Matemáticas de la Fundación Universitaria Konrad Lorenz que creemos que las ideas también se disfrutan mejor en compañía. Nos une la curiosidad, las ganas de compartir conocimiento y la convicción de que la matemática puede ser parte de una buena conversación. Cada encuentro es el resultado de trabajo en equipo, creatividad y mucha pasión por hacer que las matemáticas salgan del papel para encontrarse con la gente.</p>
             <p>Detrás de cada charla, cada idea y cada cerveza compartida, hay un equipo que trabaja para que todo cobre sentido. Conoce al equipo que da vida a Math & Beer:</p>
-                <p><i class="fa-solid fa-circle-chevron-right fa-2xs"></i> <b>Ruth Alejandra Torres Rubiano</b> <br>Quien creyó en esta locura y la hizo posible. Con su guía, experiencia y entusiasmo, mantuvo viva la chispa del proyecto y nos recordó que las matemáticas también se enseñan con una sonrisa y una cerveza en la mano.</p>
-                <p><i class="fa-solid fa-circle-chevron-right fa-2xs"></i> <b>Nicolás Díaz Guayazana</b> <br>El cerebro detrás de la logística y el corazón del evento. Coordina las charlas, habla con los conferencistas y se asegura de que todo fluya. Si quieres participar en Math & Beer, él será tu contacto principal… y probablemente quien te convenza con una buena charla y una mejor historia.</p>
-                <p><i class="fa-solid fa-circle-chevron-right fa-2xs"></i> <b>Blaymi Tatiana Romero López</b> <br>Nuestra presentadora estrella y cómplice en cada encuentro. Es la voz, la energía y la sonrisa que le da ritmo a Math & Beer. Siempre lista para animar al público, acompañar al equipo y hacer que cada sesión se sienta como una conversación entre amigos.</p>
-                <p><i class="fa-solid fa-circle-chevron-right fa-2xs"></i> <b>Karla Violeta Ruiz Vargas</b> <br>Convierte ideas locas en afiches brillantes y hace que Math & Beer se vea tan bien como suena. Si viste un poster y te dieron ganas de venir, probablemente fue culpa suya. Diseña todo, desde los posters hasta las excusas para tomarse otra cerveza.</p>
-                <p><i class="fa-solid fa-circle-chevron-right fa-2xs"></i> <b>Juan José Escorcia</b> <br>El paparazzi oficial del proyecto. Siempre está detrás de la cámara capturando el mejor ángulo, el mejor brindis y las caras más concentradas durante una charla. Gracias a él, cada encuentro de Math & Beer queda inmortalizado, incluso esos momentos que preferirías no recordar.</p>
+            <div id="carouselExampleInterval" class="carousel slide w-100 mt-4 mb-4" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="5000">
+                        <div class="displayColumn">
+                            <img src="../static/images/in game/1.png" class="mb-3" style="width: 38%;" alt="...">
+                            <div class="card myBorder mb-3 myHeight myBg">
+                            <div class="card-header fs-2 text-light">Ruth Alejandra Torres Rubiano</div>
+                                <div class="card-body">
+                                    <h4 class="fs-personal text-light">Quien creyó en esta locura y la hizo posible. Con su guía, experiencia y entusiasmo, mantuvo viva la chispa del proyecto y nos recordó que las matemáticas también se enseñan con una sonrisa.</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="5000">
+                        <div class="displayColumn">
+                            <img src="../static/images/in game/2.png" class="mb-3" style="width: 38%;" alt="...">
+                            <div class="card myBorder mb-3 myHeight myBg">
+                            <div class="card-header fs-2 text-light">Nicolás Díaz Guayazana</div>
+                                <div class="card-body">
+                                    <h4 class="fs-personal text-light">El cerebro detrás de la logística y el corazón del evento. Coordina las charlas, habla con los conferencistas y se asegura de que todo fluya. Si quieres participar en Math & Beer, él será tu contacto principal… y probablemente quien te convenza con una buena charla y una mejor historia.</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="5000">
+                        <div class="displayColumn">
+                            <img src="../static/images/in game/3.png" class="mb-3" style="width: 38%;" alt="...">
+                            <div class="card myBorder mb-3 myHeight myBg">
+                            <div class="card-header fs-2 text-light">Blaymi Tatiana Romero López</div>
+                                <div class="card-body">
+                                    <h4 class="fs-personal text-light">Nuestra presentadora estrella y cómplice en cada encuentro. Es la voz, la energía y la sonrisa que le da ritmo a Math & Beer. Siempre lista para animar al público, acompañar al equipo y hacer que cada sesión se sienta como una conversación entre amigos.</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="5000">
+                        <div class="displayColumn">
+                            <img src="../static/images/in game/4.png" class="mb-3" style="width: 38%;" alt="...">
+                            <div class="card myBorder mb-3 myHeight myBg">
+                            <div class="card-header fs-2 text-light">Juan José Escorcia</div>
+                                <div class="card-body">
+                                    <h4 class="fs-personal text-light">El paparazzi oficial del proyecto. Siempre está detrás de la cámara capturando el mejor ángulo, el mejor brindis y las caras más concentradas durante una charla. Gracias a él, cada encuentro de Math & Beer queda inmortalizado, incluso esos momentos que preferirías no recordar.</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="5000">
+                        <div class="displayColumn">
+                            <img src="../static/images/in game/5.png" class="mb-3" style="width: 38%;" alt="...">
+                            <div class="card myBorder mb-3 myHeight myBg">
+                            <div class="card-header fs-2 text-light">Karla Violeta Ruiz Vargas</div>
+                                <div class="card-body">
+                                    <h4 class="fs-personal text-light">Convierte ideas locas en afiches brillantes y hace que Math & Beer se vea tan bien como suena. Si viste un poster y te dieron ganas de venir, probablemente fue culpa suya. Diseña todo, desde los posters hasta las excusas para tomarse otra cerveza.</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
         <hr id="Ciudad">
         <h2 class="title">¿Quieres llevar el Math & Beer a tu ciudad?</h2>
@@ -1095,6 +1162,13 @@
             <p>Si decides postularte, serás el corazón del proyecto en tu ciudad. Te encargarás de coordinar el espacio, contactar al conferencista, definir la actividad y asegurarte de que el evento conserve ese ambiente relajado, divertido y cercano que hace único a Math & Beer. No te preocupes, no estarás solo: nuestro equipo te acompañará durante todo el proceso, ayudándote con la planeación, las piezas gráficas, la difusión y algunos sabios consejos basados en experiencias.</p>
             <p>Queremos que Math & Beer siga creciendo como una red de encuentros donde las matemáticas se disfrutan, se conversan y se viven fuera del aula. Nos emociona imaginar nuevas ciudades, nuevos públicos y nuevas historias que nazcan de esta mezcla entre conocimiento, curiosidad y una buena cerveza.</p>
             <p>Si crees que en tu ciudad hay lugar para una charla, una idea brillante y un brindis con sabor a matemáticas, cuéntanos tu propuesta y ¡hagámoslo posible!</p>
+            <p>Para hacer esto realidad solo debes realizar los siguientes pasos:</p>
+            <ol>
+                <li>Contáctanos por cualquiera de los medios que encontrarás en esta página (abajo a la derecha 👇).</li>
+                <li>Llena el <a href="https://forms.office.com/r/sPQb5pxJ9d" style="text-decoration: none;">formulario</a> con tu propuesta y cuéntanos tu idea.</li>
+                <li>Espera nuestra respuesta. Te contactaremos pronto para coordinar los detalles.</li>
+                <li>Empieza a llevar el Math & Beer a tu ciudad.</li>
+            </ol>
         </div>
     </main>
 
