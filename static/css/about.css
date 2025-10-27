@@ -9,6 +9,22 @@
     hyphens: auto;
 }
 
+.about_text h2 {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 200%;
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+}
+
+.about_text li {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: min(4vw, 18px);
+    margin-bottom: 1vh;
+}
+
 .myBg {
     background: rgb(31, 0, 54) !important;
 }
@@ -94,4 +110,9 @@
 .accordion-item {
     border: 1px solid rgba(232, 201, 254, 0.53) !important;
     box-sizing: border-box;
+    padding: 1px;
+}
+
+.collapsed::after {
+    filter: invert(1);
 }
