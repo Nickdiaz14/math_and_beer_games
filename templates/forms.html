@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width height=device-height, initial-scale=0.8">
+    <title>Asistencia</title>
+    <link rel="icon" type="image/png" href="../static/images/logos/favicon.png">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/menu.css">
+    <link rel="stylesheet" href="../static/css/forms.css">
+</head>
+
+<body>
+    <main>
+    <div id="overlay">
+        <label id="overlay-label" style="font-size: 33px; margin-bottom: 20px; text-align: center;"></label>
+        <div id="overlay-buttons"></div>
+    </div>
+    <h1 class="title">Asistencia<br>Math & Beer</h1>
+
+    <form id="your-form-id" onsubmit="submitForm(event)" style="margin-bottom: 10px;">
+        <label class="titulo-pregunta">Nombre Completo <span style="color: red;">*</span></label>
+        <input type="text" name="nombre_completo" required><br>
+
+        <label class="titulo-pregunta">Sexo <span style="color: red;">*</span></label>
+        <div class="opcion-multiple">
+            <input type="radio" name="sexo" value="Masculino">
+            <label>Masculino</label>
+        </div>
+        <div class="opcion-multiple">
+            <input type="radio" name="sexo" value="Femenino">
+            <label>Femenino</label>
+        </div>
+        <div class="opcion-multiple">
+            <input type="radio" name="sexo" value="Otro" required>
+            <label>Otro</label>
+        </div>
+
+        <label class="titulo-pregunta">Edad <span style="color: red;">*</span></label>
+        <div class="opcion-multiple">
+            <input type="radio" name="edad" value="Menor de 18">
+            <label>Menor de 18</label>
+        </div>
+        <div class="opcion-multiple">
+            <input type="radio" name="edad" value="18 - 25">
+            <label>18 - 25</label>
+        </div>
+        <div class="opcion-multiple">
+            <input type="radio" name="edad" value="26 - 35">
+            <label>26 - 35</label>
+        </div>
+        <div class="opcion-multiple">
+            <input type="radio" name="edad" value="36 - 50">
+            <label>36 - 50</label>
+        </div>
+        <div class="opcion-multiple">
+            <input type="radio" name="edad" value="51 - 65">
+            <label>51 - 65</label>
+        </div>
+        <div class="opcion-multiple">
+            <input type="radio" name="edad" value="Mayor de 65" required>
+            <label>Mayor de 65</label>
+        </div>
+
+        <label class="titulo-pregunta">Correo Electrónico <span style="color: red;">*</span></label>
+        <input type="email" name="correo_electronico" required><br>
+
+        <label class="titulo-pregunta">Rol del Asistente <span style="color: red;">*</span></label>
+        <div class="opcion-multiple">
+            <input type="radio" name="rol" value="Asistente ocasional">
+            <label>Asistente ocasional</label>
+        </div>
+        <div class="opcion-multiple">
+            <input type="radio" name="rol" value="Estudiante de la Konrad Lorenz">
+            <label>Estudiante de la Konrad Lorenz</label>
+        </div>
+        <div class="opcion-multiple">
+            <input type="radio" name="rol" value="Egresado de la Konrad Lorenz">
+            <label>Egresado de la Konrad Lorenz</label>
+        </div>
+        <div class="opcion-multiple">
+            <input type="radio" name="rol" value="Docente de la Konrad Lorenz" required>
+            <label>Docente de la Konrad Lorenz</label>
+        </div>
+
+        <label class="titulo-pregunta">¿Qué te pareció el contenido y desarrollo del evento? <span style="color: red;">*</span></label>
+        <label>¡Califícalo del 1 al 5!</label>
+        <div class="rating">
+            <input type="radio" name="calificacion" value="1" id="star1" required>
+            <label for="star1"><img src="/static/images/logos/logo_M&B_b.png" style="width: 58px; height: 58px;" alt="1 estrella" onclick="updateRating(1)"></label>
+            <input type="radio" name="calificacion" value="2" id="star2" required>
+            <label for="star2"><img src="/static/images/logos/logo_M&B_b.png" style="width: 58px; height: 58px;" alt="2 estrella" onclick="updateRating(2)"></label>
+            <input type="radio" name="calificacion" value="3" id="star3" required>
+            <label for="star3"><img src="/static/images/logos/logo_M&B_b.png" style="width: 58px; height: 58px;" alt="3 estrella" onclick="updateRating(3)"></label>
+            <input type="radio" name="calificacion" value="4" id="star4" required>
+            <label for="star4"><img src="/static/images/logos/logo_M&B_b.png" style="width: 58px; height: 58px;" alt="4 estrella" onclick="updateRating(4)"></label>
+            <input type="radio" name="calificacion" value="5" id="star5" required>
+            <label for="star5"><img src="/static/images/logos/logo_M&B_b.png" style="width: 58px; height: 58px;" alt="5 estrella" onclick="updateRating(5)"></label>
+        </div>
+        <input type="hidden" name="calificacion" id="calificacion">
+
+        <label class="titulo-pregunta">¿Quieres que te invitemos a nuestras próximas ediciones de Math&Beer? <span style="color: red;">*</span></label>
+        <div class="opcion-multiple">
+            <input type="radio" name="futuros_eventos" value="¡Por supuesto!">
+            <label>¡Por supuesto!</label>
+        </div>
+        <div class="opcion-multiple">
+            <input type="radio" name="futuros_eventos" value="No, gracias." required>
+            <label>No, gracias.</label>
+        </div>
+
+        <label class="titulo-pregunta">¿Tienes algún comentario o recomendación?</label>
+        <label>Tu opinión es muy importante y nos ayuda a mejorar.</label>
+        <textarea name="comentario" rows="2" placeholder="Escribe tus comentarios aquí..."></textarea><br>
+        <button id="enviar" type="submit">Enviar</button>
+    </form>
+      </main>
+      <script src="../static/scripts/forms.js"></script>
+</body>
+</html>
