@@ -20,13 +20,13 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <button onclick="window.location.href='/'" class="nav-link active" aria-current="page"><i class="fa-solid fa-gamepad"></i> Juegos</button>
+                    <button onclick="window.location.href='/menu'" class="nav-link active" aria-current="page"><i class="fa-solid fa-gamepad"></i> Juegos</button>
                 </li>
                 <li class="nav-item">
                     <button onclick="window.location.href='/leaderboards'" class="nav-link active" aria-current="page"><i class="fa-solid fa-ranking-star"></i> Rankings</button>
                 </li>
                 <li class="nav-item">
-                    <button onclick="window.location.href='/about'" class="nav-link active" aria-current="page"><i class="fa-solid fa-people-group"></i> Sobre Nosotros</button>
+                    <button onclick="window.location.href='/'" class="nav-link active" aria-current="page"><i class="fa-solid fa-people-group"></i> Sobre Nosotros</button>
                 </li>
             </ul>
             </div>
@@ -34,64 +34,67 @@
         </nav>
     </header>
     <main>
+        <div id="countdown-overlay">
+            <h2 class="fs-3">Próximamente disponible 🚧 <br>¡Vuelve pronto!</h2>
+        </div>
         <h1 class="title">¡Hola, {{ nickname }}! <br> Elige un juego</h1>
         <hr>
         <div class="grid_container displayColumn">
-            <button class="game" onclick="location.href='0h_h1.html'">
+            <button class="btn game disabled" onclick="window.location.href='/0h_h1'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text">0h-h1</span>
             </button>
 
-            <button class="game" onclick="location.href='time_trial_0h_h1.html'">
+            <button class="game" onclick="window.location.href='/time_trial_0h_h1'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/time_trial.png" alt="" class="game_img">
                 <span class="game_text_big">Contrareloj</span>
             </button>
 
-            <button class="game" onclick="location.href='knight.html'">
+            <button class="game" onclick="window.location.href='/knight'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/knight.png" alt="" class="game_img">
                 <span class="game_text">Knight</span>
             </button>
 
-            <button class="game" onclick="location.href='secuenzo.html'">
+            <button class="game" onclick="window.location.href='/secuenzo'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text_big">Secuenzo</span>
             </button>
 
-            <button class="game" onclick="location.href='cuentamania.html'">
+            <button class="game" onclick="window.location.href='/cuenta_mania'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text">Cuenta<br>Manía</span>
             </button>
 
-            <button class="game" onclick="location.href='0h_h1.html'">
+            <button class="game" onclick="window.location.href='/patron_perfecto'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text">Patrón<br>Perfecto</span>
             </button>
 
-            <button class="game" onclick="location.href='0h_h1.html'">
+            <button class="game" onclick="window.location.href='/colores_cruzados'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text_big">Colores<br>Cruzados</span>
             </button>
 
-            <button class="game" onclick="location.href='0h_h1.html'">
+            <button class="game" onclick="window.location.href='/0h_n0'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text">0h-n0</span>
             </button>
 
-            <button class="game" onclick="location.href='0h_h1.html'">
+            <button class="game" onclick="window.location.href='/nerdle'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text">Nerdle</span>
             </button>
 
-            <button class="game" onclick="location.href='0h_h1.html'">
+            <button class="game" onclick="window.location.href='/agalludo'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text_big">Agalludo</span>
@@ -99,7 +102,7 @@
         </div>
     </main>
     <div class="menu-toggle">
-        <a class="mail" href="https://mail.google.com/mail/?view=cm&fs=1&to=mate.et.cerv@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        <a class="mail" href="mailto:mate.et.cerv@gmail.com?subject=Math and Beer en mi ciudad🍻&body=Hola%2C%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre..." aria-label="Enviar correo"><i class="fa-solid fa-envelope"></i></a>
         <a class="instagram" href="https://www.instagram.com/math_and_beer/#"><i class="fa-brands fa-instagram"></i></a>
         <a class="whatsapp" href="https://wa.me/+573227217274"><i class="fa-brands fa-whatsapp"></i></a>
     </div>

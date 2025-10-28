@@ -37,14 +37,14 @@ header {
   -webkit-backdrop-filter: blur(9.5px);
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1001;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   gap: 100px;
 }
 
 .logo {
-  width: 95px;
-  height: 95px;
+  width: 80px;
+  height: 80px;
   float: left;
   background: var(--primary-gradient-text);
   -webkit-mask-image: url('/static/images/logos/logo_M&B_b.png');
@@ -219,4 +219,22 @@ hr {
   transition: all 0.3s ease;
   color: white;
   font-size: 150%;
+}
+
+#countdown-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+  backdrop-filter: blur(3px);
+  /* Reducido el blur */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  z-index: 1000;
 }

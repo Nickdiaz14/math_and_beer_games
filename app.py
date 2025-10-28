@@ -10,7 +10,7 @@ def menu():
 def leaderboards():
     return render_template('leaderboards.html')
 
-@app.route('/about')
+@app.route('/menu')
 def about():
     return render_template('menu.html')
 
