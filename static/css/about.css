@@ -124,6 +124,10 @@
     width: 77%;
 }
 
+.myImgWidth {
+    width: min(32vh, 40vw) !important;
+}
+
 .fs-personal {
     font-family: 'Inter', sans-serif !important;
     font-weight: normal !important;
