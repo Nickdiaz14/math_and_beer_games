@@ -120,8 +120,8 @@
 }
 
 .myHeight {
-    height: 27vh !important;
-    width: 77%;
+    height: min(30vh, 47vw) !important;
+    width: 80%;
 }
 
 .myImgWidth {
@@ -132,4 +132,6 @@
     font-family: 'Inter', sans-serif !important;
     font-weight: normal !important;
     font-size: 18px !important;
+    text-align: justify;
+
 }
