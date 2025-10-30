@@ -141,4 +141,8 @@
     .myPersonalInfo {
         height: 10em !important;
     }
+
+    .myWidth {
+        width: 20rem;
+    }
 }
