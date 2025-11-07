@@ -48,6 +48,8 @@ def attendance():
         rol = request.form['rol']
         calificacion = request.form['calificacion']
         futuros_eventos = request.form['futuros_eventos']
+        tipo_doc = request.form['tipo_doc']
+        numero_doc = request.form['numero_doc']
         comentario = request.form['comentario']
         timezone = pytz.timezone('America/Bogota')
         now = datetime.now(timezone)
@@ -55,9 +57,9 @@ def attendance():
         fecha_larga = now.strftime('%Y/%m/%d %H:%M')
         cursor.execute("""
                 INSERT INTO attendance 
-                (created_at, "Fecha", "Nombre", "Sexo", "Edad", "Correo", "Rol", "Calificación", "Futuros_eventos", "Comentario")
+                (created_at, "Fecha", "Nombre", "Sexo", "Edad", "Correo", "Rol", "Calificación", "Futuros_eventos", "Comentario", "Tipo_documento", "Numero_documento")
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
-            """, (fecha_larga, fecha_corta, nombre_completo, sexo, edad, correo_electronico, rol, calificacion, futuros_eventos, comentario))
+            """, (fecha_larga, fecha_corta, nombre_completo, sexo, edad, correo_electronico, rol, calificacion, futuros_eventos, comentario,tipo_doc, numero_doc))
 
         connection.commit()
         cursor.close()
