@@ -1,0 +1,315 @@
+[
+    {
+        "year": 2023,
+        "title": "El teorema de 5000 años",
+        "speaker": "María José Cabrera",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/pitagoras.png",
+        "summary": {
+            "p1": "El teorema de Pitágoras es uno de los teoremas más famoso y conocido, aunque existen muchos libros y artículos dedicados a su explicación e historia es poca la literatura que muestra las diferencias que han existe en el origen del teorema que sin embargo llegan al mismo resultado: la relación entre los lados de un triángulo rectángulo en una superficie plana.",
+            "p2": "El teorema de Pitágoras tiene un importante papel como conector entre dos ramas de la matemática que no se creían relacionadas entre sí como lo son el álgebra y la geometría, conocer sus orígenes nos puede dar una idea de cómo y cuándo empezamos a entender las relaciones que unían las diferentes áreas de la matemática. La investigación busca estudiar una perspectiva diferente del Teorema de Pitágoras, el objetivo es hacer un recorrido histórico sobre la idea de este y como ha impactado el desarrollo social, económico y religioso de la humanidad en las siguientes civilizaciones antiguas: Egipto, Mesopotamia, China, India y Grecia.",
+            "p3": "Para esto se estudia el auge de estas civilizaciones y el conocimiento que desarrollaron sobre los triángulos, se identifican las similitudes y diferencias de cada civilización, encontrando que dos grandes enfoques para su estudio; la aplicación y el misticismo. Finalmente, se concluye que diferentes enfoques e intereses conducen a un mismo resultado, dándole a la matemática un sentido atemporal y a sus puntos de vista un carácter divergente, estos incluyen conceptos metafísicos como la inmortalidad del espíritu y la habilidad mental del humano para afrontar retos."
+        },
+        "video": "https://www.instagram.com/tv/Cl7l_giKph1/"
+    },
+    {
+        "year": 2023,
+        "title": "De parientes matemáticos y otras especies raras",
+        "speaker": "Carlos Díez",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/numeros.jpg",
+        "summary": {
+            "p1": "Dime un número abundante… ahora dime dos números amigos… por último dime algún número sorprendente. Estos y más miembros de la familia de los números están invitados, así como tú, yo y todos los demás, a tomarnos una cerveza y a pensar y hablar de matemáticas. La familia de los números es más grande y diversa de lo que te imaginas. Ven y descúbrelo."
+        },
+        "video": "https://www.instagram.com/tv/CpGhLKQqYYb/?igsh=MWc3Y2wxczZ1NmMxNg=="
+    },
+    {
+        "year": 2023,
+        "title": "De cervezas y algoritmos: Como la inteligencia artificial puede ayudarte a encontrar tu favorita",
+        "speaker": "Viviana Márquez",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/cerv_algo.png",
+        "summary": {
+            "p1": "¿Eres un amante de la cerveza y la tecnología? Entonces, esta charla es para ti. En ella, exploraremos cómo la inteligencia artificial y los algoritmos pueden ayudarnos a encontrar la cerveza perfecta para cada persona. Específicamente hablaremos sobre cómo los 'embeddings' o vectores representan conceptos abstractos, lo que permite a los algoritmos encontrar patrones y similitudes entre diferentes elementos, como cervezas o palabras en un idioma."
+        },
+        "video": "https://www.instagram.com/tv/CrEqyy2KYWK/?igsh=MTQ2ZXJqNzFiZ3BkdQ=="
+    },
+    {
+        "year": 2023,
+        "title": "¿De humanos a super humanos o el fin de la humanidad como la conocemos?",
+        "speaker": "Dora Suárez",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/transhumanismo.jpg",
+        "summary": {
+            "p1": "¿Cuál de tus habilidades humanas quisieras mejorar? ¿Estarías dispuesto a renunciar a la obsolencia programada que tenemos los humanos? ¿Qué pasaría con la humanidad y que tan ético sería?",
+            "p2": "En esta charla discutiremos sobre los límites y las posibilidades de la mejora humana mediante la tecnología y a explorar el mundo del transhumanismo. Descubre cómo la Inteligencia Artificial puede ayudarnos a superar nuestras limitaciones y las preocupaciones éticas y sociales que surgen con su aplicación.",
+            "p3": "Además, en nuestra charla hablaremos sobre los transformes, una tecnología detrás de las Inteligencias Artificiales más revolucionarias de los últimos meses.",
+            "p4": "No te pierdas esta oportunidad de explorar el futuro y el concepto de la humanidad en la era digital. ¡Únete a nuestro Math & Beer y prepárate para que tu mente explote!"
+        },
+        "video": "https://www.instagram.com/tv/Cse2frGqx2M/?igsh=MXZlb2t4cnF2YTBpdA=="
+    },
+    {
+        "year": 2023,
+        "title": "Economía comportamental",
+        "speaker": "Campo Elías Suárez",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/economia.jpg",
+        "summary": {
+            "p1": "En esta charla se hará una breve abrebocas de algunos de los fenómenos más importantes de Economía comportamental. Hablaremos de impaciencia, aversión a las pérdidas, exceso de confianza entre otros. Será un espacio para que entendamos un poco de la forma en la que decidimos y como esto afecta a la sociedad como un todo."
+        },
+        "video": "https://www.instagram.com/tv/Ctm9zLoq101/?igsh=MTh5NGR6anBseW9wdA="
+    },
+    {
+        "year": 2023,
+        "title": "Math Buzz: Proporción áurea, parábolas, estadística, trigonometría y Pi",
+        "speaker": "Ricardo Cano",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/buzz.jpg",
+        "summary": {
+            "p1": "¡Prepárate para sumergirte en el fascinante mundo de las matemáticas! Únete a nosotros en una emocionante charla llena de sorpresas y curiosidades matemáticas que te dejarán boquiabierto. Exploraremos la enigmática proporción áurea y su presencia en la naturaleza, el arte y la arquitectura, descubriremos las divertidas y curiosas propiedades de las parábolas, nos sumergiremos en el intrigante mundo de la estadística y aprenderemos cómo los números pueden revelar patrones sorprendentes. Y por supuesto, no podemos olvidarnos del enigmático número π. Aprenderemos sobre su historia, sus infinitos decimales y sus conexiones con el universo matemático.",
+            "p2": "Prepárate para reír, aprender y sorprenderte en esta charla única. ¡No te pierdas esta experiencia llena de math vibes!"
+        },
+        "video": "https://www.instagram.com/reel/CuvVn0hK9em/?igsh=ajk4amI3b2x3anFy"
+    },
+    {
+        "year": 2023,
+        "title": "Matemáticos, bares, café y sumas",
+        "speaker": "Margot Salas",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/cafe.jpg",
+        "summary": {
+            "p1": "En esta charla, se explora la conexión entre el ambiente social y la creación matemática a través de un enfoque histórico. El punto de partida es el célebre cuaderno escocés, una colección de problemas matemáticos propuestos por el matemático polaco Stefan Banach y sus colaboradores en un café escocés a mediados del siglo XX.",
+            "p2": "La historia del cuaderno escocés sirve como una inspiradora muestra de cómo la matemática, una disciplina aparentemente abstracta, se nutre de la interacción humana y cómo los lugares cotidianos, como un café, pueden ser escenario de importantes avances científicos. Luego nos adentraremos en el concepto de sumas infinitas y series matemáticas, a través de la paradoja de Zenón y exhibiremos con ejemplos que algunas de las propiedades que aprendimos en el colegio para sumas finitas y que creemos son naturales no funcionan, en general, para este tipo de sumas. Hablaremos de cómo Banach y colaboradores utilizaron su experiencia en el café para abordar problemas relacionados con convergencia y divergencia de series."
+        },
+        "video": "https://www.instagram.com/reel/CwJM8enNFcV/?igsh=MTF6YzZxYWlobXp4ZQ=="
+    },
+    {
+        "year": 2023,
+        "title": "Mates y sus demonios (educativos)",
+        "speaker": "Juan José Escorcia",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/demonios.jpg",
+        "summary": {
+            "p1": "El fin de esta charla es abordar las problemáticas en la enseñanza de matemática, cómo esto ayuda a la generación de prejuicios sobre la matemática y proponer soluciones a dichos problemas. A lo largo del texto se explorarán puntos, llamados demonios según el título, que tienen la finalidad de discriminar los prejuicios o problemas al enseñar matemáticas y entender su fundamentos y una posible solución."
+        },
+        "video": "https://www.instagram.com/reel/CzzxVVhL3sw/?igsh=NHNvc2poN3VlZnJ1"
+    },
+    {
+        "year": 2024,
+        "title": "Números para leer mejor",
+        "speaker": "Angela Cristina Villate",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/lectura.jpg",
+        "summary": {
+            "p1": "Nos encontraremos en el Math & Beer para leer a Borges con la brújula del NLP (procesamiento de lenguaje natural). Borges quien escribió de Heráclito, el Minotauro, del memorioso Funes. Borges, quien dejó en aprietos a tres o cuatro generaciones de literatos ¿Cómo escribir después de Borges?",
+            "p2": "Cientos de textos circulan con su nombre, pero ¿son todos de su autoría? o ¿hay impostores que sacan partido de su nombre? Responderemos a estas y otras preguntas gracias a las técnicas de análisis de texto desarrolladas por el NLP."
+        },
+        "video": "https://www.instagram.com/p/C3gG1jnvQGZ/?igsh=MWdmdDl4dmRnZ2xxMQ%3D%3D"
+    },
+    {
+        "year": 2024,
+        "title": "La naturaleza autosimilar",
+        "speaker": "Eliana Oostra",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/autosimilar.jpg",
+        "summary": {
+            "p1": "¿Alguna vez ha observado que, al tomar una rama de un brócoli, ésta es una copia más pequeña del mismo? ¿Se ha detenido a observar que la rama de un árbol podría parecerse al árbol original, al punto que sus hojas tienen ramificaciones que son copias de sí mismas? De esta forma, gran variedad de objetos en la naturaleza se describen por la autosimilitud, tales como: las flores, los rayos, las caracolas, los copos de nieve, las nubes. De hecho, esto se puede observar inclusive en el cuerpo humano, como en los músculos, los pulmones o el sistema nervioso. Pero, más allá de admirar la belleza de la autosimilitud en la naturaleza ¿Cuál es la utilidad de observar estas estructuras?",
+            "p2": "Aquí, las matemáticas juegan un papel importante, y es que no solo se puede describir matemáticamente el comportamiento de estos objetos, sino que también se puede generar estructuras autosimilares “imposibles”, mejor conocidas como fractales. El descubrimiento de estos objetos permitió un avance significativo en el desarrollo y percepción de las matemáticas, fortaleció la axiomatización de esta ciencia, pero además los fractales permitían describir estas auto semejanzas en la naturaleza. En consecuencia, los resultados obtenidos mediante la teoría de fractales se han podido implementar en áreas como la medicina, la biología, la física, la computación, entre otros. Inclusive, con un paso más arriesgado, aportó en la descripción de la teoría del caos, conllevando a estudiar cómo se constituye el universo a partir de la autosimilitud, ¿acaso podría describirse toda la existencia mediante fractales?"
+        },
+        "video": "https://www.instagram.com/reel/C5__VMzpIOO/?igsh=MXdkamJ4MmZpejZtcQ=="
+    },
+    {
+        "year": 2024,
+        "title": "¿Qué es diferente en aprender matemáticas?",
+        "speaker": "Oscar Bernal",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/aprender.jpg",
+        "summary": {
+            "p1": "Tradicionalmente nos han hablado de estudiar y aprender como actividades genéricas que no dependen tanto del contexto de lo que se quiere aprender. Pero eso no es tan cierto y las matemáticas son un caso muy especial de por qué debemos entender las particularidades de nuestro contexto para aprender. En esta charla hablaremos de algunas de esas particularidades y de cómo incorporarlas en procesos de aprendizaje y de enseñanza."
+        },
+        "video": "https://www.instagram.com/reel/C7IGM5hJabI/?igsh=OXg1enBzaXB4ZTNl"
+    },
+    {
+        "year": 2024,
+        "title": "¿Existe una potencia de 2 que empiece con un 7?",
+        "speaker": "John Alexander Arredondo",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/pontencias.jpg",
+        "summary": {
+            "p1": "La respuesta a la pregunta ¿existe una potencia de 2 que inicie con un 7? como es  generalmente en matemáticas puede ser: si, no, nadie sabe. En esta charla averiguaremos cual de estas es la respuesta, jugaremos a ser matemáticos y descubriremos un súper objeto matemático."
+        },
+        "video": "https://www.instagram.com/p/C9i7MElJr8C/?igsh=anM4dnlnZHVlc3Vo"
+    },
+    {
+        "year": 2024,
+        "title": "Sudokus Colombianos",
+        "speaker": "Bernardo Recamán",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/sudoku.jpg",
+        "summary": {
+            "p1": "El juego de Picas y famas (o Picas y fijas, como también se conoce) ha divertido a varias generaciones de aficionados a las matemáticas. Uno de dos jugadores intenta, mediante la lógica, y el ensayo y error, encontrar una clave secreta (normalmente un número de cuatro dígitos) que el otro jugador conoce.",
+            "p2": "Por otro lado, el Sudoku, el pasatiempo lógico más popular de todos los tiempos y que irrumpió en el mundo casi de repente en el año 2004, deleita a millones de aficionados que los buscan y resuelven a diario para retarse y divertirse."
+        },
+        "video": "https://www.instagram.com/reel/C-ybAV2pKQA/?igsh=d2d0MTU4Nmh3b3h5"
+    },
+    {
+        "year": 2024,
+        "title": "El azar no es caos: Cómo las probabilidades modelan la complejidad",
+        "speaker": "Jesús Arbey Benavides",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/complejidad.jpg",
+        "summary": {
+            "p1": "Exploraremos el papel fundamental que juegan las distribuciones de probabilidad en nuestra vida diaria y su importancia en el análisis de sistemas complejos. Desde los fenómenos meteorológicos y económicos hasta la toma de decisiones humanas, las distribuciones estadísticas no solo describen el azar, sino que también revelan patrones subyacentes en medio de la aparente aleatoriedad. Haremos un recorrido conciso por la historia de los sistemas complejos, desde sus inicios hasta la actualidad, demostrando cómo emergen en ámbitos naturales, sociales y tecnológicos. Esto nos permite no solo predecir ciertos comportamientos, sino también comprender mejor un mundo lleno de incertidumbre. A través de ejemplos prácticos y accesibles, veremos cómo la matemática del azar se convierte en una herramienta poderosa para descubrir el orden escondido en la complejidad."
+        },
+        "video": "https://www.instagram.com/reel/DBUlypQOB1q/?igsh=NjdqOHQ1eXFhaWx6"
+    },
+    {
+        "year": 2025,
+        "title": "Cervezas, bares y matemáticas: El dilema del agente viajero",
+        "speaker": "David Ernesto Ramírez",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/viajero.jpg",
+        "summary": {
+            "p1": "En esta charla, se exploró el dilema del agente viajero, un problema clásico de optimización en la investigación de operaciones, mediante una propuesta didáctica que integra teoría matemática con georreferenciación. A través de un recorrido virtual por diferentes puntos emblemáticos de Bogotá, se emplearon herramientas como Google Maps y sistemas de información geográfica (SIG) para ilustrar cómo se pueden modelar rutas eficientes en contextos reales, demostrando la aplicabilidad de los algoritmos en entornos urbanos."
+        },
+        "video": "https://www.instagram.com/reel/DGHOSwLuiEB/?igsh=MWN1ZzUxeHBtZ3Z2ag=="
+    },
+    {
+        "year": 2025,
+        "title": "Math Buzz: Proporción áurea, parábolas, estadística, trigonometría y Pi",
+        "speaker": "Ricardo Cano",
+        "place": "Universidad El Bosque, Bogotá",
+        "image": "static/images/charlas/buzz.jpg",
+        "summary": {
+            "p1": "¡Prepárate para sumergirte en el fascinante mundo de las matemáticas! Únete a nosotros en una emocionante charla llena de sorpresas y curiosidades matemáticas que te dejarán boquiabierto. Exploraremos la enigmática proporción áurea y su presencia en la naturaleza, el arte y la arquitectura, descubriremos las divertidas y curiosas propiedades de las parábolas, nos sumergiremos en el intrigante mundo de la estadística y aprenderemos cómo los números pueden revelar patrones sorprendentes. Y por supuesto, no podemos olvidarnos del enigmático número π. Aprenderemos sobre su historia, sus infinitos decimales y sus conexiones con el universo matemático.",
+            "p2": "Prepárate para reír, aprender y sorprenderte en esta charla única. ¡No te pierdas esta experiencia llena de math vibes!"
+        },
+        "video": "https://www.instagram.com/reel/DHEwWk7Oh3m/?igsh=ZnVjazQ0Ym95cHNk"
+    },
+    {
+        "year": 2025,
+        "title": "Las mates en grandes obras que inspiran",
+        "speaker": "Ana María Peñaloza y Julián Vivas Pimiento",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/obras.jpg",
+        "summary": {
+            "p1": "En este fascinante encuentro, exploraremos cómo las matemáticas han influido y se han integrado en diversas obras literarias y cinematográficas. Desde los enigmas matemáticos en las novelas, hasta las complejas teorías científicas en las películas de Sci-fi, descubriremos la magia de los números y su impacto en la narrativa y el arte visual."
+        },
+        "video": "https://www.instagram.com/reel/DHPMedAOZna/?igsh=MW1sbGF1aWw4NWV2bQ=="
+    },
+    {
+        "year": 2025,
+        "title": "Etnomatemática: Conocimiento matemático, prácticas culturales y la necesidad de perdurar",
+        "speaker": "David Mauricio Valoyes Porras",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/etno.jpg",
+        "summary": {
+            "p1": "El término 'etnomatemática' fue acuñado por el matemático brasileño Ubiratàn D'Ambrosio durante los años 80, buscando nombrar la forma en la que el conocimiento matemático se puede dar en un ambiente social, cultural y natural (etno), naciendo de la necesidad de tratar de explicar, entender o enseñar (mathema) y teniendo como bases un determinado arte o técnica (thica). Así entonces la etnomatemática es la forma de denominar a aquel conocimiento matemático que surge o nace en medio de las prácticas culturales tradicionales de las comunidades, normalmente de aquellas que no están formalmente alfabetizadas, y que responden a su historia, raíces y saberes que pasan de generación en generación, y a la necesidad de las diferentes comunidades de sobrevivir, perdurar en el tiempo y expandirse en el espacio.",
+            "p2": "Los matemáticos, como ejercicio propio de su profesión, siempre buscan la formalización del conocimiento, y es algo natural, al fín y al cabo las matemáticas son una rama del conocimiento altamente estructurada, autoexplicativa, exacta, y con una historia que abarca prácticamente la historia misma de la humanidad (o al menos de las civilizaciones humanas). Pero en el contexto colombiano, y en general latinoamericano, es igualmente natural y válido tomarse un momento para reflexionar sobre la profesión que es hacer matemáticas respecto a la forma en la que viven las matemáticas las diferentes comunidades.",
+            "p3": "Esta charla surge como un proyecto para ser presentado, inicialmente, en el seminario de Filosofía de las Matemáticas de la Universidad El Bosque, y que agradezco lentamente ha ido tomando cada vez más forma impulsado por la posibilidad de presentarlo en diferentes espacios. Pero esta charla también surge de mi propio interés. Soy matemático, pero también soy orgullosamente de ascendencia chocoana, una región del país alejada, y en muchos casos olvidada, en donde los saberes tradicionales que pasan de generación en generación son aquello que les ha permitido perdurar. Así entonces, me parece valioso aportar desde mi profesión en la búsqueda de la reflexión frente a cómo otros contextos interpretan las matemáticas. Porque, aunque yo tuve el privilegio de aprenderlas de manera formal y como una ciencia, también veo el valor de aquel conocimiento matemático informal que surge de las necesidades de las comunidades campesinas, indígenas, negras, entre otras."
+        },
+        "video": "https://www.instagram.com/reel/DIU46CYxuVH/?igsh=NGFmdWpmMzBrcmJr"
+    },
+    {
+        "year": 2025,
+        "title": "The Topoligst's Rectangle: When a Scribble hides a Klein Bottle",
+        "speaker": "Eder David Barrero",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/topo.jpg",
+        "summary": {
+            "p1": "Esta presentación ofrece una exploración intuitiva del Problema de la Clavija Cuadrada, una cuestión topológica centenaria planteada originalmente por Otto Toeplitz en 1911, que pregunta si toda curva cerrada en el plano contiene los cuatro vértices de un cuadrado inscrito.",
+            "p2": "Se presenta una reinterpretación moderna del problema, inspirada por Grant Sanderson (3Blue1Brown). La charla comienza con definiciones fundamentales y se desplaza gradualmente hacia una reformulación en términos de rectángulos. A continuación, se desarrolla una codificación geométrica de pares de puntos no ordenados a lo largo de una curva cerrada en una superficie tridimensional.",
+            "p3": "La interacción entre geometría y topología adquiere una importancia fundamental, ya que la banda de Möbius (y, en interpretaciones recientes, la botella de Klein) emerge como una estructura clave para representar dichos emparejamientos. En última instancia, esta presentación pone de relieve un obstáculo topológico para incrustar esta superficie (la banda de Möbius) en R3 sin auto-intersección. La discusión concluye con un breve resumen de la prueba de Greene y Lobb, que resuelve el problema para el caso de curvas suaves."
+        },
+        "video": "https://www.instagram.com/math_and_beer/reel/DKD43QBg1Vd/"
+    },
+    {
+        "year": 2025,
+        "title": "¿Qué tienen en común las matemáticas y la cerveza?",
+        "speaker": "Ginna Juliana González Fandiño",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/mat_cerv.jpg",
+        "summary": {
+            "p1": "No hace falta estar frente a una pizarra para hacer matemáticas. A veces basta con una mesa llena de amigos, un par de vasos vacíos y un par de cervezas. En esta charla, haremos un brindis con la ciencia para descubrir la magia escondida en cada vaso."
+        },
+        "video": "https://www.instagram.com/reel/DKVi341Abyr/?igsh=Z3BoMGc2MXQxMjFt"
+    },
+    {
+        "year": 2025,
+        "title": "Evolución y complejidad: el camino a la transdisciplinariedad",
+        "speaker": "Fernando Gaspar Dueñas",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/evo.jpg",
+        "summary": {
+            "p1": "Es común el deseo de muchos investigadores y profesionales de estudiar los fenómenos y problemas que nos rodean de una manera transversal a varias disciplinas de diferentes ámbitos (ciencias naturales, ciencias sociales, humanidades), en lugar de solo a partir de una sola disciplina. Sin embargo, lo normal es que uno se estrelle con el siguiente problema: ¿cómo alcanzar y poner en práctica dicha perspectiva transversal? Pues bien, la clave está en las ciencias de la evolución y en las ciencias de la complejidad (en sus métodos y teorías: en sus matemáticas). La perspectiva o marco que ellas constituyen es el puente que permite atravesar diversas disciplinas de diferentes ámbitos."
+        },
+        "video": "https://www.instagram.com/reel/DNhLnwSOf_n/?igsh=MXYwNm9meDhkMDVpNQ=="
+    },
+    {
+        "year": 2025,
+        "title": "¿Qué tiene que ver un matemático griego con tu canción favorita de Spotify?",
+        "speaker": "Johan Sebástian Martínez Benítez",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/spotify.jpg",
+        "summary": {
+            "p1": "Desde tiempos antiguos, el sonido ha sido fuente de asombro y emoción. Esta charla busca explorar cómo las matemáticas se encuentran en la raíz de lo que hoy llamamos música. A partir de un recorrido por vibraciones, armónicos, escalas y temperamentos, descubriremos cómo patrones numéricos están detrás de la belleza que percibimos al escuchar nuestras canciones favoritas. Una conversación donde cuerdas, espectros y geometría se conectan con rock, reggaetón o Beethoven."
+        },
+        "video": "https://www.instagram.com/reel/DONAZnLjua-/?igsh=MW40N3VtNTN4YjJ4cA=="
+    },
+    {
+        "year": 2025,
+        "title": "Einstein y la caída de las manzanas: una nueva mirada a la gravedad",
+        "speaker": "Daniel Felipe Rojas Paternina",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/gravedad.jpg",
+        "summary": {
+            "p1": "Desde los primeros intentos por entender el movimiento de los astros hasta las ideas que transformaron la ciencia moderna, la historia de la gravedad ha sido un viaje lleno de descubrimientos. Newton la describió como una fuerza que mantiene unidos a los planetas y explica la caída de los cuerpos en la Tierra. Pero con la llegada de Einstein, la gravedad dejó de ser una fuerza misteriosa para convertirse en la manifestación de un espacio-tiempo curvo. Esta visión abrió la puerta a predicciones asombrosas: agujeros negros, estrellas que parecen multiplicarse en el cielo y una nueva forma de comprender el tiempo mismo. En esta charla recorreremos ese camino y exploraremos cómo cambió para siempre nuestra visión del universo."
+        },
+        "video": "https://www.instagram.com/p/DPRwMn8jpAk/?igsh=MXA5ZXc5aTdzMDF6bg=="
+    },
+    {
+        "year": 2025,
+        "title": "¿Qué es saber jugar?: Una mirada desde la teoría de juegos",
+        "speaker": "Diego Karkomés",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/juegos.jpg",
+        "summary": {
+            "p1": "Vamos a dar un paseo por el mundo de los juegos y la estrategia. Aunque no lo pensemos, estamos jugando todo el tiempo: cuando negociamos, cuando cooperamos, incluso cuando competimos. Muchas de esas decisiones ocurren sin que nos demos cuenta… y, detrás de ellas, siempre hay matemáticas. Porque al final, saber jugar no depende solo de ti, sino también de lo que los demás deciden. Y es justo ahí donde se ponen a prueba la estrategia, la confianza y, sobre todo, nuestra manera de relacionarnos."
+        },
+        "video": "https://www.instagram.com/p/DQF4LHUDpsX/?img_index=5"
+    },
+    {
+        "year": 2025,
+        "title": "Del enfriamiento de la cerveza a la inteligencia artificial",
+        "speaker": "Nathalia Valentina Castiblanco Carretero",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/enfriamiento.jpg",
+        "summary": {
+            "p1": "¿Por qué una cerveza se enfría rápido al principio y luego parece quedarse tibia para siempre? Detrás de ese comportamiento cotidiano hay una ecuación diferencial que describe cómo varía la temperatura de tu cerveza con el tiempo. En esta charla exploraremos, de forma visual y sencilla, cómo esas mismas ideas matemáticas sobre el cambio continuo inspiran hoy modelos modernos de inteligencia artificial, como las ecuaciones diferenciales neuronales."
+        },
+        "video": "https://www.instagram.com/p/DQ2D2IEjoJ8/?img_index=4"
+    },
+    {
+        "year": 2025,
+        "title": "Math Buzz: Proporción áurea, parábolas, estadística, trigonometría y Pi",
+        "speaker": "Ricardo Cano",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/buzz.jpg",
+        "summary": {
+            "p1": "¡Prepárate para sumergirte en el fascinante mundo de las matemáticas! Únete a nosotros en una emocionante charla llena de sorpresas y curiosidades matemáticas que te dejarán boquiabierto. Exploraremos la enigmática proporción áurea y su presencia en la naturaleza, el arte y la arquitectura, descubriremos las divertidas y curiosas propiedades de las parábolas, nos sumergiremos en el intrigante mundo de la estadística y aprenderemos cómo los números pueden revelar patrones sorprendentes. Y por supuesto, no podemos olvidarnos del enigmático número π. Aprenderemos sobre su historia, sus infinitos decimales y sus conexiones con el universo matemático.",
+            "p2": "Prepárate para reír, aprender y sorprenderte en esta charla única. ¡No te pierdas esta experiencia llena de math vibes!"
+        },
+        "video": "https://www.instagram.com/p/DQx0pnZDjrN/"
+    },
+    {
+        "year": 2025,
+        "title": "¿Y si bailar salsa se aprendiera con matemáticas?",
+        "speaker": "Ruth Alejandra Torres Rubiano",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/salsa.jpg",
+        "summary": {
+            "p1": "Resumen: El conteo, los patrones del ritmo, las simetrías y la geometría ofrecen herramientas para comprender el movimiento, coordinar los pasos y disfrutar más de la salsa. En esta charla descubriremos cómo las matemáticas pueden estar presentes,incluso, en la pista de baile."
+        },
+        "video": "https://www.instagram.com/p/DRUvvJhjkyJ/"
+    }
+]
