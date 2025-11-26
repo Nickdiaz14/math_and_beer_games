@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import pytz
 from datetime import datetime
+import json
 import psycopg2
 import os
 
@@ -8,7 +9,17 @@ app = Flask(__name__)
 
 @app.route('/')
 def menu():
-    return render_template('about.html')
+    with open("static/json/equipo.json", "r", encoding="utf-8") as f:
+        equipo = json.load(f)
+
+    with open("static/json/charlas.json", "r", encoding="utf-8") as f:
+        charlas = json.load(f)
+
+    grouped = {}
+    for c in charlas:
+        grouped.setdefault(c["year"], []).append(c)
+
+    return render_template("about.html", charlas=grouped, miembros=equipo)
 
 @app.route('/leaderboards')
 def leaderboards():
