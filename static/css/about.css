@@ -27,8 +27,18 @@
     hyphens: auto;
 }
 
+.about-img {
+    --img-width: 90%;
+    width: var(--img-width);
+    margin: 0 calc((100% - var(--img-width))/2);
+}
+
+.img-max-w {
+    max-width: 100% !important;
+}
+
 .myBg {
-    background: rgb(31, 0, 54) !important;
+    background: rgb(36, 1, 62) !important;
 }
 
 .yearBox {
@@ -120,12 +130,15 @@
 }
 
 .myPersonalInfo {
-    height: 14em !important;
+    height: 31em !important;
+    padding-top: 5%;
     width: 80%;
 }
 
 .myImgWidth {
     width: min(30vh, 38vw) !important;
+    height: min(30vh, 38vw) !important;
+    border-radius: 50%;
 }
 
 .fs-personal {
@@ -139,10 +152,15 @@
 
     /* 🌄 Modo horizontal */
     .myPersonalInfo {
-        height: 10em !important;
+        height: 27em !important;
     }
 
     .myWidth {
         width: 20rem;
+    }
+
+    .img-max-w {
+        max-width: 40% !important;
+        margin: 0 30%;
     }
 }
