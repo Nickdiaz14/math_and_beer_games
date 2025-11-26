@@ -293,7 +293,7 @@
         "year": 2025,
         "title": "Math Buzz: Proporción áurea, parábolas, estadística, trigonometría y Pi",
         "speaker": "Ricardo Cano",
-        "place": "A Seis Manos, Bogotá",
+        "place": "Museo de la Salle, Bogotá",
         "image": "static/images/charlas/buzz.jpg",
         "summary": {
             "p1": "¡Prepárate para sumergirte en el fascinante mundo de las matemáticas! Únete a nosotros en una emocionante charla llena de sorpresas y curiosidades matemáticas que te dejarán boquiabierto. Exploraremos la enigmática proporción áurea y su presencia en la naturaleza, el arte y la arquitectura, descubriremos las divertidas y curiosas propiedades de las parábolas, nos sumergiremos en el intrigante mundo de la estadística y aprenderemos cómo los números pueden revelar patrones sorprendentes. Y por supuesto, no podemos olvidarnos del enigmático número π. Aprenderemos sobre su historia, sus infinitos decimales y sus conexiones con el universo matemático.",
@@ -308,7 +308,7 @@
         "place": "A Seis Manos, Bogotá",
         "image": "static/images/charlas/salsa.jpg",
         "summary": {
-            "p1": "Resumen: El conteo, los patrones del ritmo, las simetrías y la geometría ofrecen herramientas para comprender el movimiento, coordinar los pasos y disfrutar más de la salsa. En esta charla descubriremos cómo las matemáticas pueden estar presentes,incluso, en la pista de baile."
+            "p1": "El conteo, los patrones del ritmo, las simetrías y la geometría ofrecen herramientas para comprender el movimiento, coordinar los pasos y disfrutar más de la salsa. En esta charla descubriremos cómo las matemáticas pueden estar presentes,incluso, en la pista de baile."
         },
         "video": "https://www.instagram.com/p/DRUvvJhjkyJ/"
     }
