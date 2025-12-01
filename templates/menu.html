@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" type="image/png" href="../static/images/logos/favicon.png">
-    <title>Menu</title>
+    <title>Games</title>
 </head> 
 <body>
     <header>
@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <button onclick="window.location.href='/menu'" class="nav-link active" aria-current="page"><i class="fa-solid fa-gamepad"></i> Juegos</button>
+                    <button onclick="window.location.href=`/menu_games?userid=${localStorage.getItem('userId')}`" class="nav-link active" aria-current="page"><i class="fa-solid fa-gamepad"></i> Juegos</button>
                 </li>
                 <li class="nav-item">
                     <button onclick="window.location.href='/leaderboards'" class="nav-link active" aria-current="page"><i class="fa-solid fa-ranking-star"></i> Rankings</button>
@@ -44,10 +44,10 @@
                 <span class="game_text">0h-h1</span>
             </button>
 
-            <button class="game" onclick="window.location.href='/time_trial_0h_h1'">
+            <button class="game" onclick="window.location.href='/0h_h1_tt'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/time_trial.png" alt="" class="game_img">
-                <span class="game_text_big">Contrareloj</span>
+                <span class="game_text_big">Contrareloj<br>0h-h1</span>
             </button>
 
             <button class="game" onclick="window.location.href='/knight'">
