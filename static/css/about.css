@@ -38,7 +38,7 @@
 }
 
 .myBg {
-    background: rgb(36, 1, 62) !important;
+    background: var(--myBg) !important;
 }
 
 .yearBox {
@@ -120,7 +120,7 @@
 }
 
 .myBorder {
-    border: 1px solid rgba(232, 201, 254, 0.53) !important;
+    border: 1px solid var(--myBorder) !important;
     box-sizing: border-box;
     padding: 1px;
 }
