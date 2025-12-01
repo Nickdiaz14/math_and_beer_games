@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, jsonify
-import pytz
 from datetime import datetime
-import json
 import psycopg2
+import random
+import pytz
+import json
 import os
 from dotenv import load_dotenv
 
@@ -10,8 +11,9 @@ load_dotenv()
 
 app = Flask(__name__)
 
+# Templates
 @app.route('/')
-def menu():
+def page_about():
     with open("static/json/equipo.json", "r", encoding="utf-8") as f:
         equipo = json.load(f)
 
@@ -25,19 +27,39 @@ def menu():
     return render_template("about.html", charlas=grouped, miembros=equipo)
 
 @app.route('/leaderboards')
-def leaderboards():
+def page_leaderboards():
     return render_template('leaderboards.html')
 
-@app.route('/menu')
-def about():
-    return render_template('menu.html')
+@app.route('/menu_games')
+def page_menu():
+    id = request.args.get('userid')
+    connection = connect_db()
+    cursor = connection.cursor()
+    cursor.execute("""
+        SELECT nickname FROM nickname
+        WHERE userid = %s;
+    """, (id,))
+
+    name = cursor.fetchone()[0]
+    connection.commit()
+    cursor.close()
+    connection.close()  
+    return render_template('menu.html', nickname=name)
 
 @app.route('/forms')
-def forms():
+def page_forms():
     return render_template('forms.html')
 
+@app.route('/0h_h1')
+def page_0hh1():
+    return render_template('0h_h1.html')
 
-# Conectar a Supabase
+@app.route('/0h_h1_tt')
+def page_0hh1_tt():
+    return render_template('0h_h1_tt.html')
+
+
+# Conección a Base de Datos
 def connect_db():
     return psycopg2.connect(
         host=os.getenv("DB_HOST"),
@@ -83,6 +105,19 @@ def attendance():
     except Exception as e:
         print("Error:", e)
         return jsonify({'success': False})
+    
+#---------------------------------------------------------Fetch---------------------------------------------------------#
+
+@app.route('/0h_h1/play', methods=['POST'])
+def get_cond_ini():
+    n = request.json['n'] 
+    with open(f'static/boards/aleatorios{n}.txt', 'r', encoding='utf-8') as file:
+        lineas = file.readlines()
+        linea_especifica = lineas[random.randint(0, len(lineas)-1)].strip()  # Remueve espacios en blanco y saltos de línea
+    matrix = eval(linea_especifica)
+
+    return jsonify({'matrix': matrix})
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
