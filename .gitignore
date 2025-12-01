@@ -1,3 +1,2 @@
 .env
-templates/leaderboards.html
-templates/menu.html
+templates/template.html
