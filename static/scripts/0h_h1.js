@@ -1,4 +1,4 @@
-let n = 10;
+let n;
 let solved = false;
 let timerInterval = null;
 let validateTimeout = null;
@@ -10,8 +10,9 @@ const title = document.getElementById('title');
 const back = document.getElementById('back');
 
 document.addEventListener('DOMContentLoaded', function () {
+    n = Number(document.body.dataset.n)
     back.addEventListener('click', () => window.location.href = `\menu_games?userid=${localStorage.getItem('userId')}`)
-    const cell_size = n === 4 ? '' : n === 6 ? 'z-6' : n === 8 ? 'z-8' : 'z-10';
+    const cell_size = n === 4 ? 'grey' : n === 6 ? 'z-6' : n === 8 ? 'z-8' : 'z-10';
     const matrix = document.getElementById('matrix');
     for (let i = 0; i < n; i++) {
         const mtr = document.createElement('tr')
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         matrix.appendChild(mtr)
     }
     matrix.classList.add('matrix')
+    startGame()
 })
 
 function updateTimerDisplay() {
@@ -54,17 +56,6 @@ function stop_timer() {
     }
 }
 
-function schedule_validation() {
-    if (!game_matrix.some(row => row.includes(-1))) {
-        valid_solution(); // validación inmediata si ya está lleno
-        return;
-    }
-
-    if (validateTimeout) clearTimeout(validateTimeout);
-
-    validateTimeout = setTimeout(valid_solution, 150);
-}
-
 function click_animation(td, time) {
     td.classList.add('clicked');
     setTimeout(() => {
@@ -73,8 +64,7 @@ function click_animation(td, time) {
 }
 
 function toggle_color(row, col, td) {
-    click_animation(td, 130);
-
+    click_animation(td, 110);
     if (game_matrix[row][col] === -1) {
         game_matrix[row][col] = 0;
         td.classList.remove('grey');
@@ -91,7 +81,7 @@ function toggle_color(row, col, td) {
 
     if (validateTimeout) clearTimeout(validateTimeout);
 
-    validateTimeout = setTimeout(valid_solution(), 150);
+    validateTimeout = setTimeout(() => valid_solution(), 200);
 
 }
 
@@ -234,6 +224,3 @@ function valid_solution() {
     stop_timer()
     return;
 }
-
-
-startGame()

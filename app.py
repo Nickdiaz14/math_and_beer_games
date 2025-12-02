@@ -52,7 +52,8 @@ def page_forms():
 
 @app.route('/0h_h1')
 def page_0hh1():
-    return render_template('0h_h1.html')
+    n = request.args.get('n')
+    return render_template('0h_h1.html', n=n)
 
 @app.route('/0h_h1_tt')
 def page_0hh1_tt():
