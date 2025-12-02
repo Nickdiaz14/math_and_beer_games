@@ -9,6 +9,7 @@ let game_matrix = Array.from({ length: n }, () => Array(n).fill(-1));
 const timer = document.getElementById('timer');
 const title = document.getElementById('title');
 const back = document.getElementById('back');
+const s_boards = document.getElementById('s_boards')
 
 document.addEventListener('DOMContentLoaded', function () {
     back.addEventListener('click', () => window.location.href = `\menu_games?userid=${localStorage.getItem('userId')}`)
@@ -57,17 +58,6 @@ function stop_timer() {
     }
 }
 
-function schedule_validation() {
-    if (!game_matrix.some(row => row.includes(-1))) {
-        valid_solution(); // validación inmediata si ya está lleno
-        return;
-    }
-
-    if (validateTimeout) clearTimeout(validateTimeout);
-
-    validateTimeout = setTimeout(valid_solution, 150);
-}
-
 function click_animation(td, time) {
     td.classList.add('clicked');
     setTimeout(() => {
@@ -76,7 +66,7 @@ function click_animation(td, time) {
 }
 
 function toggle_color(row, col, td) {
-    click_animation(td, 130);
+    click_animation(td, 110);
     if (game_matrix[row][col] === -1) {
         game_matrix[row][col] = 0;
         td.classList.remove('grey');
@@ -93,7 +83,7 @@ function toggle_color(row, col, td) {
 
     if (validateTimeout) clearTimeout(validateTimeout);
 
-    validateTimeout = setTimeout(valid_solution(), 150);
+    validateTimeout = setTimeout(() => valid_solution(), 200);
 
 }
 
@@ -127,7 +117,7 @@ function startGame() {
 }
 
 function valid_solution() {
-    title.textContent = '0h-h1';
+    title.textContent = 'Contrareloj';
     const cells = document.querySelectorAll('td')
     cells.forEach(cell => cell.classList.remove('cell_alert'))
 
@@ -234,8 +224,10 @@ function valid_solution() {
     boards_solved++;
     centisecondsElapsed += Math.max(Math.floor(1000 * Math.pow(0.8, boards_solved)))
     s_boards.textContent = `Tableros resueltos: ${boards_solved}`;
-    cells.forEach(cell => cell.className = 'grey');
-    setTimeout(startGame(), 350);
+    setTimeout(() => {
+        cells.forEach(cell => cell.className = 'grey');
+        startGame();
+    }, 250);
     return;
 }
 
