@@ -8,8 +8,10 @@ let game_matrix = Array.from({ length: n }, () => Array(n).fill(-1));
 
 const timer = document.getElementById('timer');
 const title = document.getElementById('title');
+const back = document.getElementById('back');
 
 document.addEventListener('DOMContentLoaded', function () {
+    back.addEventListener('click', () => window.location.href = `\menu_games?userid=${localStorage.getItem('userId')}`)
     const matrix = document.getElementById('matrix')
     for (let i = 0; i < n; i++) {
         const mtr = document.createElement('tr')

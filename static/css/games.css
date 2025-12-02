@@ -1,9 +1,7 @@
-.game_info {
+/*-----Interfaz-----*/
+.game_info,
+.back {
     position: fixed;
-    display: flex;
-    flex-direction: column;
-    bottom: 15px;
-    right: 15px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -13,7 +11,17 @@
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: white;
+    color: #b6bde7;
+}
+
+.game_info {
+    bottom: 15px;
+    right: 15px;
+}
+
+.back {
+    bottom: 15px;
+    left: 15px;
 }
 
 .popover-body {
@@ -23,6 +31,7 @@
     color: #ffffff !important;
 }
 
+/*-----Matriz-----*/
 .matrix {
     border-collapse: separate;
     border-spacing: 7px;
@@ -50,14 +59,6 @@
     background: var(--matrix-cell-color);
 }
 
-.red {
-    background: linear-gradient(135deg, #bc2111 0%, #e13712 100%);
-}
-
-.blue {
-    background: linear-gradient(135deg, #551ba5 0%, #0b54e7 100%);
-}
-
 .z-6 {
     height: 73px;
     width: 73px;
@@ -78,11 +79,6 @@
     pointer-events: none;
 }
 
-.cell_alert {
-    border: 3px solid white;
-    box-sizing: border-box;
-}
-
 .blocked::after {
     content: "";
     position: absolute;
@@ -95,6 +91,10 @@
     pointer-events: none;
 }
 
+.cell_alert {
+    border: 3px solid white;
+    box-sizing: border-box;
+}
 
 main {
     margin-top: 5vh;
