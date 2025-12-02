@@ -1,4 +1,4 @@
-let n = 6;
+let n = 10;
 let solved = false;
 let timerInterval = null;
 let validateTimeout = null;
@@ -7,14 +7,18 @@ let game_matrix = Array.from({ length: n }, () => Array(n).fill(-1));
 
 const timer = document.getElementById('timer');
 const title = document.getElementById('title');
+const back = document.getElementById('back');
 
 document.addEventListener('DOMContentLoaded', function () {
-    const matrix = document.getElementById('matrix')
+    back.addEventListener('click', () => window.location.href = `\menu_games?userid=${localStorage.getItem('userId')}`)
+    const cell_size = n === 4 ? '' : n === 6 ? 'z-6' : n === 8 ? 'z-8' : 'z-10';
+    const matrix = document.getElementById('matrix');
     for (let i = 0; i < n; i++) {
         const mtr = document.createElement('tr')
         for (let j = 0; j < n; j++) {
             const mtd = document.createElement('td')
             mtd.classList.add('grey')
+            mtd.classList.add(cell_size)
             mtd.id = `cell-${i}-${j}`;
             mtd.addEventListener('click', () => toggle_color(i, j, mtd))
             mtr.appendChild(mtd)
@@ -92,7 +96,6 @@ function toggle_color(row, col, td) {
 }
 
 function startGame() {
-    const cell_size = n === 4 ? '' : n === 6 ? 'z-6' : n === 8 ? 'z-8' : 'z-10'
     fetch('/0h_h1/play', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -108,9 +111,9 @@ function startGame() {
                 for (let j = 0; j < game_matrix[i].length; j++) {
                     const cell = matrix.rows[i].cells[j];
                     cell.classList.remove('grey')
-                    const color = game_matrix[i][j] === 0 ? ['red', 'blocked', cell_size] :
-                        game_matrix[i][j] === 1 ? ['blue', 'blocked', cell_size] :
-                            ['grey', cell_size];
+                    const color = game_matrix[i][j] === 0 ? ['red', 'blocked'] :
+                        game_matrix[i][j] === 1 ? ['blue', 'blocked'] :
+                            ['grey'];
                     for (let k = 0; k < color.length; k++) {
                         cell.classList.add(color[k])
                     }
