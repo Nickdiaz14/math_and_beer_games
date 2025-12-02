@@ -96,12 +96,11 @@ function startGame() {
         .then(response => response.json())
         .then(data => {
             const cond_ini = data.matrix;
-            const matrix = document.getElementById('matrix')
             game_matrix = cond_ini.map(row => [...row]);
 
             for (let i = 0; i < game_matrix.length; i++) {
                 for (let j = 0; j < game_matrix[i].length; j++) {
-                    const cell = matrix.rows[i].cells[j];
+                    const cell = document.getElementById(`cell-${i}-${j}`);
                     cell.classList.remove('grey')
                     const color = game_matrix[i][j] === 0 ? ['red', 'blocked'] :
                         game_matrix[i][j] === 1 ? ['blue', 'blocked'] :
