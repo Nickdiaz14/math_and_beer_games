@@ -1,0 +1,7 @@
+.red {
+    background: linear-gradient(135deg, #bc2111 0%, #e13712 100%);
+}
+
+.blue {
+    background: linear-gradient(135deg, #551ba5 0%, #0b54e7 100%);
+}
