@@ -39,7 +39,9 @@
 
 .grey,
 .red,
-.blue {
+.blue,
+.black,
+.white {
     position: relative;
     height: 100px;
     width: 100px;

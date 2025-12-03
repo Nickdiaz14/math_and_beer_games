@@ -59,6 +59,10 @@ def page_0hh1():
 def page_0hh1_tt():
     return render_template('0h_h1_tt.html')
 
+@app.route('/knight')
+def page_knight():
+    return render_template('knight.html')
+
 
 # Conección a Base de Datos
 def connect_db():
