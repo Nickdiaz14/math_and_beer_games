@@ -35,9 +35,9 @@
         </nav>
     </header>
     <main>
-        <div id="countdown-overlay">
+        <!-- <div id="countdown-overlay">
             <h2 class="fs-3">Próximamente disponible 🚧 <br>¡Vuelve pronto!</h2>
-        </div>
+        </div> -->
         <h1 class="title">¡Hola, {{ nickname }}! <br> Elige un juego</h1>
         <hr>
         <div class="grid_container displayColumn">
@@ -69,6 +69,7 @@
                     </div>
                 </div>
             </div>
+
             <button class="game" onclick="window.location.href='/0h_h1_tt'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/time_trial.png" alt="" class="game_img">
@@ -81,11 +82,30 @@
                 <span class="game_text">Knight</span>
             </button>
 
-            <button class="game" onclick="window.location.href='/secuenzo'">
+            <button class="game" data-bs-toggle="modal" data-bs-target="#secuenzo-size">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text_big">Secuenzo</span>
             </button>
+            <!-- Modal -->
+            <div class="modal fade" id="secuenzo-size" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content bg-dark text-light overflow-auto">
+                        <div class="modal-header displayColumn">Elige un modo de juego</div>
+                        <div class="modal-body">
+                            <table class="displayColumn">
+                                <tr>
+                                    <td><button class="btn btn-secondary btn-lg p-4 subGameBtn" onclick="window.location.href='/secuenzo?n=5'">Unicolor</button></td>
+                                    <td><button class="btn btn-secondary btn-lg p-4 subGameBtn" onclick="window.location.href='/secuenzo?n=6'">Bicolor</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer myButtons">
+                            <button type="button" class="btn btn-secondary closeButton" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <button class="game" onclick="window.location.href='/cuenta_mania'">
                 <span class="game_text_out">¡Jugar!</span>

@@ -6,6 +6,10 @@
     background: linear-gradient(135deg, #551ba5 0%, #0b54e7 100%);
 }
 
+.locked {
+    pointer-events: none;
+}
+
 .blocked {
     position: relative;
     pointer-events: none;

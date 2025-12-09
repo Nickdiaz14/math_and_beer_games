@@ -63,6 +63,10 @@ def page_0hh1_tt():
 def page_knight():
     return render_template('knight.html')
 
+@app.route('/secuenzo')
+def page_secuenzo():
+    n = request.args.get('n')
+    return render_template('secuenzo.html', n=n)
 
 # Conección a Base de Datos
 def connect_db():
