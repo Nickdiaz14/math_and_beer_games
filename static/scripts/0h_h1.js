@@ -1,4 +1,5 @@
 let n;
+let cells;
 let solved = false;
 let timerInterval = null;
 let validateTimeout = null;
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
         matrix.appendChild(mtr)
     }
     matrix.classList.add('matrix')
+    cells = document.querySelectorAll('td');
     startGame()
 })
 
@@ -115,7 +117,6 @@ function startGame() {
 
 function valid_solution() {
     title.textContent = '0h-h1';
-    const cells = document.querySelectorAll('td')
     cells.forEach(cell => cell.classList.remove('cell_alert'))
 
     if (solved || game_matrix.some(row => row.includes(-1))) return;

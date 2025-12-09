@@ -1,4 +1,5 @@
 let n = 4;
+let cells;
 let solved = false;
 let boards_solved = 0;
 let timerInterval = null;
@@ -9,7 +10,7 @@ let game_matrix = Array.from({ length: n }, () => Array(n).fill(-1));
 const timer = document.getElementById('timer');
 const title = document.getElementById('title');
 const back = document.getElementById('back');
-const s_boards = document.getElementById('s_boards')
+const s_boards = document.getElementById('s_boards');
 
 document.addEventListener('DOMContentLoaded', function () {
     back.addEventListener('click', () => window.location.href = `\menu_games?userid=${localStorage.getItem('userId')}`)
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         matrix.appendChild(mtr)
     }
     matrix.classList.add('matrix')
+    cells = document.querySelectorAll('td');
 })
 
 function updateTimerDisplay() {
@@ -117,7 +119,6 @@ function startGame() {
 
 function valid_solution() {
     title.textContent = 'Contrareloj';
-    const cells = document.querySelectorAll('td')
     cells.forEach(cell => cell.classList.remove('cell_alert'))
 
     if (solved || game_matrix.some(row => row.includes(-1))) return;

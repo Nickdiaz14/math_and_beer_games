@@ -1,4 +1,5 @@
 let n = 8;
+let cells;
 let solved = false;
 let timerInterval = null;
 let validateTimeout = null;
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         matrix.appendChild(mtr)
     }
     matrix.classList.add('matrix')
+    cells = document.querySelectorAll('td');
     startGame();
 })
 
@@ -84,7 +86,6 @@ function toggle_color(row, col, td) {
 }
 
 function updateValidSpots(i, j) {
-    const cells = document.querySelectorAll('td');
     cells.forEach(cell => cell.classList.add('locked'));
 
     // Todos los movimientos de caballo
@@ -164,8 +165,7 @@ function startGame() {
 }
 
 function valid_solution() {
-    if (game_matrix.some(row => row.includes(1))) return;
-    const cells = document.querySelectorAll('td');
+    if (game_matrix.some(row => row.includes(1))) return;;
     cells.forEach(cell => cell.classList.add('locked'));
     stop_timer();
 }
