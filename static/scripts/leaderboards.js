@@ -12,7 +12,7 @@ const extra_table = document.getElementById('extra_leaderboard');
 document.addEventListener('DOMContentLoaded', function () {
     if (back) {
         back.addEventListener('click', () => {
-            window.location.href = `/menu_games?userid=${localStorage.getItem('userId')}`;
+            window.location.href = '/register';
         });
     }
 

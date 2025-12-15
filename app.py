@@ -50,6 +50,14 @@ def page_menu():
 def page_forms():
     return render_template('forms.html')
 
+@app.route('/register')
+def page_register():
+    try:
+        m = request.args.get('m')
+        return render_template('register.html', m = m)
+    except:
+        return render_template('registrer.html')
+
 @app.route('/0h_h1')
 def page_0hh1():
     n = request.args.get('n')
@@ -259,6 +267,55 @@ def get_leaderboard():
             return jsonify({'ranking': ranking, 'personal_ranking': personal_ranking})
         
     return jsonify({'ranking': ranking, 'personal_ranking': ['-', '-', '-', '-']})
+
+@app.route('/seeUser', methods=['POST'])
+def seeUserExistense():
+    user_id = request.json['user_id'] 
+    connection = connect_db()
+    cursor = connection.cursor()
+    cursor.execute("""
+        SELECT nickname FROM nickname
+        WHERE userid = %s;
+    """, (user_id,))
+
+    name = cursor.fetchone()
+    cursor.close()
+    connection.close()  
+    return jsonify({'valid': True if name else False})
+
+@app.route('/generateUser', methods=['POST'])
+def generateUser():
+    user_id = request.json['user_id']
+    nickname = request.json['nickname'].strip()
+
+    if len(nickname) > 20:
+        return jsonify({'valid': False, 'message_id': 1})
+
+    connection = connect_db()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT 1 FROM nickname
+        WHERE LOWER(nickname) = LOWER(%s)
+        AND userid != %s;
+    """, (nickname, user_id))
+
+    if cursor.fetchone():
+        cursor.close()
+        connection.close()
+        return jsonify({'valid': False, 'message_id': 0})
+
+    cursor.execute("""
+        INSERT INTO nickname (userid, nickname)
+        VALUES (%s, %s);
+    """, (user_id, nickname))
+
+    connection.commit()
+    cursor.close()
+    connection.close()
+
+    return jsonify({'valid': True, 'message_id': -1})
+
     
 
 if __name__ == '__main__':
