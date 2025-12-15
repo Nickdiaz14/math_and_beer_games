@@ -28,7 +28,7 @@ def page_about():
 
 @app.route('/leaderboards')
 def page_leaderboards():
-    return render_template('leaderboards.html')
+    return render_template('leaderboards.html', records=10)
 
 @app.route('/menu_games')
 def page_menu():
@@ -50,14 +50,37 @@ def page_menu():
 def page_forms():
     return render_template('forms.html')
 
+@app.route('/register')
+def page_register():
+    try:
+        m = request.args.get('m')
+        return render_template('register.html', m = m)
+    except:
+        return render_template('registrer.html')
+
 @app.route('/0h_h1')
 def page_0hh1():
-    return render_template('0h_h1.html')
+    n = request.args.get('n')
+    return render_template('0h_h1.html', n=n)
 
 @app.route('/0h_h1_tt')
 def page_0hh1_tt():
     return render_template('0h_h1_tt.html')
 
+@app.route('/knight')
+def page_knight():
+    return render_template('knight.html')
+
+@app.route('/secuenzo')
+def page_secuenzo():
+    n = request.args.get('n')
+    return render_template('secuenzo.html', n=n)
+
+@app.route('/leaderboard')
+def page_leaderboard():
+    game = request.args.get('game')
+    name = request.args.get('name')
+    return render_template('leaderboard.html', game = game, name = name, records = 5)
 
 # Conección a Base de Datos
 def connect_db():
@@ -117,6 +140,182 @@ def get_cond_ini():
     matrix = eval(linea_especifica)
 
     return jsonify({'matrix': matrix})
+
+@app.route('/leaderboard/submit', methods=['POST'])
+def update_leaderboard():
+    better = False
+    user_id = request.json['userid']
+    board = request.json['game']
+    record_raw = request.json['record']
+    
+    count_games = ['TContrareloj', 'TUnicolor', 'TBicolor', 'TProgresivo', 'TAleatorio']
+    points_games = ['TCruzado', 'TKnight', 'TMini-Nerdle', 'TNerdle', 'TMaxi-Nerdle']
+
+    connection = connect_db()
+    cursor = connection.cursor()
+    
+    try:
+        # Convertir y formatear record según el tipo de juego
+        if board in count_games:
+            record = int(record_raw)
+            string_record = f'{record} tabs'
+            is_better = lambda new, old: new > old
+        elif board in points_games:
+            record = float(record_raw)
+            string_record = f'{round(record, 2)}'
+            is_better = lambda new, old: new > old
+        else:
+            record = int(record_raw)
+            string_record = f'{(record//6000):02}:{((record%6000)//100):02}.{(record%100):02}'
+            is_better = lambda new, old: new < old
+
+        cursor.execute("""
+            SELECT id, record FROM leaderboard
+            WHERE userid = %s AND board = %s;
+        """, (user_id, board))
+
+        prev_record = cursor.fetchone()
+
+        if prev_record:
+            lead_id = int(prev_record[0])
+            prev_value = float(prev_record[1]) if board in points_games else int(prev_record[1])
+
+            print(prev_value, record)
+            
+            if is_better(record, prev_value):
+                cursor.execute("""
+                    UPDATE leaderboard
+                    SET record = %s, string_record = %s
+                    WHERE id = %s;
+                """, (record, string_record, lead_id))
+                better = True
+        else:
+            cursor.execute("""
+                INSERT INTO leaderboard (board, userid, record, string_record)
+                VALUES (%s, %s, %s, %s);
+            """, (board, user_id, record, string_record))
+
+        connection.commit()
+
+    except Exception as e:
+        connection.rollback()
+        print("Error:", e)
+        return jsonify({'error': str(e)}), 500
+        
+    finally:
+        cursor.close()
+        connection.close() 
+
+    return jsonify({'better': better})
+
+@app.route('/leaderboard/consult', methods=['POST'])
+def get_leaderboard():
+    user_id = request.json['userid']
+    board = request.json['game']
+    records = request.json['records']
+    connection = connect_db()
+    cursor = connection.cursor()
+
+    desc = ['TContrareloj', 'TUnicolor', 'TBicolor', 'TProgresivo', 'TAleatorio', 'TCruzado', 'TKnight', 'TMini-Nerdle', 'TNerdle', 'TMaxi-Nerdle']
+    
+    query = """
+        SELECT
+            ROW_NUMBER() OVER (PARTITION BY board ORDER BY record DESC) AS position,
+            nickname,
+            string_record,
+            userid
+        FROM leader_final_view
+        WHERE board = %s
+        LIMIT %s;
+    """ if board in desc else """
+        SELECT
+            ROW_NUMBER() OVER (PARTITION BY board ORDER BY record) AS position,
+            nickname,
+            string_record,
+            userid
+        FROM leader_final_view
+        WHERE board = %s
+        LIMIT %s;
+    """
+    cursor.execute(query, (board, records))
+
+    ranking = cursor.fetchall()
+
+    query_2 = """
+        SELECT * FROM (SELECT
+            ROW_NUMBER() OVER (PARTITION BY board ORDER BY record DESC) AS position,
+            nickname,
+            string_record,
+            userid
+        FROM leader_final_view
+        WHERE board = %s) t
+        WHERE t.userid = %s
+    """ if board in desc else """
+        SELECT * FROM (SELECT
+            ROW_NUMBER() OVER (PARTITION BY board ORDER BY record) AS position,
+            nickname,
+            string_record,
+            userid
+        FROM leader_final_view
+        WHERE board = %s) t
+        WHERE t.userid = %s
+    """
+    cursor.execute(query_2, (board,user_id))
+    personal_ranking = cursor.fetchone()
+    if personal_ranking:
+        if personal_ranking[0] > 0:
+            return jsonify({'ranking': ranking, 'personal_ranking': personal_ranking})
+        
+    return jsonify({'ranking': ranking, 'personal_ranking': ['-', '-', '-', '-']})
+
+@app.route('/seeUser', methods=['POST'])
+def seeUserExistense():
+    user_id = request.json['user_id'] 
+    connection = connect_db()
+    cursor = connection.cursor()
+    cursor.execute("""
+        SELECT nickname FROM nickname
+        WHERE userid = %s;
+    """, (user_id,))
+
+    name = cursor.fetchone()
+    cursor.close()
+    connection.close()  
+    return jsonify({'valid': True if name else False})
+
+@app.route('/generateUser', methods=['POST'])
+def generateUser():
+    user_id = request.json['user_id']
+    nickname = request.json['nickname'].strip()
+
+    if len(nickname) > 20:
+        return jsonify({'valid': False, 'message_id': 1})
+
+    connection = connect_db()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT 1 FROM nickname
+        WHERE LOWER(nickname) = LOWER(%s)
+        AND userid != %s;
+    """, (nickname, user_id))
+
+    if cursor.fetchone():
+        cursor.close()
+        connection.close()
+        return jsonify({'valid': False, 'message_id': 0})
+
+    cursor.execute("""
+        INSERT INTO nickname (userid, nickname)
+        VALUES (%s, %s);
+    """, (user_id, nickname))
+
+    connection.commit()
+    cursor.close()
+    connection.close()
+
+    return jsonify({'valid': True, 'message_id': -1})
+
     
 
 if __name__ == '__main__':

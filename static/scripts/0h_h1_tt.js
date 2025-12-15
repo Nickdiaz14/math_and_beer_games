@@ -1,4 +1,5 @@
 let n = 4;
+let cells;
 let solved = false;
 let boards_solved = 0;
 let timerInterval = null;
@@ -9,9 +10,18 @@ let game_matrix = Array.from({ length: n }, () => Array(n).fill(-1));
 const timer = document.getElementById('timer');
 const title = document.getElementById('title');
 const back = document.getElementById('back');
+const s_boards = document.getElementById('s_boards');
 
 document.addEventListener('DOMContentLoaded', function () {
-    back.addEventListener('click', () => window.location.href = `\menu_games?userid=${localStorage.getItem('userId')}`)
+    back.addEventListener('click', () => {
+        window.history.back();
+    });
+
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) {
+            window.location.reload();
+        }
+    });
     const matrix = document.getElementById('matrix')
     for (let i = 0; i < n; i++) {
         const mtr = document.createElement('tr')
@@ -25,6 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
         matrix.appendChild(mtr)
     }
     matrix.classList.add('matrix')
+    cells = document.querySelectorAll('td');
+    startGame();
 })
 
 function updateTimerDisplay() {
@@ -46,6 +58,7 @@ function start_timer() {
             updateTimerDisplay();
         } else {
             stop_timer();
+            sendRecord();
         }
     }, 10); // Actualizar cada 10 ms (centésima de segundo)
 }
@@ -57,17 +70,6 @@ function stop_timer() {
     }
 }
 
-function schedule_validation() {
-    if (!game_matrix.some(row => row.includes(-1))) {
-        valid_solution(); // validación inmediata si ya está lleno
-        return;
-    }
-
-    if (validateTimeout) clearTimeout(validateTimeout);
-
-    validateTimeout = setTimeout(valid_solution, 150);
-}
-
 function click_animation(td, time) {
     td.classList.add('clicked');
     setTimeout(() => {
@@ -76,7 +78,7 @@ function click_animation(td, time) {
 }
 
 function toggle_color(row, col, td) {
-    click_animation(td, 130);
+    click_animation(td, 110);
     if (game_matrix[row][col] === -1) {
         game_matrix[row][col] = 0;
         td.classList.remove('grey');
@@ -93,7 +95,7 @@ function toggle_color(row, col, td) {
 
     if (validateTimeout) clearTimeout(validateTimeout);
 
-    validateTimeout = setTimeout(valid_solution(), 150);
+    validateTimeout = setTimeout(() => valid_solution(), 200);
 
 }
 
@@ -106,12 +108,11 @@ function startGame() {
         .then(response => response.json())
         .then(data => {
             const cond_ini = data.matrix;
-            const matrix = document.getElementById('matrix')
             game_matrix = cond_ini.map(row => [...row]);
 
             for (let i = 0; i < game_matrix.length; i++) {
                 for (let j = 0; j < game_matrix[i].length; j++) {
-                    const cell = matrix.rows[i].cells[j];
+                    const cell = document.getElementById(`cell-${i}-${j}`);
                     cell.classList.remove('grey')
                     const color = game_matrix[i][j] === 0 ? ['red', 'blocked'] :
                         game_matrix[i][j] === 1 ? ['blue', 'blocked'] :
@@ -127,8 +128,7 @@ function startGame() {
 }
 
 function valid_solution() {
-    title.textContent = '0h-h1';
-    const cells = document.querySelectorAll('td')
+    title.textContent = 'Contrareloj';
     cells.forEach(cell => cell.classList.remove('cell_alert'))
 
     if (solved || game_matrix.some(row => row.includes(-1))) return;
@@ -234,10 +234,25 @@ function valid_solution() {
     boards_solved++;
     centisecondsElapsed += Math.max(Math.floor(1000 * Math.pow(0.8, boards_solved)))
     s_boards.textContent = `Tableros resueltos: ${boards_solved}`;
-    cells.forEach(cell => cell.className = 'grey');
-    setTimeout(startGame(), 350);
+    setTimeout(() => {
+        cells.forEach(cell => cell.className = 'grey');
+        startGame();
+    }, 250);
     return;
 }
 
-
-startGame()
+function sendRecord() {
+    fetch('/leaderboard/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            game: `TContrareloj`,
+            record: boards_solved,
+            userid: localStorage.getItem('userId')
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            window.location.href = `/leaderboard?game=TContrareloj&name=0hh1 Contrareloj&better=${data.better}`
+        })
+}

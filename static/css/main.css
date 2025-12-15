@@ -66,8 +66,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1vh;
-  margin-bottom: 8vh;
+  gap: 3vh;
+  margin: 5vh 0;
 }
 
 .displayColumn {
@@ -106,7 +106,6 @@ main {
   font-size: 300%;
   width: 95%;
   text-align: center;
-  margin: 3vh 0;
 }
 
 hr {
