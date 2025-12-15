@@ -1,5 +1,6 @@
 let n = 8;
 let cells;
+let moves = 0;
 let solved = false;
 let timerInterval = null;
 let validateTimeout = null;
@@ -9,9 +10,18 @@ let game_matrix = Array.from({ length: n }, () => Array(n).fill(0));
 const timer = document.getElementById('timer');
 const title = document.getElementById('title');
 const back = document.getElementById('back');
+const movements = document.getElementById('movements');
 
 document.addEventListener('DOMContentLoaded', function () {
-    back.addEventListener('click', () => window.location.href = `\menu_games?userid=${localStorage.getItem('userId')}`)
+    back.addEventListener('click', () => {
+        window.history.back();
+    });
+
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) {
+            window.location.reload();
+        }
+    });
     const matrix = document.getElementById('matrix');
     for (let i = 0; i < n; i++) {
         const mtr = document.createElement('tr')
@@ -54,6 +64,7 @@ function stop_timer() {
         clearInterval(timerInterval);  // ← Detiene el cronómetro
         timerInterval = null;          // ← Limpia el ID para poder reiniciarlo
     }
+
 }
 
 function click_animation(td, time) {
@@ -65,7 +76,8 @@ function click_animation(td, time) {
 
 function toggle_color(row, col, td) {
     click_animation(td, 110);
-
+    moves++;
+    movements.textContent = `Movimientos: ${moves}`
     const current_horse = document.querySelector('.horse')
     current_horse.classList.remove('horse')
 
@@ -165,7 +177,24 @@ function startGame() {
 }
 
 function valid_solution() {
-    if (game_matrix.some(row => row.includes(1))) return;;
+    if (game_matrix.some(row => row.includes(1))) return;
     cells.forEach(cell => cell.classList.add('locked'));
     stop_timer();
+    sendRecord();
+}
+
+function sendRecord() {
+    fetch('/leaderboard/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            game: `TKnight`,
+            record: 100000.0 / (((centisecondsElapsed / 100) + 1) * (moves + 1)),
+            userid: localStorage.getItem('userId')
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            window.location.href = `/leaderboard?game=TKnight&name=Knight&better=${data.better}`
+        })
 }

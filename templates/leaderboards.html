@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="../static/images/logos/favicon.png">
     <title>leaderboards</title>
 </head>
-<body>
+<body data-game="{{ game }}" data-records="{{ records }}">
     <header>
         <nav class="navbar navbar-expand-lg menu">
         <div class="container-fluid">
@@ -35,24 +35,25 @@
         </nav>
     </header>
     <main>
-        <div id="countdown-overlay">
+        <!-- <div id="countdown-overlay">
             <h2 class="fs-3">Próximamente disponible 🚧 <br>¡Vuelve pronto!</h2>
-        </div>
+        </div> -->
         <h1 class="title">¡Elige un juego!</h1>
         <select name="select" id="select" class="game_select">
-            <option value="h1_4">0h-h1 - 4</option>
-            <option value="h1_6">0h-h1 - 6</option>
-            <option value="h1_8">0h-h1 - 8</option>
-            <option value="h1_10">0h-h1 - 10</option>
-            <option value="time_trial_0h_h1">Contrareloj</option>
-            <option value="knight">Knight</option>
-            <option value="secuenzo">Secuenzo</option>
-            <option value="cuentamania">CuentaManía</option>
+            <option value="T4">0h-h1 - 4</option>
+            <option value="T6">0h-h1 - 6</option>
+            <option value="T8">0h-h1 - 8</option>
+            <option value="T10">0h-h1 - 10</option>
+            <option value="TContrareloj">Contrareloj</option>
+            <option value="TKnight">Knight</option>
+            <option value="TUnicolor">Unicolor</option>
+            <option value="TBicolor">Bicolor</option>
+            <!-- <option value="cuentamania">CuentaManía</option>
             <option value="patron_perfecto">Patrón Perfecto</option>
             <option value="colores_cruzados">Colores Cruzados</option>
             <option value="n0_4">0h-n0 - 4</option>
             <option value="n0_5">0h-n0 - 5</option>
-            <option value="nerdle">Nerdle</option>
+            <option value="nerdle">Nerdle</option> -->
         </select>
         <hr>
         <div id="leaderboard" class="leaderboard displayColumn">
@@ -64,36 +65,25 @@
                         <th>Record</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Jugador1</td>
-                        <td>00:45</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Jugador1</td>
-                        <td>00:45</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Jugador1</td>
-                        <td>00:45</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Jugador1</td>
-                        <td>00:45</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Jugador1</td>
-                        <td>00:45</td>
-                    </tr>
+                <tbody id="ranking">
                     <!-- Leaderboard rows will be dynamically inserted here -->
                 </tbody>
             </table>
-            <!-- Leaderboard content will be dynamically inserted here -->
+        </div>
+        
+        <div id="extra_leaderboard" class="leaderboard displayColumn" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Posición</th>
+                        <th>Jugador</th>
+                        <th>Record</th>
+                    </tr>
+                </thead>
+                <tbody id="extra_ranking">
+                    <!-- Leaderboard rows will be dynamically inserted here -->
+                </tbody>
+            </table>
         </div>
     </main>
     <div class="menu-toggle">
@@ -105,6 +95,7 @@
         <i class="fa-solid fa-chevron-up"></i>
     </button>
     <script src="../static/scripts/main.js"></script>
+    <script src="../static/scripts/leaderboards.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

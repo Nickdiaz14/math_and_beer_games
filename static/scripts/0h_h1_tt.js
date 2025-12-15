@@ -13,7 +13,15 @@ const back = document.getElementById('back');
 const s_boards = document.getElementById('s_boards');
 
 document.addEventListener('DOMContentLoaded', function () {
-    back.addEventListener('click', () => window.location.href = `\menu_games?userid=${localStorage.getItem('userId')}`)
+    back.addEventListener('click', () => {
+        window.history.back();
+    });
+
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) {
+            window.location.reload();
+        }
+    });
     const matrix = document.getElementById('matrix')
     for (let i = 0; i < n; i++) {
         const mtr = document.createElement('tr')
@@ -28,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     matrix.classList.add('matrix')
     cells = document.querySelectorAll('td');
+    startGame();
 })
 
 function updateTimerDisplay() {
@@ -49,6 +58,7 @@ function start_timer() {
             updateTimerDisplay();
         } else {
             stop_timer();
+            sendRecord();
         }
     }, 10); // Actualizar cada 10 ms (centésima de segundo)
 }
@@ -231,5 +241,18 @@ function valid_solution() {
     return;
 }
 
-
-startGame()
+function sendRecord() {
+    fetch('/leaderboard/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            game: `TContrareloj`,
+            record: boards_solved,
+            userid: localStorage.getItem('userId')
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            window.location.href = `/leaderboard?game=TContrareloj&name=0hh1 Contrareloj&better=${data.better}`
+        })
+}

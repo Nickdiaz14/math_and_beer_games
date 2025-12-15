@@ -12,7 +12,15 @@ const back = document.getElementById('back');
 
 document.addEventListener('DOMContentLoaded', function () {
     n = Number(document.body.dataset.n)
-    back.addEventListener('click', () => window.location.href = `\menu_games?userid=${localStorage.getItem('userId')}`)
+    back.addEventListener('click', () => {
+        window.history.back();
+    });
+
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) {
+            window.location.reload();
+        }
+    });
     const cell_size = n === 4 ? 'grey' : n === 6 ? 'z-6' : n === 8 ? 'z-8' : 'z-10';
     const matrix = document.getElementById('matrix');
     for (let i = 0; i < n; i++) {
@@ -221,6 +229,23 @@ function valid_solution() {
 
     solved = true;
     title.textContent = 'Felicidades';
-    stop_timer()
+    stop_timer();
+    sendRecord();
     return;
+}
+
+function sendRecord() {
+    fetch('/leaderboard/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            game: `T${n}`,
+            record: centisecondsElapsed,
+            userid: localStorage.getItem('userId')
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            window.location.href = `/leaderboard?game=T${n}&name=0h-h1 - ${n}&better=${data.better}`
+        })
 }

@@ -18,7 +18,15 @@ document.addEventListener('DOMContentLoaded', function () {
     n = Number(document.body.dataset.n)
     game_matrix = Array.from({ length: n }, () => Array(n).fill(0));
     user_matrix = Array.from({ length: n }, () => Array(n).fill(0));
-    back.addEventListener('click', () => window.location.href = `\menu_games?userid=${localStorage.getItem('userId')}`)
+    back.addEventListener('click', () => {
+        window.history.back();
+    });
+
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) {
+            window.location.reload();
+        }
+    });
     cell_size = n === 5 ? 'z-5' : 'z-6';
     const matrix = document.getElementById('matrix');
     for (let i = 0; i < n; i++) {
@@ -57,7 +65,7 @@ function start_timer() {
         } else {
             stop_timer();
             if (!in_game) setTimeout(() => continueGame(), 200);
-            if (in_game) return
+            if (in_game) sendRecord();
         }
     }, 10); // Actualizar cada 10 ms (centésima de segundo)
 }
@@ -85,13 +93,13 @@ function toggle_color(row, col, td) {
             td.classList.remove('grey');
             td.classList.remove('blue');
             td.classList.add('red');
-        } else if (n === 6 && user_matrix[row][col] === 1) {
+        } else if (n === 5 && user_matrix[row][col] === 1) {
             user_matrix[row][col] = 2
             td.classList.remove('red');
             td.classList.add('blue');
         }
     } else {
-        title.textContent = 'Perdiste'
+        sendRecord();
     }
 
     if (validateTimeout) clearTimeout(validateTimeout);
@@ -100,7 +108,7 @@ function toggle_color(row, col, td) {
 }
 
 function getSpots(max, size) {
-    const values = n === 6 ? 2 : 1;
+    const values = n === 5 ? 2 : 1;
     const spots = [];
     while (spots.length < size) {
         const a = Math.floor(Math.random() * max);
@@ -141,7 +149,7 @@ function startGame() {
     red_cells.forEach(([x, y]) => {
         game_matrix[x][y] = 1
     })
-    if (n === 6) {
+    if (n === 5) {
         const blue_cells = spots.filter(p => p[2] === 2)
         blue_cells.forEach(([x, y]) => {
             game_matrix[x][y] = 2
@@ -183,3 +191,19 @@ function valid_solution() {
     }
 }
 
+function sendRecord() {
+    let game = n === 6 ? `Unicolor` : 'Bicolor'
+    fetch('/leaderboard/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            game: `T${game}`,
+            record: boards_solved,
+            userid: localStorage.getItem('userId')
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            window.location.href = `/leaderboard?game=T${game}&name=Secuenzo ${game}&better=${data.better}`
+        })
+}
