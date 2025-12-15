@@ -1,4 +1,5 @@
-let n = 10;
+let n;
+let cells;
 let solved = false;
 let timerInterval = null;
 let validateTimeout = null;
@@ -10,8 +11,17 @@ const title = document.getElementById('title');
 const back = document.getElementById('back');
 
 document.addEventListener('DOMContentLoaded', function () {
-    back.addEventListener('click', () => window.location.href = `\menu_games?userid=${localStorage.getItem('userId')}`)
-    const cell_size = n === 4 ? '' : n === 6 ? 'z-6' : n === 8 ? 'z-8' : 'z-10';
+    n = Number(document.body.dataset.n)
+    back.addEventListener('click', () => {
+        window.history.back();
+    });
+
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) {
+            window.location.reload();
+        }
+    });
+    const cell_size = n === 4 ? 'grey' : n === 6 ? 'z-6' : n === 8 ? 'z-8' : 'z-10';
     const matrix = document.getElementById('matrix');
     for (let i = 0; i < n; i++) {
         const mtr = document.createElement('tr')
@@ -26,6 +36,8 @@ document.addEventListener('DOMContentLoaded', function () {
         matrix.appendChild(mtr)
     }
     matrix.classList.add('matrix')
+    cells = document.querySelectorAll('td');
+    startGame()
 })
 
 function updateTimerDisplay() {
@@ -54,17 +66,6 @@ function stop_timer() {
     }
 }
 
-function schedule_validation() {
-    if (!game_matrix.some(row => row.includes(-1))) {
-        valid_solution(); // validación inmediata si ya está lleno
-        return;
-    }
-
-    if (validateTimeout) clearTimeout(validateTimeout);
-
-    validateTimeout = setTimeout(valid_solution, 150);
-}
-
 function click_animation(td, time) {
     td.classList.add('clicked');
     setTimeout(() => {
@@ -73,8 +74,7 @@ function click_animation(td, time) {
 }
 
 function toggle_color(row, col, td) {
-    click_animation(td, 130);
-
+    click_animation(td, 110);
     if (game_matrix[row][col] === -1) {
         game_matrix[row][col] = 0;
         td.classList.remove('grey');
@@ -91,7 +91,7 @@ function toggle_color(row, col, td) {
 
     if (validateTimeout) clearTimeout(validateTimeout);
 
-    validateTimeout = setTimeout(valid_solution(), 150);
+    validateTimeout = setTimeout(() => valid_solution(), 200);
 
 }
 
@@ -104,12 +104,11 @@ function startGame() {
         .then(response => response.json())
         .then(data => {
             const cond_ini = data.matrix;
-            const matrix = document.getElementById('matrix')
             game_matrix = cond_ini.map(row => [...row]);
 
             for (let i = 0; i < game_matrix.length; i++) {
                 for (let j = 0; j < game_matrix[i].length; j++) {
-                    const cell = matrix.rows[i].cells[j];
+                    const cell = document.getElementById(`cell-${i}-${j}`);
                     cell.classList.remove('grey')
                     const color = game_matrix[i][j] === 0 ? ['red', 'blocked'] :
                         game_matrix[i][j] === 1 ? ['blue', 'blocked'] :
@@ -126,7 +125,6 @@ function startGame() {
 
 function valid_solution() {
     title.textContent = '0h-h1';
-    const cells = document.querySelectorAll('td')
     cells.forEach(cell => cell.classList.remove('cell_alert'))
 
     if (solved || game_matrix.some(row => row.includes(-1))) return;
@@ -231,9 +229,23 @@ function valid_solution() {
 
     solved = true;
     title.textContent = 'Felicidades';
-    stop_timer()
+    stop_timer();
+    sendRecord();
     return;
 }
 
-
-startGame()
+function sendRecord() {
+    fetch('/leaderboard/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            game: `T${n}`,
+            record: centisecondsElapsed,
+            userid: localStorage.getItem('userId')
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            window.location.href = `/leaderboard?game=T${n}&name=0h-h1 - ${n}&better=${data.better}`
+        })
+}

@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <button onclick="window.location.href=`/menu_games?userid=${localStorage.getItem('userId')}`" class="nav-link active" aria-current="page"><i class="fa-solid fa-gamepad"></i> Juegos</button>
+                    <button onclick="window.location.href='/register'" class="nav-link active" aria-current="page"><i class="fa-solid fa-gamepad"></i> Juegos</button>
                 </li>
                 <li class="nav-item">
                     <button onclick="window.location.href='/leaderboards'" class="nav-link active" aria-current="page"><i class="fa-solid fa-ranking-star"></i> Rankings</button>
@@ -35,17 +35,40 @@
         </nav>
     </header>
     <main>
-        <div id="countdown-overlay">
+        <!-- <div id="countdown-overlay">
             <h2 class="fs-3">Próximamente disponible 🚧 <br>¡Vuelve pronto!</h2>
-        </div>
+        </div> -->
         <h1 class="title">¡Hola, {{ nickname }}! <br> Elige un juego</h1>
         <hr>
         <div class="grid_container displayColumn">
-            <button class="game" onclick="window.location.href='/0h_h1'">
+            <button class="game" data-bs-toggle="modal" data-bs-target="#0h-h1-size">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text">0h-h1</span>
             </button>
+            <!-- Modal -->
+            <div class="modal fade" id="0h-h1-size" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content bg-dark text-light overflow-auto">
+                        <div class="modal-header displayColumn">Elige el tamaño del tablero</div>
+                        <div class="modal-body">
+                            <table class="displayColumn">
+                                <tr>
+                                    <td><button class="btn btn-secondary btn-lg p-4 subGameBtn" onclick="window.location.href='/0h_h1?n=4'">4x4</button></td>
+                                    <td><button class="btn btn-secondary btn-lg p-4 subGameBtn" onclick="window.location.href='/0h_h1?n=6'">6x6</button></td>
+                                </tr>
+                                <tr>
+                                    <td><button class="btn btn-secondary btn-lg p-4 subGameBtn" onclick="window.location.href='/0h_h1?n=8'">8x8</button></td>
+                                    <td><button class="btn btn-secondary btn-lg p-4 subGameBtn" onclick="window.location.href='/0h_h1?n=10'">10x10</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer myButtons">
+                            <button type="button" class="btn btn-secondary closeButton" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <button class="game" onclick="window.location.href='/0h_h1_tt'">
                 <span class="game_text_out">¡Jugar!</span>
@@ -59,13 +82,32 @@
                 <span class="game_text">Knight</span>
             </button>
 
-            <button class="game" onclick="window.location.href='/secuenzo'">
+            <button class="game" data-bs-toggle="modal" data-bs-target="#secuenzo-size">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text_big">Secuenzo</span>
             </button>
+            <!-- Modal -->
+            <div class="modal fade" id="secuenzo-size" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content bg-dark text-light overflow-auto">
+                        <div class="modal-header displayColumn">Elige un modo de juego</div>
+                        <div class="modal-body">
+                            <table class="displayColumn">
+                                <tr>
+                                    <td><button class="btn btn-secondary btn-lg p-4 subGameBtn" onclick="window.location.href='/secuenzo?n=6'">Unicolor</button></td>
+                                    <td><button class="btn btn-secondary btn-lg p-4 subGameBtn" onclick="window.location.href='/secuenzo?n=5'">Bicolor</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer myButtons">
+                            <button type="button" class="btn btn-secondary closeButton" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <button class="game" onclick="window.location.href='/cuenta_mania'">
+            <!-- <button class="game" onclick="window.location.href='/cuenta_mania'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text">Cuenta<br>Manía</span>
@@ -99,7 +141,7 @@
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text_big">Agalludo</span>
-            </button>
+            </button> -->
         </div>
     </main>
     <div class="menu-toggle">
