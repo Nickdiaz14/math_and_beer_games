@@ -194,6 +194,6 @@ function sendRecord() {
     })
         .then(response => response.json())
         .then(data => {
-            window.location.href = `/leaderboard?game=TKnight&name=Knight&better=${data.better}`
+            window.location.href = `/leaderboard?game=TKnight&name=Knight&better=${data.better}&type=2&record=${100000.0 / (((centisecondsElapsed / 100) + 1) * (moves + 1))}`
         })
 }

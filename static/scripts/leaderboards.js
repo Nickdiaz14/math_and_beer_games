@@ -41,7 +41,7 @@ function updateLeaderboard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             game: game_name,
-            userid: localStorage.getItem('userId'),
+            userid: userid,
             records: records
         })
     })
@@ -51,7 +51,6 @@ function updateLeaderboard() {
 
             // Asegurar que siempre haya 10 filas
             const fullRanking = [...data.ranking];
-            console.log(records)
             while (fullRanking.length < records) {
                 fullRanking.push(['-', '-', '-']);
             }

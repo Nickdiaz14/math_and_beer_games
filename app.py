@@ -80,7 +80,22 @@ def page_secuenzo():
 def page_leaderboard():
     game = request.args.get('game')
     name = request.args.get('name')
-    return render_template('leaderboard.html', game = game, name = name, records = 5)
+    types = int(request.args.get('type'))
+    better = request.args.get('better') == 'true'
+    record = request.args.get('record')
+    if better:
+        message = '¡Felicidades, superaste tu record!'
+    elif types == 1:
+        record = int(record)
+        message = f'¡Hiciste un tiempo de {(record//6000):02}:{((record%6000)//100):02}.{(record%100):02}, sigue así!'
+    elif types == 2:
+        record = float(record)
+        message = f'¡Hiciste {round(record, 2)} puntos, sigue así!'
+    else:
+        record = int(record)
+        message = f'¡Hiciste {record} tableros, sigue así!'
+    print(types, better, record, message)
+    return render_template('leaderboard.html', game = game, name = name, records = 5, message = message)
 
 # Conección a Base de Datos
 def connect_db():
@@ -180,8 +195,6 @@ def update_leaderboard():
             lead_id = int(prev_record[0])
             prev_value = float(prev_record[1]) if board in points_games else int(prev_record[1])
 
-            print(prev_value, record)
-            
             if is_better(record, prev_value):
                 cursor.execute("""
                     UPDATE leaderboard
