@@ -258,6 +258,6 @@ function sendRecord() {
     })
         .then(response => response.json())
         .then(data => {
-            window.location.href = `/leaderboard?game=T${n}&name=0h-h1 - ${n}&better=${data.better}`
+            window.location.href = `/leaderboard?game=T${n}&name=0h-h1 - ${n}&better=${data.better}&type=1&record=${centisecondsElapsed}`
         })
 }
