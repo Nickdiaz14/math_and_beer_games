@@ -314,7 +314,7 @@ def generateUser():
     cursor.close()
     connection.close()
 
-    return jsonify({'valid': True, 'message_id': -1})
+    return jsonify({'valid': True, 'message_id': ''})
 
     
 
