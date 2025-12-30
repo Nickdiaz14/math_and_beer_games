@@ -8,7 +8,6 @@ let centisecondsElapsed = 0;
 let game_matrix = Array.from({ length: n }, () => Array(n).fill(0));
 
 const timer = document.getElementById('timer');
-const title = document.getElementById('title');
 const back = document.getElementById('back');
 const movements = document.getElementById('movements');
 

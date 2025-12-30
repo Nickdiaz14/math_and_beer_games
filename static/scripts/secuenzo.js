@@ -10,7 +10,6 @@ let validateTimeout = null;
 let centisecondsElapsed = 300;
 
 const timer = document.getElementById('timer');
-const title = document.getElementById('title');
 const back = document.getElementById('back');
 const s_boards = document.getElementById('s_boards');
 
