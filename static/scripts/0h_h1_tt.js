@@ -7,6 +7,17 @@ let validateTimeout = null;
 let centisecondsElapsed = 4500;
 let game_matrix = Array.from({ length: n }, () => Array(n).fill(-1));
 
+const messages = [
+    '¿Estás seguro de esto?',
+    'Creo que esto no va así',
+    'Revisa esto',
+    'Algo no cuadra aquí',
+    'Vale la pena revisarlo de nuevo',
+    'Tal vez quieras revisarlo',
+    'Ojo con esto',
+    'Creo que aquí hay algo raro',
+]
+
 const timer = document.getElementById('timer');
 const title = document.getElementById('title');
 const back = document.getElementById('back');
@@ -128,6 +139,7 @@ function startGame() {
 }
 
 function valid_solution() {
+    let num = Math.floor(Math.random() * messages.length)
     title.textContent = 'Contrareloj';
     cells.forEach(cell => cell.classList.remove('cell_alert'))
 
@@ -150,7 +162,7 @@ function valid_solution() {
             if (row_prev === row[c]) {
                 row_count++;
                 if (row_count === 3) {
-                    title.textContent = `Hay 3 consecutivos en fila ${r + 1}`;
+                    title.textContent = messages[num];
                     for (let consec = 0; consec < 3; consec++) {
                         const mtd = document.getElementById(`cell-${r}-${c - consec}`)
                         mtd.classList.add('cell_alert')
@@ -165,7 +177,7 @@ function valid_solution() {
             if (col_prev === col[c]) {
                 col_count++;
                 if (col_count === 3) {
-                    title.textContent = `Hay 3 consecutivos en columna ${r + 1}`;
+                    title.textContent = messages[num];
                     for (let consec = 0; consec < 3; consec++) {
                         const mtd = document.getElementById(`cell-${c - consec}-${r}`)
                         mtd.classList.add('cell_alert')
@@ -183,7 +195,7 @@ function valid_solution() {
         let col_sum = col.reduce((a, b) => a + b, 0);
 
         if (row_sum !== n / 2) {
-            title.textContent = `Revisa la fila ${r + 1}`;
+            title.textContent = messages[num];
             for (let consec = 0; consec < n; consec++) {
                 const mtd = document.getElementById(`cell-${r}-${consec}`)
                 mtd.classList.add('cell_alert')
@@ -191,7 +203,7 @@ function valid_solution() {
             return;
         }
         if (col_sum !== n / 2) {
-            title.textContent = `Revisa la columna ${r + 1}`;
+            title.textContent = messages[num];
             for (let consec = 0; consec < n; consec++) {
                 const mtd = document.getElementById(`cell-${consec}-${r}`)
                 mtd.classList.add('cell_alert')
@@ -204,7 +216,7 @@ function valid_solution() {
     for (let i = 0; i < n; i++) {
         for (let j = i + 1; j < n; j++) {
             if (game_matrix[i].every((v, k) => v === game_matrix[j][k])) {
-                title.textContent = 'Hay dos filas iguales';
+                title.textContent = messages[num];
                 for (let consec = 0; consec < n; consec++) {
                     const mtd_1 = document.getElementById(`cell-${i}-${consec}`)
                     const mtd_2 = document.getElementById(`cell-${j}-${consec}`)
@@ -219,7 +231,7 @@ function valid_solution() {
     for (let i = 0; i < n; i++) {
         for (let j = i + 1; j < n; j++) {
             if (game_matrix_t[i].every((v, k) => v === game_matrix_t[j][k])) {
-                title.textContent = 'Hay dos columnas iguales';
+                title.textContent = messages[num];
                 for (let consec = 0; consec < n; consec++) {
                     const mtd_1 = document.getElementById(`cell-${consec}-${i}`)
                     const mtd_2 = document.getElementById(`cell-${consec}-${j}`)
