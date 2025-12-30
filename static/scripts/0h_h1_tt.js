@@ -265,6 +265,6 @@ function sendRecord() {
     })
         .then(response => response.json())
         .then(data => {
-            window.location.href = `/leaderboard?game=TContrareloj&name=0hh1 Contrareloj&better=${data.better}`
+            window.location.href = `/leaderboard?game=TContrareloj&name=0hh1 Contrareloj&better=${data.better}&type=3&record=${boards_solved}`
         })
 }

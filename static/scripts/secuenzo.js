@@ -203,6 +203,6 @@ function sendRecord() {
     })
         .then(response => response.json())
         .then(data => {
-            window.location.href = `/leaderboard?game=T${game}&name=Secuenzo ${game}&better=${data.better}`
+            window.location.href = `/leaderboard?game=T${game}&name=Secuenzo ${game}&better=${data.better}&type=3&record=${boards_solved}`
         })
 }
