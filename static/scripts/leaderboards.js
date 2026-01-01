@@ -1,3 +1,4 @@
+let better;
 let records;
 let game_name;
 let timerInterval;
@@ -8,6 +9,7 @@ const leader = document.getElementById('ranking');
 const game_info = document.getElementById('game_info');
 const extra_leader = document.getElementById('extra_ranking');
 const extra_table = document.getElementById('extra_leaderboard');
+const fireworks = document.getElementById('fireworks-layer');
 
 document.addEventListener('DOMContentLoaded', function () {
     if (back) {
@@ -28,9 +30,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     records = document.body.dataset.records;
+    better = document.body.dataset.better;
+    if (better === 'True') {
+        fireworks.style.display = 'flex'
+    }
     timerInterval = setInterval(() => {
         updateLeaderboard();
-    }, 800);
+    }, 1000);
 })
 
 function updateLeaderboard() {
