@@ -95,7 +95,7 @@ def page_leaderboard():
         record = int(record)
         message = f'¡Hiciste {record} tableros, sigue así!'
     print(types, better, record, message)
-    return render_template('leaderboard.html', game = game, name = name, records = 5, message = message)
+    return render_template('leaderboard.html', game = game, name = name, records = 5, message = message, better = better)
 
 # Conección a Base de Datos
 def connect_db():
