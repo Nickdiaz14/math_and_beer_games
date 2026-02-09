@@ -1,0 +1,17 @@
+[
+    {
+        "oh-h1": {
+            "summary": "Debes llenar todo el tablero con rojos y azules cumpliendo las siguientes reglas y respentando la condición inicial dada",
+            "rules": {
+                "r1": "El tablero debe estar lleno.",
+                "r2": "Cada fila y columna debe tener la misma cantidad de rojos que azules.",
+                "r3": "No pueden haber tres del mismo color seguidos.",
+                "r4": "No pueden haber dos filas o columnas iguales."
+            },
+            "ejemplo": {
+                "p1": "Este tablero es una condición inicial dada.",
+                "p2": ""
+            }
+        }
+    }
+]
