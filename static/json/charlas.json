@@ -310,6 +310,31 @@
         "summary": {
             "p1": "El conteo, los patrones del ritmo, las simetrías y la geometría ofrecen herramientas para comprender el movimiento, coordinar los pasos y disfrutar más de la salsa. En esta charla descubriremos cómo las matemáticas pueden estar presentes,incluso, en la pista de baile."
         },
-        "video": "https://www.instagram.com/p/DRUvvJhjkyJ/"
+        "video": "https://www.instagram.com/p/DSVOQJvDhDp/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+    },
+    {
+        "year": 2026,
+        "title": "Las matemáticas no son sólo fórmulas, son decisiones y estructuras invisibles que gobiernan el mundo.",
+        "speaker": "Sara Daniela Pérez Mejía",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/formulas.jpg",
+        "summary": {
+            "p1": "Las matemáticas suelen verse como un conjunto de fórmulas abstractas, pero en realidad son una herramienta fundamental para entender cómo funciona el mundo, cómo tomamos decisiones y cómo los sistemas complejos logran estabilidad.",
+            "p2": "En esta charla exploraremos cómo ideas del análisis matemático aparecen tanto en la física —en la continuidad del espacio-tiempo, la propagación de ondas y la ausencia de “saltos” en la realidad— como en aplicaciones modernas de decision making, inteligencia artificial y análisis de datos.",
+            "p3": "A través de ejemplos cotidianos y juegos interactivos, veremos cómo conceptos como métricas, estabilidad, optimización y equilibrio permiten explicar desde por qué el GPS elige ciertas rutas, cómo plataformas como Netflix miden la similitud entre usuarios y contenidos, hasta cómo en actuaría y finanzas se toman decisiones bajo incertidumbre.",
+            "p4": "Finalmente, mostraremos cómo incluso en sistemas altamente caóticos y complejos —como los que se estudian en problemas avanzados de minimización y modelos físicos— es posible alcanzar estados de equilibrio y estabilidad, reflejando una idea central: las matemáticas no son sólo fórmulas, son decisiones y estructuras invisibles que gobiernan el mundo."
+        },
+        "video": "https://www.instagram.com/reel/DToROnADp4Z/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+    },
+    {
+        "year": 2026,
+        "title": "Construyendo el amor",
+        "speaker": "Oscar Bernal",
+        "place": "A Seis Manos, Bogotá",
+        "image": "static/images/charlas/amor.jpg",
+        "summary": {
+            "p1": "En esta charla hablaremos de amor por las matemáticas, de cómo se construye y de algunos ejercicios sobre construcciones geométricas."
+        },
+        "video": "https://www.instagram.com/p/DUV9rptjmbD/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
     }
 ]
