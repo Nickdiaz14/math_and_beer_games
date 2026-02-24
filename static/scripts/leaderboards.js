@@ -34,9 +34,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (better === 'True') {
         fireworks.style.display = 'flex'
     }
+    updateLeaderboard();
+
     timerInterval = setInterval(() => {
         updateLeaderboard();
-    }, 20000);
+        console.log('Leaderboard updated');
+    }, 15000);
 })
 
 function updateLeaderboard() {
