@@ -117,11 +117,11 @@
 
                 <div class="d-flex justify-content-around mt-4 small">
                 <div class="about_text displayColumn">
-                    <h2 class="fw-bold text-primary m-0">+25</h2>
+                    <h2 class="fw-bold text-primary m-0">{{ n_charlas }}</h2>
                     <p>Charlas</p>
                 </div>
                 <div class="about_text displayColumn">
-                    <h2 class="fw-bold text-primary m-0">+3</h2>
+                    <h2 class="fw-bold text-primary m-0">+{{ charlas|length -1 }}</h2>
                     <p>Años</p>
                 </div>
                 <div class="about_text displayColumn">
@@ -165,7 +165,7 @@
                         <div class="card mb-3 myCard">
                             <div class="row g-0">
                                 <div class="col-md-4 w-50">
-                                    <img src="{{ c.image }}" class="img-fluid rounded-start" alt="{{ c.title }}">
+                                    <img src="https://lh3.googleusercontent.com/u/0/d/{{ c.image }}" class="img-fluid rounded-start" alt="{{ c.title }}">
                                 </div>
 
                                 <div class="col-md-8 w-50 myCardBody">
@@ -191,6 +191,9 @@
                                     <div class="modal-body">
                                         <h3>Conferencista</h3>
                                         <p class="modalContent">{{ c.speaker }}</p>
+
+                                        <h3>Fecha</h3>
+                                        <p class="modalContent">{{ c.date }}</p>
 
                                         <h3>Lugar</h3>
                                         <p class="modalContent">{{ c.place }}</p>

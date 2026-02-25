@@ -17,14 +17,21 @@ def page_about():
     with open("static/json/equipo.json", "r", encoding="utf-8") as f:
         equipo = json.load(f)
 
-    with open("static/json/charlas.json", "r", encoding="utf-8") as f:
-        charlas = json.load(f)
+    connection = connect_db()
+    cursor = connection.cursor()
+    
+    cursor.execute("SELECT * FROM events ORDER BY date ASC;")
+    charlas = cursor.fetchall()
+
+    columnas = [col[0] for col in cursor.description]
 
     grouped = {}
-    for c in charlas:
-        grouped.setdefault(c["year"], []).append(c)
-
-    return render_template("about.html", charlas=grouped, miembros=equipo)
+    for row in charlas:
+        c = dict(zip(columnas, row))
+        year = c["date"].year
+        grouped.setdefault(int(year), []).append(c)
+    connection.close()
+    return render_template("about.html", charlas=grouped, miembros=equipo, n_charlas=len(charlas))
 
 @app.route('/leaderboards')
 def page_leaderboards():
