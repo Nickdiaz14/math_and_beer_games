@@ -90,6 +90,20 @@
         <label class="titulo-pregunta">Correo Electrónico <span style="color: red;">*</span></label>
         <input type="email" name="correo_electronico" required><br>
 
+        <label class="titulo-pregunta">Ciudad del Evento <span style="color: red;">*</span></label>
+        <div class="opcion-multiple" onclick="toggleCiudad(true)">
+            <input type="radio" name="ciudad" value="Bogota">
+            <label>Bogotá</label>
+        </div>
+        <div class="opcion-multiple" onclick="toggleCiudad(false)">
+            <input type="radio" name="ciudad" value="Cali">
+            <label>Cali</label>
+        </div>
+        <div class="opcion-multiple" onclick="toggleCiudad(false)">
+            <input type="radio" name="ciudad" value="Barranquilla" required>
+            <label>Barranquilla</label>
+        </div>
+
         <label class="titulo-pregunta">Rol del Asistente <span style="color: red;">*</span></label>
         <div class="opcion-multiple">
             <input type="radio" name="rol" value="Asistente ocasional">
@@ -104,33 +118,91 @@
             <label>Egresado</label>
         </div>
         <div class="opcion-multiple">
-            <input type="radio" name="rol" value="Docente" required>
+            <input type="radio" name="rol" value="Docente" required >
             <label>Docente</label>
         </div>
 
+        <div  id="ciudad-field" style="display: none;">
         <label class="titulo-pregunta">¿Pertenece a la comunidad konradista? <span style="color: red;">*</span></label>
-        <div class="opcion-multiple">
-            <input type="radio" name="konradista" value="Si">
+        <div class="opcion-multiple" onclick="toggleKonradista(true)">
+            <input type="radio" name="konradista" value="Si" class="input-condicional-ciudad">
             <label>Sí</label>
         </div>
-        <div class="opcion-multiple">
-            <input type="radio" name="konradista" value="No" required>
+        <div class="opcion-multiple" onclick="toggleKonradista(false)">
+            <input type="radio" name="konradista" value="No" class="input-condicional-ciudad" required>
             <label>No</label>
+        </div>
+        </div>
+
+        <div id="carrera-field" style="display: none;">
+            <label class="titulo-pregunta">¿En qué carrera te formaste?<span style="color: red;">*</span></label>
+            <div class="opcion-multiple">
+                <input type="radio" name="carrera" value="Matemáticas" class="input-condicional-carrera">
+                <label>Matemáticas</label>
+            </div>
+            <div class="opcion-multiple">
+                <input type="radio" name="carrera" value="Ingeniería de Sistemas" class="input-condicional-carrera">
+                <label>Ingeniería de Sistemas</label>
+            </div>
+            <div class="opcion-multiple">
+                <input type="radio" name="carrera" value="Ingeniería Industrial" class="input-condicional-carrera">
+                <label>Ingeniería Industrial</label>
+            </div>
+            <div class="opcion-multiple">
+                <input type="radio" name="carrera" value="Marketing" class="input-condicional-carrera">
+                <label>Marketing</label>
+            </div>
+            <div class="opcion-multiple">
+                <input type="radio" name="carrera" value="Administración de Negocios Internacionales" class="input-condicional-carrera">
+                <label>Administración de Negocios Internacionales</label>
+            </div>
+            <div class="opcion-multiple">
+                <input type="radio" name="carrera" value="Psicología" class="input-condicional-carrera">
+                <label>Psicología</label>
+            </div>
+            <div class="opcion-multiple">
+                <input type="radio" name="carrera" value="Tecnología en desarrollo de software" class="input-condicional-carrera">
+                <label>Tecnología en desarrollo de software</label>
+            </div>
+            <div class="opcion-multiple">
+                <input type="radio" name="carrera" value="Administración de Empresas" class="input-condicional-carrera">
+                <label>Administración de Empresas</label>
+            </div>
+            <div class="opcion-multiple">
+                <input type="radio" name="carrera" value="Administración en Seguridad y Salud en el Trabajo" class="input-condicional-carrera">
+                <label>Administración en Seguridad y Salud en el Trabajo</label>
+            </div>
+            <div class="opcion-multiple">
+                <input type="radio" name="carrera" value="Escuela de Posgrados" class="input-condicional-carrera">
+                <label>Escuela de Posgrados</label>
+            </div>
+
+            <input type="radio" name="carrera" value="No aplica" id="carrera-default" style="display: none;" class="input-condicional-carrera" checked>
         </div>
 
         <label class="titulo-pregunta">¿Qué te pareció el contenido y desarrollo del evento? <span style="color: red;">*</span></label>
         <label>¡Califícalo del 1 al 5!</label>
         <div class="rating">
-            <input type="radio" name="calificacion" value="1" id="star1" required>
-            <label for="star1"><img src="/static/images/logos/logo_M&B_b.png" style="width: 58px; height: 58px;" alt="1 estrella" onclick="updateRating(1)"></label>
-            <input type="radio" name="calificacion" value="2" id="star2" required>
-            <label for="star2"><img src="/static/images/logos/logo_M&B_b.png" style="width: 58px; height: 58px;" alt="2 estrella" onclick="updateRating(2)"></label>
-            <input type="radio" name="calificacion" value="3" id="star3" required>
-            <label for="star3"><img src="/static/images/logos/logo_M&B_b.png" style="width: 58px; height: 58px;" alt="3 estrella" onclick="updateRating(3)"></label>
-            <input type="radio" name="calificacion" value="4" id="star4" required>
-            <label for="star4"><img src="/static/images/logos/logo_M&B_b.png" style="width: 58px; height: 58px;" alt="4 estrella" onclick="updateRating(4)"></label>
-            <input type="radio" name="calificacion" value="5" id="star5" required>
-            <label for="star5"><img src="/static/images/logos/logo_M&B_b.png" style="width: 58px; height: 58px;" alt="5 estrella" onclick="updateRating(5)"></label>
+            <div>
+                <input type="radio" name="calificacion" value="1" id="star1" required>
+                <label for="star1"><img src="/static/images/logos/logo_M&B_b.png" style="width: 60px; height: 60px;" alt="1 estrella" onclick="updateRating(1)"></label>
+            </div>
+            <div>
+                <input type="radio" name="calificacion" value="2" id="star2" required>
+                <label for="star2"><img src="/static/images/logos/logo_M&B_b.png" style="width: 60px; height: 60px;" alt="2 estrella" onclick="updateRating(2)"></label>
+            </div>
+            <div>
+                <input type="radio" name="calificacion" value="3" id="star3" required>
+                <label for="star3"><img src="/static/images/logos/logo_M&B_b.png" style="width: 60px; height: 60px;" alt="3 estrella" onclick="updateRating(3)"></label>
+            </div>
+            <div>
+                <input type="radio" name="calificacion" value="4" id="star4" required>
+                <label for="star4"><img src="/static/images/logos/logo_M&B_b.png" style="width: 60px; height: 60px;" alt="4 estrella" onclick="updateRating(4)"></label>
+            </div>
+            <div>
+                <input type="radio" name="calificacion" value="5" id="star5" required>
+                <label for="star5"><img src="/static/images/logos/logo_M&B_b.png" style="width: 60px; height: 60px;" alt="5 estrella" onclick="updateRating(5)"></label>
+            </div>
         </div>
         <input type="hidden" name="calificacion" id="calificacion">
 

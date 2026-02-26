@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     timerInterval = setInterval(() => {
         updateLeaderboard();
-        console.log('Leaderboard updated');
     }, 15000);
 })
 
