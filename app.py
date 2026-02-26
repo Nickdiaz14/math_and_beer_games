@@ -130,6 +130,8 @@ def attendance():
         calificacion = request.form['calificacion']
         futuros_eventos = request.form['futuros_eventos']
         tipo_doc = request.form['tipo_doc']
+        ciudad = request.form['ciudad']
+        carrera = request.form['carrera']
         numero_doc = request.form['numero_doc']
         konradista = request.form['konradista']
         comentario = request.form['comentario']
@@ -139,9 +141,9 @@ def attendance():
         fecha_larga = now.strftime('%Y/%m/%d %H:%M')
         cursor.execute("""
                 INSERT INTO attendance 
-                (created_at, "Fecha", "Nombre", "Sexo", "Edad", "Correo", "Rol", "Calificación", "Futuros_eventos", "Comentario", "Tipo_documento", "Numero_documento", "Konradista")
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
-            """, (fecha_larga, fecha_corta, nombre_completo, sexo, edad, correo_electronico, rol, calificacion, futuros_eventos, comentario,tipo_doc, numero_doc, konradista))
+                (created_at, "Fecha", "Nombre", "Sexo", "Edad", "Correo", "Rol", "Calificación", "Futuros_eventos", "Comentario", "Tipo_documento", "Numero_documento", "Konradista", "Ciudad", "Carrera")
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+            """, (fecha_larga, fecha_corta, nombre_completo, sexo, edad, correo_electronico, rol, calificacion, futuros_eventos, comentario,tipo_doc, numero_doc, konradista, ciudad, carrera))
 
         connection.commit()
         cursor.close()
