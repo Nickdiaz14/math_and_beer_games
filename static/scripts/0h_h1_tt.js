@@ -8,14 +8,18 @@ let centisecondsElapsed = 4500;
 let game_matrix = Array.from({ length: n }, () => Array(n).fill(-1));
 
 const messages = [
-    '¿Estás seguro de esto?',
-    'Creo que esto no va así',
-    'Revisa esto',
-    'Algo no cuadra aquí',
-    'Vale la pena revisarlo de nuevo',
-    'Tal vez quieras revisarlo',
-    'Ojo con esto',
-    'Creo que aquí hay algo raro',
+    'Mira esto',
+    'Ojo aquí',
+    'Verifica',
+    'Revísalo',
+    'Pilas aquí',
+    'Algo raro',
+    'Detalle aquí',
+    'Corrige esto',
+    'Valida esto',
+    'Revisa bien',
+    'Mira bien',
+    'Ojo con eso'
 ]
 
 const timer = document.getElementById('timer');
