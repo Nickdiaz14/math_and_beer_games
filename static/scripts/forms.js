@@ -79,6 +79,51 @@ function updateRating(rating) {
     document.getElementById('calificacion').value = rating;
 }
 
+function toggleKonradista(isKonradista) {
+    const carreraField = document.getElementById('carrera-field');
+    const inputsCarrera = document.querySelectorAll('.input-condicional-carrera');
+    if (isKonradista) {
+        carreraField.style.display = 'block';
+        inputsCarrera.forEach(input => {
+            input.required = true
+            if (input.value === "No Aplica") input.checked = false
+        });
+    } else {
+        carreraField.style.display = 'none';
+        inputsCarrera.forEach(input => {
+            input.required = false;
+            input.checked = false;
+        });
+        const defaultInput = document.querySelector('input[name="carrera"][value="No Aplica"]');
+        if (defaultInput) {
+            defaultInput.checked = true;
+        }
+    }
+}
+
+function toggleCiudad(isBogota) {
+    const ciudadField = document.getElementById('ciudad-field');
+    const inputsCiudad = document.querySelectorAll('.input-condicional-ciudad');
+    if (isBogota) {
+        ciudadField.style.display = 'block';
+        inputsCiudad.forEach(input => {
+            input.required = true
+            if (input.value === "No") input.checked = false
+        });
+    } else {
+        ciudadField.style.display = 'none';
+        inputsCiudad.forEach(input => {
+            input.required = false;
+            input.checked = false; // Desmarcar opciones de ciudad si no es Bogotá
+        });
+
+        const defaultInput = document.querySelector('input[name="konradista"][value="No"]');
+        if (defaultInput) {
+            defaultInput.checked = true; // Marcar "No" si no es Bogotá
+        }
+    }
+}
+
 async function submitForm(event) {
     event.preventDefault(); // Evitar recargar página
     const submitButton = document.getElementById('enviar');
@@ -87,6 +132,7 @@ async function submitForm(event) {
     submitButton.disabled = true; // Deshabilitar el botón de envío
 
     const formData = new FormData(event.target);
+    console.log('Datos del formulario:', Object.fromEntries(formData.entries())); // Mostrar datos en consola
 
     const response = await fetch('/attendance', {
         method: 'POST',

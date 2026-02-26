@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     message = document.body.dataset.m
     if (message) {
         message_case.style.display = 'flex';
-        console.log(messages[message])
         message_case.textContent = messages[Number(message)];
     } else {
         message_case.style.display = 'none';
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function generateUser() {
     const new_user_id = localStorage.getItem('userId');
-    console.log(user_name.value)
     fetch('/generateUser', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
