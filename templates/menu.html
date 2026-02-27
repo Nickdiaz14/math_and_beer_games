@@ -107,13 +107,33 @@
                 </div>
             </div>
 
-            <!-- <button class="game" onclick="window.location.href='/cuenta_mania'">
+            <button class="game" data-bs-toggle="modal" data-bs-target="#cuentamania-size">
                 <span class="game_text_out">¡Jugar!</span>
-                <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
+                <img src="../static/images/games/cuentamania.png" alt="" class="game_img">
                 <span class="game_text">Cuenta<br>Manía</span>
             </button>
+            <!-- Modal -->
+            <div class="modal fade" id="cuentamania-size" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content bg-dark text-light overflow-auto">
+                        <div class="modal-header displayColumn">Elige el tamaño del tablero</div>
+                        <div class="modal-body">
+                            <table class="displayColumn">
+                                <tr>
+                                    <td><button class="btn btn-secondary btn-lg p-4 subGameBtn" onclick="window.location.href='/cuentamania?n=4'">S</button></td>
+                                    <td><button class="btn btn-secondary btn-lg p-4 subGameBtn" onclick="window.location.href='/cuentamania?n=5'">M</button></td>
+                                    <td><button class="btn btn-secondary btn-lg p-4 subGameBtn" onclick="window.location.href='/cuentamania?n=6'">L</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer myButtons">
+                            <button type="button" class="btn btn-secondary closeButton" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <button class="game" onclick="window.location.href='/patron_perfecto'">
+            <!-- <button class="game" onclick="window.location.href='/patron_perfecto'">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text">Patrón<br>Perfecto</span>

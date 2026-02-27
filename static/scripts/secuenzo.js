@@ -1,5 +1,6 @@
 let n;
 let cells;
+let matrix;
 let cell_size;
 let game_matrix;
 let user_matrix;
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     cell_size = n === 5 ? 'z-5' : 'z-6';
-    const matrix = document.getElementById('matrix');
+    matrix = document.getElementById('matrix');
     for (let i = 0; i < n; i++) {
         const mtr = document.createElement('tr')
         for (let j = 0; j < n; j++) {
