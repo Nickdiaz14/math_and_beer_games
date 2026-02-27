@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (gameInfoButton) {
         // Inicializar el popover con Bootstrap
         const popover = new bootstrap.Popover(gameInfoButton, {
+            placement: 'top',
             trigger: 'manual', // Control manual para mostrar/ocultar
             html: true,
             content: '¡Información y reglas del juego aquí!',
