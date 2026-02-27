@@ -97,6 +97,13 @@ def page_secuenzo():
         reglas = json.load(f)
     return render_template('secuenzo.html', n=n, c=reglas[0]["unicolor"] if n == 6 else reglas[0]["bicolor"])
 
+@app.route('/cuentamania')
+def page_cuentamania():
+    n = int(request.args.get('n'))
+    with open("static/json/reglas.json", "r", encoding="utf-8") as f:
+        reglas = json.load(f)
+    return render_template('cuentamania.html', c=reglas[0]["cuentamania"], n=n)
+
 @app.route('/leaderboard')
 def page_leaderboard():
     game = request.args.get('game')
@@ -107,8 +114,11 @@ def page_leaderboard():
     if better:
         message = '¡Felicidades, superaste tu record!'
     elif types == 1:
-        record = int(record)
-        message = f'¡Hiciste un tiempo de {(record//6000):02}:{((record%6000)//100):02}.{(record%100):02}, sigue así!'
+        if record is None:
+            message = '¡Sigue así, pronto harás un nuevo record!'
+        else:    
+            record = int(record)
+            message = f'¡Hiciste un tiempo de {(record//6000):02}:{((record%6000)//100):02}.{(record%100):02}, sigue así!'
     elif types == 2:
         record = float(record)
         message = f'¡Hiciste {round(record, 2)} puntos, sigue así!'
@@ -211,6 +221,7 @@ def update_leaderboard():
             SELECT id, record FROM leaderboard
             WHERE userid = %s AND board = %s;
         """, (user_id, board))
+        print(user_id, board)
 
         prev_record = cursor.fetchone()
 

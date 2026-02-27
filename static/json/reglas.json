@@ -35,6 +35,14 @@
                 "r3": "Interacción: Cada clic en una celda correcta alterna los colores disponibles, un clic en una celda incorrecta te hace perder.",
                 "r4": "Precisión: El patrón debe ser exacto, de lo contrario pierdes el juego."
             }
+        },
+        "cuentamania": {
+            "summary": "Pon a prueba tu agudeza visual y velocidad de reacción seleccionando los números en orden ascendente en el menor tiempo posible.",
+            "rules": {
+                "r1": "El jugador debe presionar las celdas siguiendo la secuencia numérica estricta (1, 2, 3...) hasta completar el tablero.",
+                "r3": "Si se presiona un número fuera de orden, perderás automáticamente el juego.",
+                "r4": "Se el más rápido en completar el tablero."
+            }
         }
     }
 ]
