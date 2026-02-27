@@ -24,11 +24,16 @@ const messages = [
 const timer = document.getElementById('timer');
 const title = document.getElementById('title');
 const back = document.getElementById('back');
+const recharge = document.getElementById('recharge');
 
 document.addEventListener('DOMContentLoaded', function () {
     n = Number(document.body.dataset.n)
     back.addEventListener('click', () => {
         window.history.back();
+    });
+
+    recharge.addEventListener('click', () => {
+        window.location.reload();
     });
 
     window.addEventListener('pageshow', (e) => {

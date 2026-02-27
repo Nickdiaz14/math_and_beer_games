@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
         window.history.back();
     });
 
+    recharge.addEventListener('click', () => {
+        window.location.reload();
+    });
+
     window.addEventListener('pageshow', (e) => {
         if (e.persisted) {
             window.location.reload();

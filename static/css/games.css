@@ -4,7 +4,8 @@
 
 /*-----Interfaz-----*/
 .game_info,
-.back {
+.back,
+.recharge {
     position: fixed;
     width: 50px;
     height: 50px;
@@ -20,12 +21,16 @@
 
 .game_info {
     bottom: 15px;
-    right: 15px;
 }
 
 .back {
     bottom: 15px;
     left: 15px;
+}
+
+.recharge {
+    bottom: 15px;
+    right: 15px;
 }
 
 .popover-body {
@@ -88,6 +93,43 @@
 .cell_alert {
     border: 3px solid white;
     box-sizing: border-box;
+}
+
+.cells_no_hit {
+    border: 3px solid rgb(204, 0, 0);
+    box-sizing: border-box;
+}
+
+.cells_hit {
+    border: 3px solid rgb(24, 159, 0);
+    box-sizing: border-box;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.shake-it {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
 }
 
 main {

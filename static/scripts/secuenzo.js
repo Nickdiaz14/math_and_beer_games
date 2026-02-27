@@ -13,12 +13,17 @@ const timer = document.getElementById('timer');
 const back = document.getElementById('back');
 const s_boards = document.getElementById('s_boards');
 
+
 document.addEventListener('DOMContentLoaded', function () {
     n = Number(document.body.dataset.n)
     game_matrix = Array.from({ length: n }, () => Array(n).fill(0));
     user_matrix = Array.from({ length: n }, () => Array(n).fill(0));
     back.addEventListener('click', () => {
         window.history.back();
+    });
+
+    recharge.addEventListener('click', () => {
+        window.location.reload();
     });
 
     window.addEventListener('pageshow', (e) => {
@@ -98,12 +103,15 @@ function toggle_color(row, col, td) {
             td.classList.add('blue');
         }
     } else {
-        sendRecord();
+        matrix.classList.add('shake-it');
+        cells.forEach(cell => cell.classList.add('cells_no_hit'));
+        window.setTimeout(() => { sendRecord() }, 200)
+
     }
 
     if (validateTimeout) clearTimeout(validateTimeout);
 
-    validateTimeout = setTimeout(() => valid_solution(), 200);
+    validateTimeout = setTimeout(() => valid_solution(), 300);
 }
 
 function getSpots(max, size) {
@@ -133,7 +141,7 @@ function getSpots(max, size) {
 function startGame() {
     in_game = false;
     centisecondsElapsed = 300;
-    const spots = getSpots(n, 3 + Math.floor(boards_solved / 2));
+    const spots = getSpots(n, Math.min(3 + Math.floor(boards_solved / 2), Math.floor(Math.pow(n, 2) * 0.45)));
     game_matrix = Array.from({ length: n }, () => Array(n).fill(0));
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
@@ -178,6 +186,7 @@ function valid_solution() {
     }
 
     if (flag) {
+        cells.forEach(cell => cell.classList.add('cells_hit'));
         game_matrix = Array.from({ length: n }, () => Array(n).fill(0));
         user_matrix = Array.from({ length: n }, () => Array(n).fill(0));
         boards_solved++;
@@ -186,7 +195,7 @@ function valid_solution() {
         setTimeout(() => {
             cells.forEach(cell => cell.className = `grey ${cell_size}`)
             startGame()
-        }, 600); // siguiente tablero
+        }, 500); // siguiente tablero
     }
 }
 

@@ -25,11 +25,16 @@ const messages = [
 const timer = document.getElementById('timer');
 const title = document.getElementById('title');
 const back = document.getElementById('back');
+const recharge = document.getElementById('recharge');
 const s_boards = document.getElementById('s_boards');
 
 document.addEventListener('DOMContentLoaded', function () {
     back.addEventListener('click', () => {
         window.history.back();
+    });
+
+    recharge.addEventListener('click', () => {
+        window.location.reload();
     });
 
     window.addEventListener('pageshow', (e) => {
