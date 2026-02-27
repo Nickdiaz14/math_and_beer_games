@@ -68,20 +68,34 @@ def page_register():
 @app.route('/0h_h1')
 def page_0hh1():
     n = request.args.get('n')
-    return render_template('0h_h1.html', n=n)
+
+    with open("static/json/reglas.json", "r", encoding="utf-8") as f:
+        reglas = json.load(f)
+
+    return render_template('0h_h1.html', n=n, c=reglas[0]["0h-h1"])
 
 @app.route('/0h_h1_tt')
 def page_0hh1_tt():
-    return render_template('0h_h1_tt.html')
+    with open("static/json/reglas.json", "r", encoding="utf-8") as f:
+        reglas = json.load(f)
+    return render_template('0h_h1_tt.html', c=reglas[0]["0h-h1"])
+
+@app.route('/tutorial_0h_h1')
+def page_tutorial_0hh1():
+    return render_template('tutorial_0h_h1.html')
 
 @app.route('/knight')
 def page_knight():
-    return render_template('knight.html')
+    with open("static/json/reglas.json", "r", encoding="utf-8") as f:
+        reglas = json.load(f)
+    return render_template('knight.html', c=reglas[0]["knight"])
 
 @app.route('/secuenzo')
 def page_secuenzo():
-    n = request.args.get('n')
-    return render_template('secuenzo.html', n=n)
+    n = int(request.args.get('n'))
+    with open("static/json/reglas.json", "r", encoding="utf-8") as f:
+        reglas = json.load(f)
+    return render_template('secuenzo.html', n=n, c=reglas[0]["unicolor"] if n == 6 else reglas[0]["bicolor"])
 
 @app.route('/leaderboard')
 def page_leaderboard():
