@@ -14,7 +14,7 @@ const recharge = document.getElementById('recharge');
 
 document.addEventListener('DOMContentLoaded', function () {
     n = Number(document.body.dataset.n)
-    game_name = n === 4 ? "CuentaManía - S" : n === 5 ? "CuentaManía - M" : "CuentaManía - L";
+    game_name = n === 3 ? "CuentaManía - S" : n === 4 ? "CuentaManía - M" : "CuentaManía - L";
     game_matrix = Array.from({ length: n }, () => Array(n).fill(0));
     user_matrix = Array.from({ length: n }, () => Array(n).fill(0));
     back.addEventListener('click', () => {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
             window.location.reload();
         }
     });
-    const cell_size = n === 4 ? 'grey' : n === 5 ? 'z-5' : 'z-6';
+    const cell_size = n === 3 ? 'z-3' : n === 5 ? 'grey' : 'z-5';
     matrix = document.getElementById('matrix');
     for (let i = 0; i < n; i++) {
         const mtr = document.createElement('tr')
