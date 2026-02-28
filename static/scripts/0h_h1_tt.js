@@ -90,15 +90,7 @@ function stop_timer() {
     }
 }
 
-function click_animation(td, time) {
-    td.classList.add('clicked');
-    setTimeout(() => {
-        td.classList.remove('clicked');
-    }, time); // igual al tiempo de la transición
-}
-
 function toggle_color(row, col, td) {
-    click_animation(td, 90);
     if (game_matrix[row][col] === -1) {
         game_matrix[row][col] = 0;
         td.classList.remove('grey');

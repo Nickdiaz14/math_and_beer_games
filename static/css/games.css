@@ -61,11 +61,6 @@
     transform: scale(1);
 }
 
-.clicked {
-    transition: all 180ms ease-in-out;
-    transform: scale(0.95);
-}
-
 .grey {
     background: var(--matrix-cell-color);
     text-align: center;
