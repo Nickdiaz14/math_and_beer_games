@@ -61,7 +61,7 @@ function click_animation(td, time) {
 }
 
 function toggle_color(row, col, td) {
-    click_animation(td, 110);
+    click_animation(td, 90);
     if (matrix[row][col] === -1) {
         matrix[row][col] = 0;
         td.classList.remove('grey');

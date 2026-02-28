@@ -10,8 +10,13 @@ const game_info = document.getElementById('game_info');
 const extra_leader = document.getElementById('extra_ranking');
 const extra_table = document.getElementById('extra_leaderboard');
 const fireworks = document.getElementById('fireworks-layer');
+const count_records = document.getElementById('count_records');
+if (count_records) {
+    count_records.textContent = '0';
+}
 
 document.addEventListener('DOMContentLoaded', function () {
+
     if (back) {
         back.addEventListener('click', () => {
             window.location.href = `/menu_games?userid=${localStorage.getItem('userId')}`;
@@ -49,14 +54,15 @@ function updateLeaderboard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             game: game_name,
-            userid: userid,
-            records: records
+            userid: userid
         })
     })
         .then(response => response.json())
         .then(data => {
             leader.innerHTML = '';
-
+            if (count_records) {
+                count_records.textContent = data.count_records;
+            }
             // Asegurar que siempre haya 10 filas
             const fullRanking = [...data.ranking];
             while (fullRanking.length < records) {
@@ -64,7 +70,7 @@ function updateLeaderboard() {
             }
 
             // Crear todas las filas
-            fullRanking.forEach((register, index) => {
+            fullRanking.slice(0, records).forEach((register, index) => {
                 let colorClass = "#ffffff";
                 const mtr = document.createElement('tr');
                 const mtd_position = document.createElement('td');

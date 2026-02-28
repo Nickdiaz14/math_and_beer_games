@@ -16,8 +16,7 @@
 }
 
 .leaderboard {
-    margin-top: 4vh;
-    width: 80%;
+    width: 85%;
     background: rgba(50, 14, 67, 0.445);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(9.5px);
@@ -61,4 +60,13 @@
 .leaderboard tr:hover {
     background: rgba(255, 255, 255, 0.1);
     cursor: pointer;
+}
+
+.record_count {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: .8rem;
+    text-align: center;
+    margin: 0;
+    float: left;
 }

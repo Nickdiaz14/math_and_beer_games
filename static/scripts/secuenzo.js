@@ -90,7 +90,7 @@ function click_animation(td, time) {
 }
 
 function toggle_color(row, col, td) {
-    click_animation(td, 110);
+    click_animation(td, 90);
 
     if (game_matrix[row][col] !== 0) {
         if (user_matrix[row][col] !== 1) {

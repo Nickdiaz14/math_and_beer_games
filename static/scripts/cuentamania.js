@@ -83,7 +83,7 @@ function click_animation(td, time) {
 }
 
 function toggle_color(row, col, td) {
-    click_animation(td, 110);
+    click_animation(td, 90);
     if (game_matrix[row][col] === max_value(user_matrix) + 1) {
         user_matrix[row][col] = game_matrix[row][col];
         td.textContent = '';

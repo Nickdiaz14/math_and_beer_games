@@ -78,7 +78,7 @@ function click_animation(td, time) {
 }
 
 function toggle_color(row, col, td) {
-    click_animation(td, 110);
+    click_animation(td, 90);
     moves++;
     movements.textContent = `Movimientos: ${moves}`
     const current_horse = document.querySelector('.horse')
@@ -198,6 +198,6 @@ function sendRecord() {
     })
         .then(response => response.json())
         .then(data => {
-            window.location.href = `/leaderboard?game=TKnight&name=Knight&better=${data.better}&type=2&record=${100000.0 / (((centisecondsElapsed / 100) + 1) * (moves + 1))}`
+            window.location.href = `/leaderboard?game=TKnight&name=Salto Real&better=${data.better}&type=2&record=${100000.0 / (((centisecondsElapsed / 100) + 1) * (moves + 1))}`
         })
 }

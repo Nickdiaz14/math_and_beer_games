@@ -259,7 +259,6 @@ def update_leaderboard():
 def get_leaderboard():
     user_id = request.json['userid']
     board = request.json['game']
-    records = request.json['records']
     connection = connect_db()
     cursor = connection.cursor()
 
@@ -272,8 +271,7 @@ def get_leaderboard():
             string_record,
             userid
         FROM leader_final_view
-        WHERE board = %s
-        LIMIT %s;
+        WHERE board = %s;
     """ if board in desc else """
         SELECT
             ROW_NUMBER() OVER (PARTITION BY board ORDER BY record) AS position,
@@ -281,10 +279,9 @@ def get_leaderboard():
             string_record,
             userid
         FROM leader_final_view
-        WHERE board = %s
-        LIMIT %s;
+        WHERE board = %s;
     """
-    cursor.execute(query, (board, records))
+    cursor.execute(query, (board,))
 
     ranking = cursor.fetchall()
 
@@ -311,9 +308,9 @@ def get_leaderboard():
     personal_ranking = cursor.fetchone()
     if personal_ranking:
         if personal_ranking[0] > 0:
-            return jsonify({'ranking': ranking, 'personal_ranking': personal_ranking})
+            return jsonify({'ranking': ranking, 'personal_ranking': personal_ranking, 'count_records': len(ranking)})
         
-    return jsonify({'ranking': ranking, 'personal_ranking': ['-', '-', '-', '-']})
+    return jsonify({'ranking': ranking, 'personal_ranking': ['-', '-', '-', '-'], 'count_records': len(ranking)})
 
 @app.route('/seeUser', methods=['POST'])
 def seeUserExistense():

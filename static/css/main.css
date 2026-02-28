@@ -1,31 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* --- Reset y Configuración Base --- */
 * {
   -webkit-tap-highlight-color: transparent;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-  --background-color: linear-gradient(135deg, #1a1a2e 0%, #15003e 50%, #0f0f23 100%);
+  /* Fondo con profundidad (Efecto Radial) */
+  --background-color: radial-gradient(circle at top, #1a0b2e 0%, #090216 100%);
+  --header-bg: rgba(15, 5, 30, 0.85);
+
+  /* Colores de Marca */
+  --accent-beer: #ffb700;
+  /* Amarillo Cerveza */
+  --accent-math: #00f2ff;
+  /* Cian Eléctrico */
+  --text-main: #ffffff;
+  --text-muted: #b6bde7;
+
+  /* Gradientes */
+  --primary-gradient-text: linear-gradient(135deg, #ffffff 0%, #b6bde7 100%);
   --background-instagram-color: linear-gradient(135deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
   --background-whatsapp-color: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
   --background-mail-color: linear-gradient(135deg, #FF512F 0%, #DD2476 100%);
-  --primary-gradient-text: linear-gradient(135deg, #b6bde7 0%, #c5a3e7 100%);
-  --myBg: rgb(36, 1, 62);
-  --myBorder: rgba(232, 201, 254, 0.53);
+
+  /* Contenedores (Glassmorphism) */
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.53);
+
+  --myBg: #200928;
+  --myBorder: rgba(255, 255, 255, 0.53);
   --matrix-cell-color: rgba(45, 31, 54, 0.53);
 }
 
 body {
-  display: flex;
+  font-family: 'Inter', sans-serif;
   background: var(--background-color);
-  margin: 0;
-  height: 100%;
-  width: 100%;
+  background-attachment: fixed;
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 /* Estilos del header */
@@ -33,10 +53,10 @@ header {
   align-items: center;
   justify-content: center;
   width: 100%;
-  background: rgba(50, 14, 67, 0.445);
+  background: var(--header-bg);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(9.5px);
-  -webkit-backdrop-filter: blur(9.5px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
   z-index: 1001;
@@ -57,6 +77,10 @@ header {
   mask-size: contain;
   -webkit-mask-position: center;
   mask-position: center;
+}
+
+.logo:hover {
+  transform: scale(1.05) rotate(-5deg);
 }
 
 main {
@@ -96,16 +120,60 @@ main {
   transform: translateY(-2px);
 }
 
+/* --- Menú de Juegos (Botones) --- */
+.menu_games {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.menu_games button {
+  color: var(--text-muted) !important;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 25px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 18px !important;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  backdrop-filter: blur(5px);
+}
+
+.menu_games button:hover {
+  color: var(--accent-beer) !important;
+  border-color: var(--accent-beer);
+  background: rgba(255, 200, 0, 0.05);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
 .title {
   background: var(--primary-gradient-text);
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 300%;
-  width: 95%;
+  font-weight: 670;
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  padding: 5px 0;
   text-align: center;
+  line-height: 1.1;
+}
+
+.subtitle {
+  color: var(--accent-beer) !important;
+  font-weight: 700;
+  font-size: clamp(1.2rem, 4vw, 2.2rem);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 hr {
@@ -139,6 +207,7 @@ hr {
 .contact.active {
   transform: rotate(180deg);
   transition: all 0.3s ease;
+  background: #4a148c;
 }
 
 .menu-toggle {
@@ -222,6 +291,19 @@ hr {
   font-size: 150%;
 }
 
+.btn-video {
+  background: var(--background-instagram-color);
+  color: white !important;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: min(4vw, 18px);
+  border: none !important;
+  border-radius: 8px;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
 #countdown-overlay {
   position: fixed;
   top: 0;
@@ -238,4 +320,8 @@ hr {
   color: white;
   font-family: 'Inter', sans-serif;
   z-index: 1000;
+}
+
+.fs-7 {
+  font-size: 0.904rem !important;
 }

@@ -40,13 +40,39 @@
         </div> -->
         <h1 class="title">¡Hola, {{ nickname }}! <br> Elige un juego</h1>
         <hr>
-        <div class="grid_container displayColumn">
+        <div class="grid_container menu_games">
             <button class="game" data-bs-toggle="modal" data-bs-target="#0h-h1-size">
                 <span class="game_text_out">¡Jugar!</span>
                 <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
                 <span class="game_text">0h-h1</span>
             </button>
-            <!-- Modal -->
+
+            <button class="game" onclick="window.location.href='/0h_h1_tt'">
+                <span class="game_text_out">¡Jugar!</span>
+                <img src="../static/images/games/time_trial.png" alt="" class="game_img">
+                <span class="game_text_big">Contrareloj<br>0h-h1</span>
+            </button>
+
+            <button class="game" onclick="window.location.href='/knight'">
+                <span class="game_text_out">¡Jugar!</span>
+                <img src="../static/images/games/knight.png" alt="" class="game_img">
+                <span class="game_text">Salto <br>Real</span>
+            </button>
+
+            <button class="game" data-bs-toggle="modal" data-bs-target="#secuenzo-size">
+                <span class="game_text_out">¡Jugar!</span>
+                <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
+                <span class="game_text_big">Secuenzo</span>
+            </button>
+
+            <button class="game" data-bs-toggle="modal" data-bs-target="#cuentamania-size">
+                <span class="game_text_out">¡Jugar!</span>
+                <img src="../static/images/games/cuentamania.png" alt="" class="game_img">
+                <span class="game_text">Cuenta<br>Manía</span>
+            </button>
+        </div>
+
+        <!-- Modal 0h-h1 -->
             <div class="modal fade" id="0h-h1-size" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered">
                     <div class="modal-content bg-dark text-light overflow-auto">
@@ -70,24 +96,7 @@
                 </div>
             </div>
 
-            <button class="game" onclick="window.location.href='/0h_h1_tt'">
-                <span class="game_text_out">¡Jugar!</span>
-                <img src="../static/images/games/time_trial.png" alt="" class="game_img">
-                <span class="game_text_big">Contrareloj<br>0h-h1</span>
-            </button>
-
-            <button class="game" onclick="window.location.href='/knight'">
-                <span class="game_text_out">¡Jugar!</span>
-                <img src="../static/images/games/knight.png" alt="" class="game_img">
-                <span class="game_text">Knight</span>
-            </button>
-
-            <button class="game" data-bs-toggle="modal" data-bs-target="#secuenzo-size">
-                <span class="game_text_out">¡Jugar!</span>
-                <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
-                <span class="game_text_big">Secuenzo</span>
-            </button>
-            <!-- Modal -->
+            <!-- Modal secuenzo -->
             <div class="modal fade" id="secuenzo-size" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered">
                     <div class="modal-content bg-dark text-light overflow-auto">
@@ -107,12 +116,7 @@
                 </div>
             </div>
 
-            <button class="game" data-bs-toggle="modal" data-bs-target="#cuentamania-size">
-                <span class="game_text_out">¡Jugar!</span>
-                <img src="../static/images/games/cuentamania.png" alt="" class="game_img">
-                <span class="game_text">Cuenta<br>Manía</span>
-            </button>
-            <!-- Modal -->
+            <!-- Modal Cuentamania -->
             <div class="modal fade" id="cuentamania-size" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered">
                     <div class="modal-content bg-dark text-light overflow-auto">
@@ -132,37 +136,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <button class="game" onclick="window.location.href='/patron_perfecto'">
-                <span class="game_text_out">¡Jugar!</span>
-                <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
-                <span class="game_text">Patrón<br>Perfecto</span>
-            </button>
-
-            <button class="game" onclick="window.location.href='/colores_cruzados'">
-                <span class="game_text_out">¡Jugar!</span>
-                <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
-                <span class="game_text_big">Colores<br>Cruzados</span>
-            </button>
-
-            <button class="game" onclick="window.location.href='/0h_n0'">
-                <span class="game_text_out">¡Jugar!</span>
-                <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
-                <span class="game_text">0h-n0</span>
-            </button>
-
-            <button class="game" onclick="window.location.href='/nerdle'">
-                <span class="game_text_out">¡Jugar!</span>
-                <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
-                <span class="game_text">Nerdle</span>
-            </button>
-
-            <button class="game" onclick="window.location.href='/agalludo'">
-                <span class="game_text_out">¡Jugar!</span>
-                <img src="../static/images/games/0h-h1.png" alt="" class="game_img">
-                <span class="game_text_big">Agalludo</span>
-            </button> -->
-        </div>
     </main>
     <div class="menu-toggle">
         <a class="mail" href="mailto:mate.et.cerv@gmail.com?subject=Math and Beer en mi ciudad🍻&body=Hola%2C%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre..." aria-label="Enviar correo"><i class="fa-solid fa-envelope"></i></a>
