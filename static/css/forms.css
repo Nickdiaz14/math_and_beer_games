@@ -5,7 +5,7 @@ main {
 html,
 body {
     height: 100%;
-    margin: 0;
+    margin-top: 10%;
     padding: 0;
     overflow: hidden;
     position: fixed;
