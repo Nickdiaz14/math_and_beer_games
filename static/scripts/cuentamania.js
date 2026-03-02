@@ -11,6 +11,7 @@ const timer = document.getElementById('timer');
 const title = document.getElementById('title');
 const back = document.getElementById('back');
 const recharge = document.getElementById('recharge');
+const overlay = document.getElementById('countdown-overlay');
 
 document.addEventListener('DOMContentLoaded', function () {
     n = Number(document.body.dataset.n)
@@ -103,8 +104,19 @@ function startGame() {
             td.textContent = game_matrix[i][j];
         }
     }
+    let cuenta = 3;
+    overlay.textContent = cuenta;
 
-    start_timer();
+    const contador = setInterval(() => {
+        cuenta--;
+        if (cuenta > 0) {
+            overlay.textContent = cuenta;
+        } else {
+            clearInterval(contador);
+            overlay.classList.add('fade-out');
+            setTimeout(start_timer, 200);
+        }
+    }, 800);
 }
 
 function random_board() {

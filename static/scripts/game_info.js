@@ -18,6 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(function () {
                 popover.hide();
             }, 3000);
-        }, 500);
+        }, 5000);
     }
 });

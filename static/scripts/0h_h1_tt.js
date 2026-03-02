@@ -2,6 +2,7 @@ let n = 4;
 let cells;
 let solved = false;
 let boards_solved = 0;
+let first_seen = true;
 let timerInterval = null;
 let validateTimeout = null;
 let centisecondsElapsed = 4500;
@@ -27,6 +28,7 @@ const title = document.getElementById('title');
 const back = document.getElementById('back');
 const recharge = document.getElementById('recharge');
 const s_boards = document.getElementById('s_boards');
+const overlay = document.getElementById('countdown-overlay');
 
 document.addEventListener('DOMContentLoaded', function () {
     back.addEventListener('click', () => {
@@ -135,7 +137,22 @@ function startGame() {
 
                 }
             }
-            start_timer();
+            if (first_seen) {
+                first_seen = false;
+                let cuenta = 3;
+                overlay.textContent = cuenta;
+
+                const contador = setInterval(() => {
+                    cuenta--;
+                    if (cuenta > 0) {
+                        overlay.textContent = cuenta;
+                    } else {
+                        clearInterval(contador);
+                        overlay.classList.add('fade-out');
+                        setTimeout(start_timer, 200);
+                    }
+                }, 800);
+            }
         })
 }
 

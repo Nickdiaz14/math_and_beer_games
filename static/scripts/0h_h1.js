@@ -25,6 +25,7 @@ const timer = document.getElementById('timer');
 const title = document.getElementById('title');
 const back = document.getElementById('back');
 const recharge = document.getElementById('recharge');
+const overlay = document.getElementById('countdown-overlay');
 
 document.addEventListener('DOMContentLoaded', function () {
     n = Number(document.body.dataset.n)
@@ -131,8 +132,29 @@ function startGame() {
 
                 }
             }
-            start_timer();
+            let cuenta = 3;
+            overlay.textContent = cuenta;
+
+            const contador = setInterval(() => {
+                cuenta--;
+                if (cuenta > 0) {
+                    overlay.textContent = cuenta;
+                } else {
+                    clearInterval(contador);
+                    overlay.classList.add('fade-out');
+                    setTimeout(start_timer, 200);
+                }
+            }, 800);
         })
+}
+
+function actualizarPaso(texto) {
+    overlay.textContent = texto;
+
+    // Reiniciar animación: quitamos y volvemos a poner la clase
+    overlay.classList.remove('pulse');
+    void overlay.offsetWidth; // "Magic trigger" para que el navegador reinicie el CSS
+    overlay.classList.add('pulse');
 }
 
 function valid_solution() {

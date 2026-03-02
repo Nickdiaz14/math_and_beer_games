@@ -10,6 +10,7 @@ let game_matrix = Array.from({ length: n }, () => Array(n).fill(0));
 const timer = document.getElementById('timer');
 const back = document.getElementById('back');
 const movements = document.getElementById('movements');
+const overlay = document.getElementById('countdown-overlay');
 
 document.addEventListener('DOMContentLoaded', function () {
     back.addEventListener('click', () => {
@@ -168,7 +169,19 @@ function startGame() {
             cell.classList.remove('grey')
         }
     }
-    start_timer();
+    let cuenta = 3;
+    overlay.textContent = cuenta;
+
+    const contador = setInterval(() => {
+        cuenta--;
+        if (cuenta > 0) {
+            overlay.textContent = cuenta;
+        } else {
+            clearInterval(contador);
+            overlay.classList.add('fade-out');
+            setTimeout(start_timer, 200);
+        }
+    }, 800);
 }
 
 function valid_solution() {

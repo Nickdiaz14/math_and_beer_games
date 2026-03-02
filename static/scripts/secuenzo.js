@@ -6,6 +6,7 @@ let game_matrix;
 let user_matrix;
 let in_game = false;
 let boards_solved = 0;
+let first_seen = true;
 let timerInterval = null;
 let validateTimeout = null;
 let centisecondsElapsed = 300;
@@ -13,7 +14,7 @@ let centisecondsElapsed = 300;
 const timer = document.getElementById('timer');
 const back = document.getElementById('back');
 const s_boards = document.getElementById('s_boards');
-
+const overlay = document.getElementById('countdown-overlay');
 
 document.addEventListener('DOMContentLoaded', function () {
     n = Number(document.body.dataset.n)
@@ -155,7 +156,25 @@ function startGame() {
             game_matrix[x][y] = 2
         })
     }
-    start_timer();
+    if (first_seen) {
+        first_seen = false;
+        let cuenta = 3;
+        overlay.textContent = cuenta;
+
+        const contador = setInterval(() => {
+            cuenta--;
+            if (cuenta > 0) {
+                overlay.textContent = cuenta;
+            } else {
+                clearInterval(contador);
+                overlay.classList.add('fade-out');
+                setTimeout(start_timer, 200);
+            }
+        }, 800);
+    }
+    else {
+        start_timer();
+    }
 }
 
 function continueGame() {
