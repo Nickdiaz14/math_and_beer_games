@@ -204,10 +204,66 @@ hr {
   color: white;
 }
 
+.new_events {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 120px;
+  right: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgb(50, 14, 67);
+  border: 1px solid rgba(155, 76, 228, 0.3);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  z-index: 2000;
+}
+
+.no_show {
+  display: none;
+}
+
 .contact.active {
   transform: rotate(180deg);
   transition: all 0.3s ease;
   background: #4a148c;
+}
+
+.new_events.pop_up {
+  animation: alarm-shake 0.2s ease infinite;
+  background: var(--accent-beer);
+  color: black;
+  display: inline-block;
+}
+
+@keyframes alarm-shake {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1.05);
+  }
+
+  20% {
+    transform: translate(-2px, 1px) rotate(-5deg) scale(1.1);
+  }
+
+  40% {
+    transform: translate(-2px, -1px) rotate(5deg) scale(1.15);
+  }
+
+  60% {
+    transform: translate(2px, 1px) rotate(-5deg) scale(1.15);
+  }
+
+  80% {
+    transform: translate(2px, -1px) rotate(5deg) scale(1.1);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1.05);
+  }
 }
 
 .menu-toggle {

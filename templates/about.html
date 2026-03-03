@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="../static/images/logos/favicon.png">
     <title>Sobre Nosotros | Math & Beer</title>
 </head>
-<body>
+<body data-proxima = '{{ proxima | safe }}''>
     <header>
         <nav class="navbar navbar-expand-lg menu">
         <div class="container-fluid">
@@ -54,12 +54,27 @@
                     </ul>
                 </li>
             </ul>
-            </div>
         </div>
-        </nav>
-    </header>
+    </div>
+</nav>
+</header>
 
-    <main>
+<main>
+        {% if proxima %}
+            <button class="new_events" id="new_events"><i class="fa-solid fa-exclamation"></i></button>
+            
+            <div id="events_list" class="no_show">
+                <hr>
+                <h2 class="title">Próximas charlas</h2>
+                <hr>
+                <div class="about_text displayColumn">
+                    <p class="small lh-base">
+                    ¡La ciencia no se detiene! Acompañanos en nuestras siguientes sesiones para brindar y aprender sobre modelos matemáticos, datos y tecnología. Consulta las fechas y temas a continuación:   
+                    </p>
+                </div>
+                <div id="contenedor-dinamico" class="w-75 justify-content-center mx-auto"></div>
+            </div>
+        {% endif %}
         <hr id="Inicio">
         <h1 class="title">¿Qué es Math & Beer?</h1>
         <hr>
@@ -105,7 +120,7 @@
             </div>
 
             <!-- Bloque 4 -->
-            <div class="text-center myBg myBorder text-dark rounded-4 p-2 shadow-sm about-img">
+            <div class="text-center myBg myBorder rounded-4 p-2 shadow-sm about-img">
                 <h3 class="subtitle fw-semibold mb-3 fs-3 mt-2">Un proyecto que inspira</h3>
                 <div class="about_text displayColumn">
                 <p class="lh-base fs-6">
@@ -277,9 +292,10 @@
         <a class="instagram" href="https://www.instagram.com/math_and_beer/#"><i class="fa-brands fa-instagram"></i></a>
         <a class="whatsapp" href="https://wa.me/+573227217274"><i class="fa-brands fa-whatsapp"></i></a>
     </div>
-
+    
     <button class="contact"><i class="fa-solid fa-chevron-up"></i></button>
     <script src="../static/scripts/main.js"></script>
+    <script src="../static/scripts/new_events.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -19,6 +19,10 @@ def page_about():
 
     connection = connect_db()
     cursor = connection.cursor()
+
+    cursor.execute('SELECT e.date , count(a.id) FROM events e LEFT JOIN attendance a ON a."Fecha" = e.date::date GROUP BY e.date HAVING count(a.id) > 0 ORDER BY date ASC;')
+    n_charlas = cursor.fetchall()
+
     
     cursor.execute("SELECT * FROM events ORDER BY date ASC;")
     charlas = cursor.fetchall()
@@ -30,8 +34,38 @@ def page_about():
         c = dict(zip(columnas, row))
         year = c["date"].year
         grouped.setdefault(int(year), []).append(c)
+
+    cursor.execute("""
+        WITH ProximosEventos AS (
+            SELECT 
+                city,
+                title,
+                date,
+                ROW_NUMBER() OVER(PARTITION BY city ORDER BY date ASC) as orders
+            FROM 
+                events
+            WHERE 
+                date > CURRENT_TIMESTAMP -- Filtra eventos pasados
+        )
+        SELECT 
+            city, 
+            title, 
+            date
+        FROM 
+            ProximosEventos
+        WHERE 
+            orders = 1
+        ORDER BY
+            date ASC;""")
+    
+    proxima = cursor.fetchall()
+    proxima = [{"city": evento[0], "title": evento[1], "date": evento[2].isoformat()} for evento in proxima]
+    print(proxima)
     connection.close()
-    return render_template("about.html", charlas=grouped, miembros=equipo, n_charlas=len(charlas))
+    if len(proxima) > 0:
+        return render_template("about.html", charlas=grouped, miembros=equipo, n_charlas=len(n_charlas) + 1, proxima = json.dumps(proxima))
+    else:
+        return render_template("about.html", charlas=grouped, miembros=equipo, n_charlas=len(n_charlas) + 1)
 
 @app.route('/leaderboards')
 def page_leaderboards():
