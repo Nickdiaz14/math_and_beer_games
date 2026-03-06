@@ -62,7 +62,7 @@
 <main>
 
     
-    <div id="events_list" class="no_show fade_out">
+    <div id="events_list" class="no_show">
         <hr>
         <h2 class="title">Próximas charlas</h2>
         <hr>
@@ -130,15 +130,15 @@
             
             <div class="d-flex justify-content-around mt-4 small">
                 <div class="about_text displayColumn">
-                    <h2 class="subtitle fw-bold m-0">{{ n_charlas }}</h2>
+                    <h2 class="subtitle fw-bold m-0 counter">{{ n_charlas }}</h2>
                     <p>Charlas</p>
                 </div>
                 <div class="about_text displayColumn">
-                    <h2 class="subtitle fw-bold m-0">+{{ charlas|length -1 }}</h2>
+                    <h2 class="subtitle fw-bold m-0 counter">{{ charlas|length -1 }}</h2>
                     <p>Años</p>
                 </div>
                 <div class="about_text displayColumn">
-                    <h2 class="subtitle fw-bold m-0">2</h2>
+                    <h2 class="subtitle fw-bold m-0 counter">3</h2>
                     <p>Ciudades</p>
                 </div>
             </div>

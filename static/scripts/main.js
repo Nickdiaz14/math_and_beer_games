@@ -42,4 +42,52 @@ document.addEventListener("DOMContentLoaded", () => {
       if (bsCollapse) bsCollapse.hide();
     });
   });
+  const reveals = document.querySelectorAll('.about-img, .about_text');
+
+  // Les añadimos la clase base oculta
+  reveals.forEach(el => el.classList.add('reveal'));
+
+  // Usamos IntersectionObserver para detectar el scroll
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target); // Solo se anima la primera vez que se ve
+      }
+    });
+  }, { threshold: 0.15 }); // Se activa cuando el 15% del elemento es visible
+
+  reveals.forEach(reveal => revealObserver.observe(reveal));
+
+  const counters = document.querySelectorAll('.counter');
+  const speed = 100; // Velocidad del contador (menor es más rápido)
+
+  const counterObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counter = entry.target;
+        // Extraemos solo los números por si tienes signos como "+"
+        const target = +counter.innerText.replace(/\D/g, '');
+        let count = 0;
+        const inc = target / speed;
+
+        const updateCount = () => {
+          count += inc;
+          if (count < target) {
+            counter.innerText = Math.ceil(count);
+            requestAnimationFrame(updateCount);
+          } else {
+            // Aseguramos que termine en el número exacto
+            counter.innerText = target;
+          }
+        };
+
+        // Iniciamos la animación
+        updateCount();
+        observer.unobserve(counter);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(counter => counterObserver.observe(counter));
 });
