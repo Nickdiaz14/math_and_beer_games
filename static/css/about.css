@@ -152,7 +152,7 @@
     margin-left: 0rem !important;
 }
 
-@media (orientation: landscape) {
+@media (min-width: 768px) {
 
     .myPersonalInfo {
         height: 27em !important;
