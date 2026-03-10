@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+﻿from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 import psycopg2
 import random
@@ -7,392 +7,396 @@ import json
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+def create_app():
+    load_dotenv()
 
-app = Flask(__name__)
+    app = Flask(__name__)
 
-# Templates
-@app.route('/')
-def page_about():
-    with open("static/json/equipo.json", "r", encoding="utf-8") as f:
-        equipo = json.load(f)
+    # Templates
+    @app.route('/')
+    def page_about():
+        with open("static/json/equipo.json", "r", encoding="utf-8") as f:
+            equipo = json.load(f)
 
-    connection = connect_db()
-    cursor = connection.cursor()
-    
-    cursor.execute("""
-        SELECT * FROM events 
-            WHERE date < CURRENT_TIMESTAMP
-        ORDER BY date ASC;""")
-    charlas = cursor.fetchall()
-
-    columnas = [col[0] for col in cursor.description]
-
-    grouped = {}
-    for row in charlas:
-        c = dict(zip(columnas, row))
-        year = c["date"].year
-        grouped.setdefault(int(year), []).append(c)
-
-    cursor.execute("""
-        WITH ProximosEventos AS (
-            SELECT 
-                city,
-                title,
-                date,
-                ROW_NUMBER() OVER(PARTITION BY city ORDER BY date ASC) as orders
-            FROM 
-                events
-            WHERE 
-                date > CURRENT_TIMESTAMP -- Filtra eventos pasados
-        )
-        SELECT 
-            city, 
-            title, 
-            date
-        FROM 
-            ProximosEventos
-        WHERE 
-            orders = 1
-        ORDER BY
-            date ASC;""")
-    
-    proxima = cursor.fetchall()
-    proxima = [{"city": evento[0], "title": evento[1], "date": evento[2].isoformat()} for evento in proxima]
-    connection.close()
-    if len(proxima) > 0:
-        return render_template("about.html", charlas=grouped, miembros=equipo, n_charlas=len(charlas), proxima = json.dumps(proxima))
-    else:
-        return render_template("about.html", charlas=grouped, miembros=equipo, n_charlas=len(charlas))
-
-@app.route('/leaderboards')
-def page_leaderboards():
-    return render_template('leaderboards.html', records=10)
-
-@app.route('/menu_games')
-def page_menu():
-    id = request.args.get('userid')
-    connection = connect_db()
-    cursor = connection.cursor()
-    cursor.execute("""
-        SELECT nickname FROM nickname
-        WHERE userid = %s;
-    """, (id,))
-
-    name = cursor.fetchone()[0]
-    connection.commit()
-    cursor.close()
-    connection.close()  
-    return render_template('menu.html', nickname=name)
-
-@app.route('/forms')
-def page_forms():
-    return render_template('forms.html')
-
-@app.route('/register')
-def page_register():
-    try:
-        m = request.args.get('m')
-        return render_template('register.html', m = m)
-    except:
-        return render_template('registrer.html')
-
-@app.route('/0h_h1')
-def page_0hh1():
-    n = request.args.get('n')
-
-    with open("static/json/reglas.json", "r", encoding="utf-8") as f:
-        reglas = json.load(f)
-
-    return render_template('0h_h1.html', n=n, c=reglas[0]["0h-h1"])
-
-@app.route('/0h_h1_tt')
-def page_0hh1_tt():
-    with open("static/json/reglas.json", "r", encoding="utf-8") as f:
-        reglas = json.load(f)
-    return render_template('0h_h1_tt.html', c=reglas[0]["0h-h1"])
-
-@app.route('/tutorial_0h_h1')
-def page_tutorial_0hh1():
-    return render_template('tutorial_0h_h1.html')
-
-@app.route('/knight')
-def page_knight():
-    with open("static/json/reglas.json", "r", encoding="utf-8") as f:
-        reglas = json.load(f)
-    return render_template('knight.html', c=reglas[0]["knight"])
-
-@app.route('/secuenzo')
-def page_secuenzo():
-    n = int(request.args.get('n'))
-    with open("static/json/reglas.json", "r", encoding="utf-8") as f:
-        reglas = json.load(f)
-    return render_template('secuenzo.html', n=n, c=reglas[0]["unicolor"] if n == 6 else reglas[0]["bicolor"])
-
-@app.route('/cuentamania')
-def page_cuentamania():
-    n = int(request.args.get('n'))
-    with open("static/json/reglas.json", "r", encoding="utf-8") as f:
-        reglas = json.load(f)
-    return render_template('cuentamania.html', c=reglas[0]["cuentamania"], n=n)
-
-@app.route('/leaderboard')
-def page_leaderboard():
-    game = request.args.get('game')
-    name = request.args.get('name')
-    types = int(request.args.get('type'))
-    better = request.args.get('better') == 'true'
-    record = request.args.get('record')
-    if better:
-        message = '¡Felicidades, superaste tu record!'
-    elif types == 1:
-        if record is None:
-            message = '¡Sigue así, pronto harás un nuevo record!'
-        else:    
-            record = int(record)
-            message = f'¡Hiciste un tiempo de {(record//6000):02}:{((record%6000)//100):02}.{(record%100):02}, sigue así!'
-    elif types == 2:
-        record = float(record)
-        message = f'¡Hiciste {round(record, 2)} puntos, sigue así!'
-    else:
-        record = int(record)
-        message = f'¡Hiciste {record} tableros, sigue así!'
-    print(types, better, record, message)
-    return render_template('leaderboard.html', game = game, name = name, records = 5, message = message, better = better)
-
-# Conección a Base de Datos
-def connect_db():
-    return psycopg2.connect(
-        host=os.getenv("DB_HOST"),
-        database=os.getenv("DB_NAME"),
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        port="5432"
-    )
-
-#---------------------------------------------------------attendance---------------------------------------------------------#
-@app.route('/attendance', methods=['POST'])
-def attendance():
-    try:
         connection = connect_db()
         cursor = connection.cursor()
-
-        # Procesar los datos
-        nombre_completo = request.form['nombre_completo']
-        sexo = request.form['sexo']
-        edad = request.form['edad']
-        correo_electronico = request.form['correo_electronico']
-        rol = request.form['rol']
-        calificacion = request.form['calificacion']
-        futuros_eventos = request.form['futuros_eventos']
-        tipo_doc = request.form['tipo_doc']
-        ciudad = request.form['ciudad']
-        carrera = request.form['carrera']
-        numero_doc = request.form['numero_doc']
-        konradista = request.form['konradista']
-        comentario = request.form['comentario']
-        timezone = pytz.timezone('America/Bogota')
-        now = datetime.now(timezone)
-        fecha_corta = now.strftime('%Y/%m/%d')
-        fecha_larga = now.strftime('%Y/%m/%d %H:%M')
+        
         cursor.execute("""
-                INSERT INTO attendance 
-                (created_at, "Fecha", "Nombre", "Sexo", "Edad", "Correo", "Rol", "Calificación", "Futuros_eventos", "Comentario", "Tipo_documento", "Numero_documento", "Konradista", "Ciudad", "Carrera")
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
-            """, (fecha_larga, fecha_corta, nombre_completo, sexo, edad, correo_electronico, rol, calificacion, futuros_eventos, comentario,tipo_doc, numero_doc, konradista, ciudad, carrera))
+            SELECT * FROM events 
+                WHERE date < CURRENT_TIMESTAMP
+            ORDER BY date ASC;""")
+        charlas = cursor.fetchall()
 
+        columnas = [col[0] for col in cursor.description]
+
+        grouped = {}
+        for row in charlas:
+            c = dict(zip(columnas, row))
+            year = c["date"].year
+            grouped.setdefault(int(year), []).append(c)
+
+        cursor.execute("""
+            WITH ProximosEventos AS (
+                SELECT 
+                    city,
+                    title,
+                    date,
+                    ROW_NUMBER() OVER(PARTITION BY city ORDER BY date ASC) as orders
+                FROM 
+                    events
+                WHERE 
+                    date > CURRENT_TIMESTAMP -- Filtra eventos pasados
+            )
+            SELECT 
+                city, 
+                title, 
+                date
+            FROM 
+                ProximosEventos
+            WHERE 
+                orders = 1
+            ORDER BY
+                date ASC;""")
+        
+        proxima = cursor.fetchall()
+        proxima = [{"city": evento[0], "title": evento[1], "date": evento[2].isoformat()} for evento in proxima]
+        connection.close()
+        if len(proxima) > 0:
+            return render_template("about.html", charlas=grouped, miembros=equipo, n_charlas=len(charlas), proxima = json.dumps(proxima))
+        else:
+            return render_template("about.html", charlas=grouped, miembros=equipo, n_charlas=len(charlas))
+
+    @app.route('/leaderboards')
+    def page_leaderboards():
+        return render_template('leaderboards.html', records=10)
+
+    @app.route('/menu_games')
+    def page_menu():
+        id = request.args.get('userid')
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT nickname FROM nickname
+            WHERE userid = %s;
+        """, (id,))
+
+        name = cursor.fetchone()[0]
         connection.commit()
         cursor.close()
         connection.close()  
-        return jsonify({'success': True})
-    except Exception as e:
-        print("Error:", e)
-        return jsonify({'success': False})
-    
-#---------------------------------------------------------Fetch---------------------------------------------------------#
+        return render_template('menu.html', nickname=name)
 
-@app.route('/0h_h1/play', methods=['POST'])
-def get_cond_ini():
-    n = request.json['n'] 
-    with open(f'static/boards/aleatorios{n}.txt', 'r', encoding='utf-8') as file:
-        lineas = file.readlines()
-        linea_especifica = lineas[random.randint(0, len(lineas)-1)].strip()  # Remueve espacios en blanco y saltos de línea
-    matrix = eval(linea_especifica)
+    @app.route('/forms')
+    def page_forms():
+        return render_template('forms.html')
 
-    return jsonify({'matrix': matrix})
+    @app.route('/register')
+    def page_register():
+        try:
+            m = request.args.get('m')
+            return render_template('register.html', m = m)
+        except:
+            return render_template('registrer.html')
 
-@app.route('/leaderboard/submit', methods=['POST'])
-def update_leaderboard():
-    better = False
-    user_id = request.json['userid']
-    board = request.json['game']
-    record_raw = request.json['record']
-    
-    count_games = ['TContrareloj', 'TUnicolor', 'TBicolor', 'TProgresivo', 'TAleatorio']
-    points_games = ['TCruzado', 'TKnight', 'TMini-Nerdle', 'TNerdle', 'TMaxi-Nerdle']
+    @app.route('/0h_h1')
+    def page_0hh1():
+        n = request.args.get('n')
 
-    connection = connect_db()
-    cursor = connection.cursor()
-    
-    try:
-        # Convertir y formatear record según el tipo de juego
-        if board in count_games:
-            record = int(record_raw)
-            string_record = f'{record} tabs'
-            is_better = lambda new, old: new > old
-        elif board in points_games:
-            record = float(record_raw)
-            string_record = f'{round(record, 2)}'
-            is_better = lambda new, old: new > old
+        with open("static/json/reglas.json", "r", encoding="utf-8") as f:
+            reglas = json.load(f)
+
+        return render_template('0h_h1.html', n=n, c=reglas[0]["0h-h1"])
+
+    @app.route('/0h_h1_tt')
+    def page_0hh1_tt():
+        with open("static/json/reglas.json", "r", encoding="utf-8") as f:
+            reglas = json.load(f)
+        return render_template('0h_h1_tt.html', c=reglas[0]["0h-h1"])
+
+    @app.route('/tutorial_0h_h1')
+    def page_tutorial_0hh1():
+        return render_template('tutorial_0h_h1.html')
+
+    @app.route('/knight')
+    def page_knight():
+        with open("static/json/reglas.json", "r", encoding="utf-8") as f:
+            reglas = json.load(f)
+        return render_template('knight.html', c=reglas[0]["knight"])
+
+    @app.route('/secuenzo')
+    def page_secuenzo():
+        n = int(request.args.get('n'))
+        with open("static/json/reglas.json", "r", encoding="utf-8") as f:
+            reglas = json.load(f)
+        return render_template('secuenzo.html', n=n, c=reglas[0]["unicolor"] if n == 6 else reglas[0]["bicolor"])
+
+    @app.route('/cuentamania')
+    def page_cuentamania():
+        n = int(request.args.get('n'))
+        with open("static/json/reglas.json", "r", encoding="utf-8") as f:
+            reglas = json.load(f)
+        return render_template('cuentamania.html', c=reglas[0]["cuentamania"], n=n)
+
+    @app.route('/leaderboard')
+    def page_leaderboard():
+        game = request.args.get('game')
+        name = request.args.get('name')
+        types = int(request.args.get('type'))
+        better = request.args.get('better') == 'true'
+        record = request.args.get('record')
+        if better:
+            message = '¡Felicidades, superaste tu record!'
+        elif types == 1:
+            if record is None:
+                message = '¡Sigue así, pronto harás un nuevo record!'
+            else:    
+                record = int(record)
+                message = f'¡Hiciste un tiempo de {(record//6000):02}:{((record%6000)//100):02}.{(record%100):02}, sigue así!'
+        elif types == 2:
+            record = float(record)
+            message = f'¡Hiciste {round(record, 2)} puntos, sigue así!'
         else:
-            record = int(record_raw)
-            string_record = f'{(record//6000):02}:{((record%6000)//100):02}.{(record%100):02}'
-            is_better = lambda new, old: new < old
+            record = int(record)
+            message = f'¡Hiciste {record} tableros, sigue así!'
+        print(types, better, record, message)
+        return render_template('leaderboard.html', game = game, name = name, records = 5, message = message, better = better)
+
+    # Conección a Base de Datos
+    def connect_db():
+        return psycopg2.connect(
+            host=os.getenv("DB_HOST"),
+            database=os.getenv("DB_NAME"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            port="5432"
+        )
+
+    #---------------------------------------------------------attendance---------------------------------------------------------#
+    @app.route('/attendance', methods=['POST'])
+    def attendance():
+        try:
+            connection = connect_db()
+            cursor = connection.cursor()
+
+            # Procesar los datos
+            nombre_completo = request.form['nombre_completo']
+            sexo = request.form['sexo']
+            edad = request.form['edad']
+            correo_electronico = request.form['correo_electronico']
+            rol = request.form['rol']
+            calificacion = request.form['calificacion']
+            futuros_eventos = request.form['futuros_eventos']
+            tipo_doc = request.form['tipo_doc']
+            ciudad = request.form['ciudad']
+            carrera = request.form['carrera']
+            numero_doc = request.form['numero_doc']
+            konradista = request.form['konradista']
+            comentario = request.form['comentario']
+            timezone = pytz.timezone('America/Bogota')
+            now = datetime.now(timezone)
+            fecha_corta = now.strftime('%Y/%m/%d')
+            fecha_larga = now.strftime('%Y/%m/%d %H:%M')
+            cursor.execute("""
+                    INSERT INTO attendance 
+                    (created_at, "Fecha", "Nombre", "Sexo", "Edad", "Correo", "Rol", "Calificación", "Futuros_eventos", "Comentario", "Tipo_documento", "Numero_documento", "Konradista", "Ciudad", "Carrera")
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+                """, (fecha_larga, fecha_corta, nombre_completo, sexo, edad, correo_electronico, rol, calificacion, futuros_eventos, comentario,tipo_doc, numero_doc, konradista, ciudad, carrera))
+
+            connection.commit()
+            cursor.close()
+            connection.close()  
+            return jsonify({'success': True})
+        except Exception as e:
+            print("Error:", e)
+            return jsonify({'success': False})
+        
+    #---------------------------------------------------------Fetch---------------------------------------------------------#
+
+    @app.route('/0h_h1/play', methods=['POST'])
+    def get_cond_ini():
+        n = request.json['n'] 
+        with open(f'static/boards/aleatorios{n}.txt', 'r', encoding='utf-8') as file:
+            lineas = file.readlines()
+            linea_especifica = lineas[random.randint(0, len(lineas)-1)].strip()  # Remueve espacios en blanco y saltos de línea
+        matrix = eval(linea_especifica)
+
+        return jsonify({'matrix': matrix})
+
+    @app.route('/leaderboard/submit', methods=['POST'])
+    def update_leaderboard():
+        better = False
+        user_id = request.json['userid']
+        board = request.json['game']
+        record_raw = request.json['record']
+        
+        count_games = ['TContrareloj', 'TUnicolor', 'TBicolor', 'TProgresivo', 'TAleatorio']
+        points_games = ['TCruzado', 'TKnight', 'TMini-Nerdle', 'TNerdle', 'TMaxi-Nerdle']
+
+        connection = connect_db()
+        cursor = connection.cursor()
+        
+        try:
+            # Convertir y formatear record según el tipo de juego
+            if board in count_games:
+                record = int(record_raw)
+                string_record = f'{record} tabs'
+                is_better = lambda new, old: new > old
+            elif board in points_games:
+                record = float(record_raw)
+                string_record = f'{round(record, 2)}'
+                is_better = lambda new, old: new > old
+            else:
+                record = int(record_raw)
+                string_record = f'{(record//6000):02}:{((record%6000)//100):02}.{(record%100):02}'
+                is_better = lambda new, old: new < old
+
+            cursor.execute("""
+                SELECT id, record FROM leaderboard
+                WHERE userid = %s AND board = %s;
+            """, (user_id, board))
+            print(user_id, board)
+
+            prev_record = cursor.fetchone()
+
+            if prev_record:
+                lead_id = int(prev_record[0])
+                prev_value = float(prev_record[1]) if board in points_games else int(prev_record[1])
+
+                if is_better(record, prev_value):
+                    cursor.execute("""
+                        UPDATE leaderboard
+                        SET record = %s, string_record = %s
+                        WHERE id = %s;
+                    """, (record, string_record, lead_id))
+                    better = True
+            else:
+                cursor.execute("""
+                    INSERT INTO leaderboard (board, userid, record, string_record)
+                    VALUES (%s, %s, %s, %s);
+                """, (board, user_id, record, string_record))
+
+            connection.commit()
+
+        except Exception as e:
+            connection.rollback()
+            print("Error:", e)
+            return jsonify({'error': str(e)}), 500
+            
+        finally:
+            cursor.close()
+            connection.close() 
+
+        return jsonify({'better': better})
+
+    @app.route('/leaderboard/consult', methods=['POST'])
+    def get_leaderboard():
+        user_id = request.json['userid']
+        board = request.json['game']
+        connection = connect_db()
+        cursor = connection.cursor()
+
+        desc = ['TContrareloj', 'TUnicolor', 'TBicolor', 'TProgresivo', 'TAleatorio', 'TCruzado', 'TKnight', 'TMini-Nerdle', 'TNerdle', 'TMaxi-Nerdle']
+        
+        query = """
+            SELECT
+                ROW_NUMBER() OVER (PARTITION BY board ORDER BY record DESC) AS position,
+                nickname,
+                string_record,
+                userid
+            FROM leader_final_view
+            WHERE board = %s;
+        """ if board in desc else """
+            SELECT
+                ROW_NUMBER() OVER (PARTITION BY board ORDER BY record) AS position,
+                nickname,
+                string_record,
+                userid
+            FROM leader_final_view
+            WHERE board = %s;
+        """
+        cursor.execute(query, (board,))
+
+        ranking = cursor.fetchall()
+
+        query_2 = """
+            SELECT * FROM (SELECT
+                ROW_NUMBER() OVER (PARTITION BY board ORDER BY record DESC) AS position,
+                nickname,
+                string_record,
+                userid
+            FROM leader_final_view
+            WHERE board = %s) t
+            WHERE t.userid = %s
+        """ if board in desc else """
+            SELECT * FROM (SELECT
+                ROW_NUMBER() OVER (PARTITION BY board ORDER BY record) AS position,
+                nickname,
+                string_record,
+                userid
+            FROM leader_final_view
+            WHERE board = %s) t
+            WHERE t.userid = %s
+        """
+        cursor.execute(query_2, (board,user_id))
+        personal_ranking = cursor.fetchone()
+        if personal_ranking:
+            if personal_ranking[0] > 0:
+                return jsonify({'ranking': ranking, 'personal_ranking': personal_ranking, 'count_records': len(ranking)})
+            
+        return jsonify({'ranking': ranking, 'personal_ranking': ['-', '-', '-', '-'], 'count_records': len(ranking)})
+
+    @app.route('/seeUser', methods=['POST'])
+    def seeUserExistense():
+        user_id = request.json['user_id'] 
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT nickname FROM nickname
+            WHERE userid = %s;
+        """, (user_id,))
+
+        name = cursor.fetchone()
+        cursor.close()
+        connection.close()  
+        return jsonify({'valid': True if name else False})
+
+    @app.route('/generateUser', methods=['POST'])
+    def generateUser():
+        user_id = request.json['user_id']
+        nickname = request.json['nickname'].strip()
+
+        if len(nickname) > 20:
+            return jsonify({'valid': False, 'message_id': 1})
+
+        connection = connect_db()
+        cursor = connection.cursor()
 
         cursor.execute("""
-            SELECT id, record FROM leaderboard
-            WHERE userid = %s AND board = %s;
-        """, (user_id, board))
-        print(user_id, board)
+            SELECT 1 FROM nickname
+            WHERE LOWER(nickname) = LOWER(%s)
+            AND userid != %s;
+        """, (nickname, user_id))
 
-        prev_record = cursor.fetchone()
+        if cursor.fetchone():
+            cursor.close()
+            connection.close()
+            return jsonify({'valid': False, 'message_id': 0})
 
-        if prev_record:
-            lead_id = int(prev_record[0])
-            prev_value = float(prev_record[1]) if board in points_games else int(prev_record[1])
-
-            if is_better(record, prev_value):
-                cursor.execute("""
-                    UPDATE leaderboard
-                    SET record = %s, string_record = %s
-                    WHERE id = %s;
-                """, (record, string_record, lead_id))
-                better = True
-        else:
-            cursor.execute("""
-                INSERT INTO leaderboard (board, userid, record, string_record)
-                VALUES (%s, %s, %s, %s);
-            """, (board, user_id, record, string_record))
+        cursor.execute("""
+            INSERT INTO nickname (userid, nickname)
+            VALUES (%s, %s);
+        """, (user_id, nickname))
 
         connection.commit()
-
-    except Exception as e:
-        connection.rollback()
-        print("Error:", e)
-        return jsonify({'error': str(e)}), 500
-        
-    finally:
-        cursor.close()
-        connection.close() 
-
-    return jsonify({'better': better})
-
-@app.route('/leaderboard/consult', methods=['POST'])
-def get_leaderboard():
-    user_id = request.json['userid']
-    board = request.json['game']
-    connection = connect_db()
-    cursor = connection.cursor()
-
-    desc = ['TContrareloj', 'TUnicolor', 'TBicolor', 'TProgresivo', 'TAleatorio', 'TCruzado', 'TKnight', 'TMini-Nerdle', 'TNerdle', 'TMaxi-Nerdle']
-    
-    query = """
-        SELECT
-            ROW_NUMBER() OVER (PARTITION BY board ORDER BY record DESC) AS position,
-            nickname,
-            string_record,
-            userid
-        FROM leader_final_view
-        WHERE board = %s;
-    """ if board in desc else """
-        SELECT
-            ROW_NUMBER() OVER (PARTITION BY board ORDER BY record) AS position,
-            nickname,
-            string_record,
-            userid
-        FROM leader_final_view
-        WHERE board = %s;
-    """
-    cursor.execute(query, (board,))
-
-    ranking = cursor.fetchall()
-
-    query_2 = """
-        SELECT * FROM (SELECT
-            ROW_NUMBER() OVER (PARTITION BY board ORDER BY record DESC) AS position,
-            nickname,
-            string_record,
-            userid
-        FROM leader_final_view
-        WHERE board = %s) t
-        WHERE t.userid = %s
-    """ if board in desc else """
-        SELECT * FROM (SELECT
-            ROW_NUMBER() OVER (PARTITION BY board ORDER BY record) AS position,
-            nickname,
-            string_record,
-            userid
-        FROM leader_final_view
-        WHERE board = %s) t
-        WHERE t.userid = %s
-    """
-    cursor.execute(query_2, (board,user_id))
-    personal_ranking = cursor.fetchone()
-    if personal_ranking:
-        if personal_ranking[0] > 0:
-            return jsonify({'ranking': ranking, 'personal_ranking': personal_ranking, 'count_records': len(ranking)})
-        
-    return jsonify({'ranking': ranking, 'personal_ranking': ['-', '-', '-', '-'], 'count_records': len(ranking)})
-
-@app.route('/seeUser', methods=['POST'])
-def seeUserExistense():
-    user_id = request.json['user_id'] 
-    connection = connect_db()
-    cursor = connection.cursor()
-    cursor.execute("""
-        SELECT nickname FROM nickname
-        WHERE userid = %s;
-    """, (user_id,))
-
-    name = cursor.fetchone()
-    cursor.close()
-    connection.close()  
-    return jsonify({'valid': True if name else False})
-
-@app.route('/generateUser', methods=['POST'])
-def generateUser():
-    user_id = request.json['user_id']
-    nickname = request.json['nickname'].strip()
-
-    if len(nickname) > 20:
-        return jsonify({'valid': False, 'message_id': 1})
-
-    connection = connect_db()
-    cursor = connection.cursor()
-
-    cursor.execute("""
-        SELECT 1 FROM nickname
-        WHERE LOWER(nickname) = LOWER(%s)
-        AND userid != %s;
-    """, (nickname, user_id))
-
-    if cursor.fetchone():
         cursor.close()
         connection.close()
-        return jsonify({'valid': False, 'message_id': 0})
 
-    cursor.execute("""
-        INSERT INTO nickname (userid, nickname)
-        VALUES (%s, %s);
-    """, (user_id, nickname))
-
-    connection.commit()
-    cursor.close()
-    connection.close()
-
-    return jsonify({'valid': True, 'message_id': ''})
+        return jsonify({'valid': True, 'message_id': ''})
+    
+    return app
 
     
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app = create_app()
+    app.run(debug=True, host='0.0.0.0', port=5000, ssl_context='adhoc')
