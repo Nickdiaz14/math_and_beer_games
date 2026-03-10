@@ -130,9 +130,9 @@
 }
 
 .myPersonalInfo {
-    height: 27em !important;
-    padding-top: 5%;
-    width: 80%;
+    height: 36em !important;
+    padding: 3%;
+    width: 85%;
 }
 
 .myImgWidth {
@@ -148,11 +148,16 @@
     text-align: justify;
 }
 
+.m-left {
+    margin-left: 0rem !important;
+}
+
 @media (orientation: landscape) {
 
-    /* 🌄 Modo horizontal */
     .myPersonalInfo {
-        height: 30em !important;
+        height: 27em !important;
+        padding: 3%;
+        width: 85%;
     }
 
     .myWidth {
@@ -160,7 +165,20 @@
     }
 
     .img-max-w {
-        max-width: 40% !important;
-        margin: 0 30%;
+        max-width: 100% !important;
+        margin: 0;
+    }
+
+    .w-md-75 {
+        width: 75% !important;
+    }
+
+    .w-md-50 {
+        width: 50% !important;
+    }
+
+    .about-img {
+        width: 100%;
+        margin: 0;
     }
 }
