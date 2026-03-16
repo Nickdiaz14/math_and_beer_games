@@ -86,7 +86,7 @@ function toggleKonradista(isKonradista) {
         carreraField.style.display = 'block';
         inputsCarrera.forEach(input => {
             input.required = true
-            if (input.value === "No Aplica") input.checked = false
+            if (input.value === "No aplica") input.checked = false
         });
     } else {
         carreraField.style.display = 'none';
@@ -94,7 +94,7 @@ function toggleKonradista(isKonradista) {
             input.required = false;
             input.checked = false;
         });
-        const defaultInput = document.querySelector('input[name="carrera"][value="No Aplica"]');
+        const defaultInput = document.querySelector('input[name="carrera"][value="No aplica"]');
         if (defaultInput) {
             defaultInput.checked = true;
         }
