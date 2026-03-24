@@ -63,7 +63,7 @@
 
     
     <div id="events_list" class="no_show">
-        <hr>
+        <hr id="Futuras">
         <h2 class="title">Próximas charlas</h2>
         <hr>
         <div class="about_text displayColumn">
@@ -330,7 +330,7 @@
     
     <button class="contact"><i class="fa-solid fa-chevron-up"></i></button>
     {% if proxima %}
-    <button class="new_events" id="new_events"><i class="fa-solid fa-exclamation"></i></button>
+    <button class="new_events" id="new_events" onclick="location.href='#Futuras'"><i class="fa-solid fa-exclamation"></i></button>
     {% endif %}
     <script src="../static/scripts/main.js"></script>
     <script src="../static/scripts/new_events.js"></script>
