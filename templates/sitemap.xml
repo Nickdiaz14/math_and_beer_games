@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Rutas Generales -->
+  <url>
+    <loc>https://math-and-beer.onrender.com/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://math-and-beer.onrender.com/leaderboards</loc>
+    <changefreq>always</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://math-and-beer.onrender.com/menu_games?userid=77888a5c-c1e8-4f8f-a11f-ae9b21ece3ff</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://math-and-beer.onrender.com/register</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://math-and-beer.onrender.com/forms</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://math-and-beer.onrender.com/tutorial_0h_h1</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- 0h h1 (diferentes tamaños) -->
+  <url>
+    <loc>https://math-and-beer.onrender.com/0h_h1_tt</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://math-and-beer.onrender.com/0h_h1?n=4</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://math-and-beer.onrender.com/0h_h1?n=6</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://math-and-beer.onrender.com/0h_h1?n=8</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://math-and-beer.onrender.com/0h_h1?n=10</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Secuenzo (unicolor, bicolor) -->
+  <url>
+    <loc>https://math-and-beer.onrender.com/secuenzo?n=5</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://math-and-beer.onrender.com/secuenzo?n=6</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cuentamania (S, M, L) -->
+  <url>
+    <loc>https://math-and-beer.onrender.com/cuentamania?n=3</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://math-and-beer.onrender.com/cuentamania?n=4</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://math-and-beer.onrender.com/cuentamania?n=5</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Otros juegos -->
+  <url>
+    <loc>https://math-and-beer.onrender.com/knight</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

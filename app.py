@@ -1,4 +1,4 @@
-﻿from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 import psycopg2
 import random
@@ -13,6 +13,10 @@ def create_app():
     app = Flask(__name__)
 
     # Templates
+    @app.route('/sitemap.xml')
+    def sitemap():
+        return render_template('sitemap.xml'), 200, {'Content-Type': 'application/xml'}
+
     @app.route('/')
     def page_about():
         with open("static/json/equipo.json", "r", encoding="utf-8") as f:
@@ -62,9 +66,9 @@ def create_app():
         proxima = [{"city": evento[0], "title": evento[1], "date": evento[2].isoformat()} for evento in proxima]
         connection.close()
         if len(proxima) > 0:
-            return render_template("about.html", charlas=grouped, miembros=equipo, n_charlas=len(charlas), proxima = json.dumps(proxima))
+            return render_template("index.html", charlas=grouped, miembros=equipo, n_charlas=len(charlas), proxima = json.dumps(proxima))
         else:
-            return render_template("about.html", charlas=grouped, miembros=equipo, n_charlas=len(charlas))
+            return render_template("index.html", charlas=grouped, miembros=equipo, n_charlas=len(charlas))
 
     @app.route('/leaderboards')
     def page_leaderboards():
