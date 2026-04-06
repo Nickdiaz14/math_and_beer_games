@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, Response
 from datetime import datetime
 import psycopg2
 import random
@@ -15,7 +15,12 @@ def create_app():
     # Templates
     @app.route('/sitemap.xml')
     def sitemap():
-        return render_template('sitemap.xml'), 200, {'Content-Type': 'application/xml'}
+        xml_content = render_template('sitemap.xml')
+        return Response(xml_content, mimetype='text/xml')
+
+    @app.route('/robots.txt')
+    def robots_txt():
+        return app.send_static_file('robots.txt')
 
     @app.route('/')
     def page_about():
