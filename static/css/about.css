@@ -130,7 +130,7 @@
 }
 
 .myPersonalInfo {
-    height: calc(56vh - 14vw) !important;
+    min-height: calc(56vh - 14vw) !important;
     padding: 3%;
     width: 85%;
 }
@@ -155,7 +155,7 @@
 @media (min-width: 1400px) {
 
     .myPersonalInfo {
-        height: 27em !important;
+        min-height: 27em !important;
         padding: 3%;
         width: 85%;
     }

@@ -401,11 +401,129 @@ def create_app():
         connection.close()
 
         return jsonify({'valid': True, 'message_id': ''})
-    
+
+    #---------------------------------------------------------Blog: Comentarios---------------------------------------------------------#
+
+    @app.route('/api/comments/<int:event_id>', methods=['GET'])
+    def get_comments(event_id):
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT c.id, n.nickname, c.content, c.created_at
+            FROM comments c
+            JOIN nickname n ON n.userid = c.userid
+            WHERE c.event_id = %s
+            ORDER BY c.created_at ASC;
+        """, (event_id,))
+        rows = cursor.fetchall()
+        cursor.close()
+        connection.close()
+        comments = [{'id': r[0], 'nickname': r[1], 'content': r[2], 'created_at': r[3].isoformat()} for r in rows]
+        return jsonify({'comments': comments})
+
+    @app.route('/api/comments/add', methods=['POST'])
+    def add_comment():
+        user_id = request.json.get('userid')
+        event_id = request.json.get('event_id')
+        content = request.json.get('content', '').strip()
+
+        if not user_id or not event_id or not content:
+            return jsonify({'success': False, 'message': 'Datos incompletos'}), 400
+        if len(content) > 500:
+            return jsonify({'success': False, 'message': 'Comentario muy largo (máx. 500 caracteres)'}), 400
+
+        connection = connect_db()
+        cursor = connection.cursor()
+
+        # Verificar que tenga nickname
+        cursor.execute("SELECT nickname FROM nickname WHERE userid = %s;", (user_id,))
+        nick_row = cursor.fetchone()
+        if not nick_row:
+            cursor.close()
+            connection.close()
+            return jsonify({'success': False, 'message': 'Debes crear un Nickname para comentar'}), 403
+
+        cursor.execute("""
+            INSERT INTO comments (event_id, userid, content)
+            VALUES (%s, %s, %s)
+            RETURNING id, created_at;
+        """, (event_id, user_id, content))
+        row = cursor.fetchone()
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return jsonify({'success': True, 'id': row[0], 'nickname': nick_row[0], 'created_at': row[1].isoformat()})
+
+    #---------------------------------------------------------Blog: Reacciones---------------------------------------------------------#
+
+    @app.route('/api/reactions/<int:event_id>', methods=['GET'])
+    def get_reactions(event_id):
+        user_id = request.args.get('userid', '')
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("SELECT COUNT(*) FROM reactions WHERE event_id = %s;", (event_id,))
+        total = cursor.fetchone()[0]
+        reacted = False
+        if user_id:
+            cursor.execute("SELECT 1 FROM reactions WHERE event_id = %s AND userid = %s;", (event_id, user_id))
+            reacted = cursor.fetchone() is not None
+        cursor.close()
+        connection.close()
+        return jsonify({'total': total, 'reacted': reacted})
+
+    @app.route('/api/reactions/toggle', methods=['POST'])
+    def toggle_reaction():
+        user_id = request.json.get('userid')
+        event_id = request.json.get('event_id')
+        if not user_id or not event_id:
+            return jsonify({'success': False}), 400
+
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("SELECT id FROM reactions WHERE event_id = %s AND userid = %s;", (event_id, user_id))
+        existing = cursor.fetchone()
+        if existing:
+            cursor.execute("DELETE FROM reactions WHERE id = %s;", (existing[0],))
+            reacted = False
+        else:
+            cursor.execute("INSERT INTO reactions (event_id, userid) VALUES (%s, %s);", (event_id, user_id))
+            reacted = True
+        cursor.execute("SELECT COUNT(*) FROM reactions WHERE event_id = %s;", (event_id,))
+        total = cursor.fetchone()[0]
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return jsonify({'success': True, 'reacted': reacted, 'total': total})
+
+    #---------------------------------------------------------Blog: Suscriptores---------------------------------------------------------#
+
+    @app.route('/api/subscribe', methods=['POST'])
+    def subscribe():
+        email = request.json.get('email', '').strip().lower()
+        name = request.json.get('name', '').strip()
+        if not email or '@' not in email:
+            return jsonify({'success': False, 'message': 'Correo inválido'}), 400
+        connection = connect_db()
+        cursor = connection.cursor()
+        try:
+            cursor.execute("""
+                INSERT INTO subscribers (email, name)
+                VALUES (%s, %s)
+                ON CONFLICT (email) DO NOTHING;
+            """, (email, name or None))
+            connection.commit()
+            return jsonify({'success': True})
+        except Exception as e:
+            connection.rollback()
+            return jsonify({'success': False, 'message': str(e)}), 500
+        finally:
+            cursor.close()
+            connection.close()
+
     return app
 
-    
+
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True, host='0.0.0.0', port=5000, ssl_context='adhoc')
+    app.run(debug=True, host='0.0.0.0', port=5000, ssl_context='adhoc')

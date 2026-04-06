@@ -38,18 +38,20 @@ function construirTarjetas(eventos) {
 
     let htmlTarjetas = '';
 
-    // Recorremos la lista. Usamos 'index' para crear un ID único por ciudad
     eventos.forEach((evento, index) => {
         htmlTarjetas += `
-        <div class="myBg myBorder p-3 mt-4">
-            <h3 class="subtitle fs-4">${evento.city}</h3>
-            <p class="title fs-5">${evento.title}</p>
-            <p id="restante-${index}" class="title fs-6"></p>
+        <div class="upcoming-card myBg myBorder rounded-4 shadow-sm p-3 mt-3">
+            <p class="subtitle fs-5 mb-1">${evento.city}</p>
+            <p class="title fs-5 mb-2">${evento.title}</p>
+            <div class="upcoming-countdown">
+                <i class="fa-solid fa-clock me-1" style="color:var(--accent-beer)"></i>
+                <span id="restante-${index}" class="upcoming-time">--d --h --m --s</span>
+            </div>
         </div>
         `;
     });
 
-    contenedor.innerHTML = htmlTarjetas; // Insertamos todo en el HTML
+    contenedor.innerHTML = htmlTarjetas;
 }
 
 // Función para actualizar los números
