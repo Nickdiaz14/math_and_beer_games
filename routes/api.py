@@ -168,12 +168,12 @@ def get_comments(event_id):
     try:
         cursor = connection.cursor()
         cursor.execute("""
-            SELECT c.id, n.nickname, c.content, c.created_at
+            SELECT c.id, n.nickname, c.content, c.created_at, c.userid
             FROM comments c JOIN nickname n ON n.userid = c.userid
             WHERE c.event_id = %s ORDER BY c.created_at ASC;
         """, (event_id,))
         rows = cursor.fetchall()
-        comments = [{'id': r[0], 'nickname': r[1], 'content': r[2], 'created_at': r[3].isoformat()} for r in rows]
+        comments = [{'id': r[0], 'nickname': r[1], 'content': r[2], 'created_at': r[3].isoformat(), 'userid': r[4]} for r in rows]
     finally:
         cursor.close()
         release_connection(connection)
@@ -266,3 +266,260 @@ def subscribe():
         cursor.close()
         release_connection(connection)
     return jsonify({'success': True})
+
+# --- RSVP / CHECK-IN ---
+@api_bp.route('/api/rsvp/<int:event_id>', methods=['GET'])
+def get_rsvp(event_id):
+    user_id = request.args.get('userid', '')
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute("SELECT COUNT(*) FROM rsvp WHERE event_id = %s;", (event_id,))
+        total = cursor.fetchone()[0]
+        attending = False
+        if user_id:
+            cursor.execute("SELECT 1 FROM rsvp WHERE event_id = %s AND userid = %s;", (event_id, user_id))
+            attending = cursor.fetchone() is not None
+    finally:
+        cursor.close()
+        release_connection(connection)
+    return jsonify({'total': total, 'attending': attending})
+
+@api_bp.route('/api/rsvp/toggle', methods=['POST'])
+def toggle_rsvp():
+    user_id = request.json.get('userid')
+    event_id = request.json.get('event_id')
+    if not user_id or not event_id:
+        return jsonify({'success': False}), 400
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute("SELECT id FROM rsvp WHERE event_id = %s AND userid = %s;", (event_id, user_id))
+        existing = cursor.fetchone()
+        if existing:
+            cursor.execute("DELETE FROM rsvp WHERE id = %s;", (existing[0],))
+            attending = False
+        else:
+            cursor.execute("INSERT INTO rsvp (event_id, userid) VALUES (%s, %s);", (event_id, user_id))
+            attending = True
+        cursor.execute("SELECT COUNT(*) FROM rsvp WHERE event_id = %s;", (event_id,))
+        total = cursor.fetchone()[0]
+        connection.commit()
+    finally:
+        cursor.close()
+        release_connection(connection)
+    return jsonify({'success': True, 'attending': attending, 'total': total})
+
+# --- PROFILE ---
+@api_bp.route('/api/profile/<userid>', methods=['GET'])
+def get_profile(userid):
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        # Nickname
+        cursor.execute("SELECT nickname FROM nickname WHERE userid = %s;", (userid,))
+        nick_row = cursor.fetchone()
+        nickname = nick_row[0] if nick_row else None
+
+        # Stats
+        cursor.execute("SELECT COUNT(*) FROM comments WHERE userid = %s;", (userid,))
+        total_comments = cursor.fetchone()[0]
+
+        cursor.execute("SELECT COUNT(*) FROM reactions WHERE userid = %s;", (userid,))
+        total_brindis = cursor.fetchone()[0]
+
+        cursor.execute("SELECT COUNT(DISTINCT board) FROM leaderboard WHERE userid = %s;", (userid,))
+        games_played = cursor.fetchone()[0]
+
+        # Records personales
+        cursor.execute("""
+            SELECT board, string_record FROM leaderboard WHERE userid = %s ORDER BY board;
+        """, (userid,))
+        records = [{'game': r[0], 'record': r[1]} for r in cursor.fetchall()]
+
+        # Charlas con brindis
+        cursor.execute("""
+            SELECT e.id, e.title, e.speaker
+            FROM reactions r JOIN events e ON e.id = r.event_id
+            WHERE r.userid = %s ORDER BY e.date DESC;
+        """, (userid,))
+        liked_talks = [{'id': r[0], 'title': r[1], 'speaker': r[2]} for r in cursor.fetchall()]
+
+        # RSVPs
+        cursor.execute("""
+            SELECT e.id, e.title, e.city, e.date
+            FROM rsvp rv JOIN events e ON e.id = rv.event_id
+            WHERE rv.userid = %s AND e.date > CURRENT_TIMESTAMP ORDER BY e.date;
+        """, (userid,))
+        rsvps = [{'id': r[0], 'title': r[1], 'city': r[2], 'date': r[3].isoformat()} for r in cursor.fetchall()]
+
+    finally:
+        cursor.close()
+        release_connection(connection)
+
+    return jsonify({
+        'nickname': nickname,
+        'stats': {'comments': total_comments, 'brindis': total_brindis, 'games': games_played},
+        'records': records,
+        'liked_talks': liked_talks,
+        'rsvps': rsvps
+    })
+
+# --- UPDATE NICKNAME ---
+@api_bp.route('/api/profile/update-nickname', methods=['POST'])
+def update_nickname():
+    user_id = request.json.get('userid')
+    new_nickname = request.json.get('nickname', '').strip()
+
+    if not user_id or not new_nickname:
+        return jsonify({'success': False, 'message': 'Datos incompletos'}), 400
+    if len(new_nickname) > 20:
+        return jsonify({'success': False, 'message': 'Máximo 20 caracteres'}), 400
+
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        # Verificar unicidad
+        cursor.execute("SELECT 1 FROM nickname WHERE LOWER(nickname) = LOWER(%s) AND userid != %s;", (new_nickname, user_id))
+        if cursor.fetchone():
+            return jsonify({'success': False, 'message': 'Ese nombre ya está en uso'})
+
+        cursor.execute("UPDATE nickname SET nickname = %s WHERE userid = %s;", (new_nickname, user_id))
+        connection.commit()
+    finally:
+        cursor.close()
+        release_connection(connection)
+    return jsonify({'success': True, 'nickname': new_nickname})
+
+# --- BADGES ---
+@api_bp.route('/api/badges/<userid>', methods=['GET'])
+def get_badges(userid):
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+
+        badges = []
+
+        # Cervecero Novato: tiene nickname
+        cursor.execute("SELECT 1 FROM nickname WHERE userid = %s;", (userid,))
+        if cursor.fetchone():
+            badges.append({'id': 'novato', 'name': 'Cervecero Novato', 'icon': '🍺', 'desc': 'Creaste tu cuenta'})
+
+        # Tertuliano: comentar en 3+ charlas distintas
+        cursor.execute("SELECT COUNT(DISTINCT event_id) FROM comments WHERE userid = %s;", (userid,))
+        distinct_comments = cursor.fetchone()[0]
+        if distinct_comments >= 3:
+            badges.append({'id': 'tertuliano', 'name': 'Tertuliano', 'icon': '💬', 'desc': 'Comentaste en 3+ charlas'})
+
+        # Fan #1: brindis a 10+ charlas
+        cursor.execute("SELECT COUNT(*) FROM reactions WHERE userid = %s;", (userid,))
+        total_reactions = cursor.fetchone()[0]
+        if total_reactions >= 10:
+            badges.append({'id': 'fan', 'name': 'Fan #1', 'icon': '🍻', 'desc': 'Brindaste por 10+ charlas'})
+
+        # Calculadora Humana: récord en cualquier juego
+        cursor.execute("SELECT 1 FROM leaderboard WHERE userid = %s LIMIT 1;", (userid,))
+        if cursor.fetchone():
+            badges.append({'id': 'calculadora', 'name': 'Calculadora Humana', 'icon': '🧮', 'desc': 'Tienes récord en un juego'})
+
+        # Leyenda: top 3 en algún leaderboard
+        cursor.execute("""
+            SELECT 1 FROM (
+                SELECT ROW_NUMBER() OVER (PARTITION BY board ORDER BY record DESC) AS pos, userid
+                FROM leaderboard
+            ) t WHERE t.pos <= 3 AND t.userid = %s LIMIT 1;
+        """, (userid,))
+        if cursor.fetchone():
+            badges.append({'id': 'leyenda', 'name': 'Leyenda', 'icon': '⭐', 'desc': 'Top 3 en un leaderboard'})
+
+    finally:
+        cursor.close()
+        release_connection(connection)
+    return jsonify({'badges': badges})
+
+# --- Q&A: PREGUNTAS PARA PONENTES ---
+@api_bp.route('/api/questions/<int:event_id>', methods=['GET'])
+def get_questions(event_id):
+    user_id = request.args.get('userid', '')
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT q.id, n.nickname, q.content, q.created_at,
+                   (SELECT COUNT(*) FROM question_votes WHERE question_id = q.id) AS votes
+            FROM questions q
+            JOIN nickname n ON n.userid = q.userid
+            WHERE q.event_id = %s
+            ORDER BY votes DESC, q.created_at ASC;
+        """, (event_id,))
+        rows = cursor.fetchall()
+
+        questions = []
+        for r in rows:
+            voted = False
+            if user_id:
+                cursor.execute("SELECT 1 FROM question_votes WHERE question_id = %s AND userid = %s;", (r[0], user_id))
+                voted = cursor.fetchone() is not None
+            questions.append({
+                'id': r[0], 'nickname': r[1], 'content': r[2],
+                'created_at': r[3].isoformat(), 'votes': r[4], 'voted': voted
+            })
+    finally:
+        cursor.close()
+        release_connection(connection)
+    return jsonify({'questions': questions})
+
+@api_bp.route('/api/questions/add', methods=['POST'])
+def add_question():
+    user_id = request.json.get('userid')
+    event_id = request.json.get('event_id')
+    content = request.json.get('content', '').strip()
+
+    if not user_id or not event_id or not content:
+        return jsonify({'success': False, 'message': 'Datos incompletos'}), 400
+    if len(content) > 300:
+        return jsonify({'success': False, 'message': 'Pregunta muy larga (máx. 300)'}), 400
+
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute("SELECT nickname FROM nickname WHERE userid = %s;", (user_id,))
+        nick_row = cursor.fetchone()
+        if not nick_row:
+            return jsonify({'success': False, 'message': 'Necesitas un Nickname'}), 403
+
+        cursor.execute("""
+            INSERT INTO questions (event_id, userid, content) VALUES (%s, %s, %s) RETURNING id, created_at;
+        """, (event_id, user_id, content))
+        row = cursor.fetchone()
+        connection.commit()
+    finally:
+        cursor.close()
+        release_connection(connection)
+    return jsonify({'success': True, 'id': row[0], 'nickname': nick_row[0], 'created_at': row[1].isoformat(), 'votes': 0})
+
+@api_bp.route('/api/questions/vote', methods=['POST'])
+def vote_question():
+    user_id = request.json.get('userid')
+    question_id = request.json.get('question_id')
+    if not user_id or not question_id:
+        return jsonify({'success': False}), 400
+
+    connection = get_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute("SELECT id FROM question_votes WHERE question_id = %s AND userid = %s;", (question_id, user_id))
+        existing = cursor.fetchone()
+        if existing:
+            cursor.execute("DELETE FROM question_votes WHERE id = %s;", (existing[0],))
+            voted = False
+        else:
+            cursor.execute("INSERT INTO question_votes (question_id, userid) VALUES (%s, %s);", (question_id, user_id))
+            voted = True
+        cursor.execute("SELECT COUNT(*) FROM question_votes WHERE question_id = %s;", (question_id,))
+        total = cursor.fetchone()[0]
+        connection.commit()
+    finally:
+        cursor.close()
+        release_connection(connection)
+    return jsonify({'success': True, 'voted': voted, 'votes': total})

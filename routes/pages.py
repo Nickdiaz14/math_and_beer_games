@@ -33,14 +33,14 @@ def page_about():
 
         cursor.execute("""
             WITH ProximosEventos AS (
-                SELECT city, title, date, ROW_NUMBER() OVER(PARTITION BY city ORDER BY date ASC) as orders
+                SELECT id, city, title, date, ROW_NUMBER() OVER(PARTITION BY city ORDER BY date ASC) as orders
                 FROM events WHERE date > CURRENT_TIMESTAMP
             )
-            SELECT city, title, date FROM ProximosEventos WHERE orders = 1 ORDER BY date ASC;
+            SELECT id, city, title, date FROM ProximosEventos WHERE orders = 1 ORDER BY date ASC;
         """)
         
         proxima = cursor.fetchall()
-        proxima = [{"city": evento[0], "title": evento[1], "date": evento[2].isoformat()} for evento in proxima]
+        proxima = [{"id": evento[0], "city": evento[1], "title": evento[2], "date": evento[3].isoformat()} for evento in proxima]
     finally:
         cursor.close()
         release_connection(connection)
@@ -141,3 +141,7 @@ def page_leaderboard():
         message = f'¡Hiciste {record} tableros, sigue así!'
 
     return render_template('leaderboard.html', game=game, name=name, records=5, message=message, better=better)
+
+@pages_bp.route('/profile')
+def page_profile():
+    return render_template('profile.html')
