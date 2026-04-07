@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       recordsEl.innerHTML = profile.records.map(r => `
         <div class="profile-record-row">
           <span class="profile-record-game">${getGameName(r.game)}</span>
-          <span class="profile-record-value">${r.record}</span>
+          <span class="profile-record-value"><span style="color: rgba(182, 189, 231, 0.6); font-size: 0.8em; margin-right: 5px;">#${r.position}</span> ${r.record}</span>
         </div>
       `).join('');
     }

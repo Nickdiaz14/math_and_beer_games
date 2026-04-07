@@ -138,7 +138,7 @@ def page_leaderboard():
         message = f'¡Hiciste {round(record, 2)} puntos, sigue así!'
     else:
         record = int(record_val)
-        message = f'¡Hiciste {record} tableros, sigue así!'
+        message = f'¡Hiciste {record} tablero(s), sigue así!'
 
     return render_template('leaderboard.html', game=game, name=name, records=5, message=message, better=better)
 

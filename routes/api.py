@@ -332,10 +332,25 @@ def get_profile(userid):
         games_played = cursor.fetchone()[0]
 
         # Records personales
-        cursor.execute("""
-            SELECT board, string_record FROM leaderboard WHERE userid = %s ORDER BY board;
-        """, (userid,))
-        records = [{'game': r[0], 'record': r[1]} for r in cursor.fetchall()]
+        cursor.execute("SELECT board, string_record FROM leaderboard WHERE userid = %s ORDER BY board;", (userid,))
+        user_boards = cursor.fetchall()
+        
+        records = []
+        desc_games = ['TContrareloj', 'TUnicolor', 'TBicolor', 'TProgresivo', 'TAleatorio', 'TCruzado', 'TKnight', 'TMini-Nerdle', 'TNerdle', 'TMaxi-Nerdle']
+        
+        for r in user_boards:
+            b = r[0]
+            val = r[1]
+            order_type = "DESC" if b in desc_games else "ASC"
+            cursor.execute(f"""
+                SELECT position FROM (
+                    SELECT ROW_NUMBER() OVER (ORDER BY record {order_type}) AS position, userid
+                    FROM leaderboard WHERE board = %s
+                ) t WHERE userid = %s;
+            """, (b, userid))
+            pos = cursor.fetchone()
+            position = pos[0] if pos else '-'
+            records.append({'game': b, 'record': val, 'position': position})
 
         # Charlas con brindis
         cursor.execute("""

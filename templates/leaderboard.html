@@ -36,9 +36,6 @@
                 <li class="nav-item">
                     <button onclick="window.location.href='/'" class="nav-link active" aria-current="page"><i class="fa-solid fa-people-group"></i> Sobre Nosotros</button>
                 </li>
-                <li class="nav-item">
-                    <button onclick="window.location.href='/profile'" class="nav-link active" aria-current="page"><i class="fa-solid fa-user"></i> Mi Perfil</button>
-                </li>
             </ul>
             </div>
         </div>
@@ -113,7 +110,10 @@
       const msg = document.querySelector('.title.fs-6')?.textContent || '';
       const siteUrl = window.location.origin;
 
-      const shareText = `🧠🍺 ${msg} en ${game} de Math & Beer! ¿Puedes superarme? ${siteUrl}/register`;
+      let cleanMsg = msg.replace(', sigue así!', '').replace('!', '').replace('¡Hiciste ', 'Hice ');
+      if (cleanMsg.includes('Felicidades')) cleanMsg = '¡Conseguí un nuevo récord';
+      
+      const shareText = `🧠🍺 ${cleanMsg} en ${getGameName(game)} de Math & Beer! ¿Puedes superarme? ${siteUrl}/register`;
 
       const waBtn = document.getElementById('share-wa');
       const xBtn = document.getElementById('share-x');
@@ -131,6 +131,23 @@
         });
       }
     });
+
+    function getGameName(gameCode) {
+        switch (gameCode) {
+            case "T4": return "0h-h1 - 4";
+            case "T6": return "0h-h1 - 6";
+            case "T8": return "0h-h1 - 8";
+            case "T10": return "0h-h1 - 10";
+            case "TContrareloj": return "Contrareloj";
+            case "TKnight": return "Salto Real";
+            case "TUnicolor": return "Unicolor";
+            case "TBicolor": return "Bicolor";
+            case "TS3": return "CuentaManía - S";
+            case "TS4": return "CuentaManía - M";
+            case "TS5": return "CuentaManía - L";
+            default: return gameCode.replace('T', ''); // Fallback por si no coincide
+        }
+    }
     </script>
 </body>
 </html>
