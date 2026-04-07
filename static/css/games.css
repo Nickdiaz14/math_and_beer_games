@@ -73,8 +73,8 @@
 }
 
 .z-5 {
-    height: 85px;
-    width: 85px;
+    height: 80px;
+    width: 80px;
 }
 
 .z-6 {
@@ -135,10 +135,10 @@
 }
 
 main {
-    margin-top: 10vh;
+    margin-top: 3vh;
 }
 
-@media (orientation: landscape) {
+@media (min-width: 768px) {
     main {
         margin-top: 0;
     }
