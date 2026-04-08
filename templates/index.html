@@ -67,30 +67,6 @@
 
 <main>
 
-    
-    <div id="events_list" class="no_show">
-        <hr id="Futuras">
-        <h2 class="title">Próximas charlas</h2>
-        <hr>
-        <div class="about_text displayColumn">
-            <p class="small lh-lg">
-                ¡La ciencia no se detiene! Acompañanos en nuestras siguientes sesiones para brindar y aprender sobre modelos matemáticos, datos y tecnología.
-            </p>
-        </div>
-        <div id="contenedor-dinamico" class="upcoming-grid mx-auto"></div>
-
-        <!-- Suscripción integrada en la sección de próximas charlas -->
-        <div class="text-center myBg myBorder rounded-4 p-4 shadow-sm upcoming-subscribe-box mx-auto mt-2">
-            <p class="subtitle fs-5 mb-1"><i class="fa-solid fa-bell me-2"></i>¿No quieres perderte nada?</p>
-            <p class="small" style="color: var(--text-muted);">Regístrate y te avisamos cuando haya una nueva charla.</p>
-            <form id="subscribe-form" class="subscribe-inline-form">
-                <input type="text" id="subscribe-name" placeholder="Tu nombre (opcional)" autocomplete="name">
-                <input type="email" id="subscribe-email" placeholder="Tu correo electrónico" required autocomplete="email">
-                <button type="submit" id="subscribe-btn"><i class="fa-solid fa-paper-plane me-1"></i>Suscribirme</button>
-            </form>
-        </div>
-    </div>
-
     <hr id="Inicio">
     <h1 class="title">¿Qué es Math &amp; Beer?</h1>
     <hr>
@@ -192,8 +168,31 @@
         </div>
     </section>
 
+    {% if proxima %}
+        <hr id="Futuras">
+        <h2 class="title">Próximas charlas</h2>
+        <hr>
+        <div class="about_text displayColumn">
+            <p class="small lh-lg">
+                ¡La ciencia no se detiene! Acompañanos en nuestras siguientes sesiones para brindar y aprender sobre modelos matemáticos, datos y tecnología.
+            </p>
+        </div>
+        <div id="contenedor-dinamico" class="upcoming-grid mx-auto"></div>
+
+        <!-- Suscripción integrada en la sección de próximas charlas -->
+        <div class="text-center myBg myBorder rounded-4 p-4 shadow-sm upcoming-subscribe-box mx-auto mt-2">
+            <p class="subtitle fs-5 mb-1"><i class="fa-solid fa-bell me-2"></i>¿No quieres perderte nada?</p>
+            <p class="small" style="color: var(--text-muted);">Regístrate y te avisamos cuando haya una nueva charla.</p>
+            <form id="subscribe-form" class="subscribe-inline-form">
+                <input type="text" id="subscribe-name" placeholder="Tu nombre (opcional)" autocomplete="name">
+                <input type="email" id="subscribe-email" placeholder="Tu correo electrónico" required autocomplete="email">
+                <button type="submit" id="subscribe-btn"><i class="fa-solid fa-paper-plane me-1"></i>Suscribirme</button>
+            </form>
+        </div>
+    {% endif %}
+
     <hr id="Charlas">
-    <h2 class="title">Charlas</h2>
+    <h2 class="title">Charlas pasadas</h2>
     <hr>
     <div class="about_text displayColumn">
         <p class="lh-lg small">En cada encuentro de <strong>Math & Beer</strong>, las matemáticas se convierten en historias que despiertan la curiosidad y el asombro. Nuestras charlas son el corazón del proyecto: espacios donde las ideas fluyen entre risas, preguntas y cervezas, y donde descubrimos que detrás de cada número hay una historia que vale la pena contar. Aquí encontrarás un recorrido por todas las ediciones que hemos realizado, con temas que van desde los clásicos teoremas hasta las conexiones más inesperadas entre el arte, la tecnología, la música y la vida cotidiana.</p>
