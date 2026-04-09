@@ -32,11 +32,8 @@ def page_about():
             grouped.setdefault(int(year), []).append(c)
 
         cursor.execute("""
-            WITH ProximosEventos AS (
-                SELECT id, city, title, date, ROW_NUMBER() OVER(PARTITION BY city ORDER BY date ASC) as orders
-                FROM events WHERE date > CURRENT_TIMESTAMP
-            )
-            SELECT id, city, title, date FROM ProximosEventos WHERE orders = 1 ORDER BY date ASC;
+            SELECT id, city, title, date
+            FROM events WHERE date > CURRENT_TIMESTAMP
         """)
         
         proxima = cursor.fetchall()
