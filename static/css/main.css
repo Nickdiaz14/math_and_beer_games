@@ -102,7 +102,7 @@ main {
   justify-content: center;
 }
 
-.menu button {
+.menu a, .menu button {
   color: #b6bde7 !important;
   background: none;
   font-family: 'Inter', sans-serif;
@@ -112,7 +112,7 @@ main {
   border: none;
 }
 
-.menu button:hover {
+.menu a:hover, .menu button:hover {
   color: #ffc800 !important;
   border: none;
   font-size: 20px;

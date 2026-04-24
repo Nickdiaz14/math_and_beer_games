@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (back) {
         back.addEventListener('click', () => {
-            window.location.href = `/menu_games?userid=${localStorage.getItem('userId')}`;
+            window.location.href = `/menu_games`;
         });
     }
 

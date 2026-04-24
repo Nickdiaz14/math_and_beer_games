@@ -31,7 +31,7 @@ function generateUser() {
         .then(response => response.json())
         .then(data => {
             if (data.valid) {
-                window.location.href = `/menu_games?userid=${new_user_id}`
+                window.location.href = `/menu_games`
             }
             else {
                 window.location.href = `/register?m=${data.message_id}`
@@ -50,7 +50,7 @@ function validateUserId() {
         .then(response => response.json())
         .then(data => {
             if (data.valid) {
-                window.location.href = `/menu_games?userid=${user_id}`
+                window.location.href = `/menu_games`
             }
             else {
                 localStorage.setItem('userId', crypto.randomUUID());
