@@ -9,7 +9,7 @@ let boards_solved = 0;
 let first_seen = true;
 let timerInterval = null;
 let validateTimeout = null;
-let centisecondsElapsed = 300;
+let centisecondsElapsed = 200;
 
 const timer = document.getElementById('timer');
 const back = document.getElementById('back');
@@ -105,7 +105,7 @@ function toggle_color(row, col, td) {
 
     if (validateTimeout) clearTimeout(validateTimeout);
 
-    validateTimeout = setTimeout(() => valid_solution(), 300);
+    validateTimeout = setTimeout(() => valid_solution(), 200);
 }
 
 function getSpots(max, size) {
@@ -134,7 +134,7 @@ function getSpots(max, size) {
 
 function startGame() {
     in_game = false;
-    centisecondsElapsed = 300;
+    centisecondsElapsed = 200;
     const spots = getSpots(n, Math.min(3 + Math.floor(boards_solved / 2), Math.floor(Math.pow(n, 2) * 0.45)));
     game_matrix = Array.from({ length: n }, () => Array(n).fill(0));
     for (let i = 0; i < n; i++) {
