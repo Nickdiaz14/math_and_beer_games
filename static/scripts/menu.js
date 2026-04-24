@@ -1,7 +1,7 @@
 const userId = localStorage.getItem('userId');
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (!userId) {
+    if (!userId && !navigator.userAgent.includes('Googlebot')) {
         window.location.href = '/register';
     } else {
         fetch(`/api/profile/${userId}`)
