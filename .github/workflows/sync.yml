@@ -8,21 +8,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Añadimos permisos explícitos aquí también por si acaso
     permissions:
       contents: write
 
     steps:
       - name: Checkout del código
-        uses: actions/checkout@v4 # Actualizado a v4 para evitar el warning
+        uses: actions/checkout@v4
 
       - name: Configurar Python
-        uses: actions/setup-python@v5 # Actualizado a v5
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
       - name: Instalar dependencias
-        run: pip install requests
+        run: pip install -r gitrequirements.txt
 
       - name: Correr script de descarga
         run: python sync_images.py
