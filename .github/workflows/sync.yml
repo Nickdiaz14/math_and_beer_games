@@ -36,11 +36,14 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add static/images/events/*.webp || true
-          # Solo hace commit si hay cambios reales para evitar el error de "nothing to commit"
+
+          # Agregamos TODA la carpeta de imágenes, sin importar la extensión
+          git add static/images/events/
+
+          # Verificamos si hay algo nuevo
           if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "Auto: Actualización de fotos desde Drive"
+            git commit -m "Auto: Sincronización completa de imágenes (JPG y WEBP)"
             git push
           else
-            echo "No hay cambios nuevos en las imágenes."
+            echo "No se detectaron archivos nuevos."
           fi
