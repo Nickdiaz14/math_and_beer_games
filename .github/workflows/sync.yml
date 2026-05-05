@@ -2,23 +2,24 @@ name: Sincronizar Fotos desde Drive
 
 on:
   push:
-    branches: [main] # Se ejecuta cuando subes algo a la rama main
-  schedule:
-    - cron: "0 0 * * *" # También se ejecuta solo una vez al día (opcional)
-  workflow_dispatch: # Esto permite ejecutarlo manualmente desde GitHub
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Añadimos permisos explícitos aquí también por si acaso
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout del código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Actualizado a v4 para evitar el warning
 
       - name: Configurar Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # Actualizado a v5
         with:
-          python-version: "3.x"
+          python-version: "3.10"
 
       - name: Instalar dependencias
         run: pip install requests
@@ -28,7 +29,13 @@ jobs:
 
       - name: Subir cambios al repositorio
         run: |
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git add assets/img/charlas/*
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Actualización automática de fotos desde Drive" && git push)
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add assets/img/charlas/*.jpg || true
+          # Solo hace commit si hay cambios reales para evitar el error de "nothing to commit"
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "Auto: Actualización de fotos desde Drive"
+            git push
+          else
+            echo "No hay cambios nuevos en las imágenes."
+          fi
