@@ -1,0 +1,34 @@
+name: Sincronizar Fotos desde Drive
+
+on:
+  push:
+    branches: [main] # Se ejecuta cuando subes algo a la rama main
+  schedule:
+    - cron: "0 0 * * *" # También se ejecuta solo una vez al día (opcional)
+  workflow_dispatch: # Esto permite ejecutarlo manualmente desde GitHub
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Instalar dependencias
+        run: pip install requests
+
+      - name: Correr script de descarga
+        run: python sync_images.py
+
+      - name: Subir cambios al repositorio
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add assets/img/charlas/*
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Actualización automática de fotos desde Drive" && git push)
